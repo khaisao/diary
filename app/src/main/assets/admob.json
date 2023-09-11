@@ -1,0 +1,43 @@
+{
+  "network": "google",
+  "appId": "ca-app-pub-2094788208346877~9909993115",
+  "packetName": "com.sutech.journal.diary.diarywriting.lockdiary",
+  "listAds": [
+    {
+      "spaceName": "splash",
+      "adsType": "interstitial",
+      "id": "ca-app-pub-2094788208346877/9722059342"
+    },
+    {
+      "spaceName": "save_diary",
+      "adsType": "interstitial",
+      "id": "ca-app-pub-2094788208346877/5533997355"
+    },
+    {
+      "spaceName": "back_diary",
+      "adsType": "interstitial",
+      "id": "ca-app-pub-2094788208346877/4220915680"
+    },
+    {
+      "spaceName": "banner_home",
+      "adsType": "banner_adaptive",
+      "id": "ca-app-pub-2094788208346877/4020770989"
+    },
+    {
+      "spaceName": "banner_viet_nhat_ky",
+      "adsType": "banner_adaptive",
+      "id": "ca-app-pub-2094788208346877/2974486465"
+    },
+    {
+      "spaceName": "banner_password",
+      "adsType": "banner_adaptive",
+      "id": "ca-app-pub-2094788208346877/9943768231"
+    },
+    {
+      "spaceName": "banner_read_nhat_ky",
+      "adsType": "banner_adaptive",
+      "id": "ca-app-pub-2094788208346877/7968589006"
+    }
+  ]
+}
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constrainViewImage"
+    android:background="@color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/tbViewImageBack"
+        android:layout_width="@dimen/img_s_normal"
+        android:layout_height="@dimen/img_s_normal"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/space_screen_small"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/app_name"
+        android:minWidth="@dimen/img_s_large"
+        android:padding="@dimen/img_padding"
+        app:tint="@color/white"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/ic_back" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpImage"
+        android:layout_width="match_parent"
+        android:paddingStart="0dp"
+        android:layout_height="0dp"
+        android:paddingEnd="@dimen/img_padding"
+        android:layout_marginVertical="@dimen/img_padding"
+        app:layout_constraintTop_toBottomOf="@+id/tbViewImageBack"
+        app:layout_constraintBottom_toBottomOf="parent"
+     />
+    <ImageView
+        android:id="@+id/imgGoneView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="2dp"
+        android:src="@color/black"
+        android:contentDescription="@string/app_name" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

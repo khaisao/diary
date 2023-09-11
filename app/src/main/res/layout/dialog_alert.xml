@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="300dp"
+    android:background="@drawable/bg_radius_12"
+    android:backgroundTint="@color/white"
+    android:layout_centerHorizontal="true"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_gravity="center_horizontal">
+
+
+        <com.sutech.common.text.TextViewBold
+            android:id="@+id/tvDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            app:textColorDefault="false"
+            android:text="@string/alert"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.sutech.common.text.TextViewRegular
+            android:id="@+id/tvContentDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="@dimen/space_screen_small"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/colorTextBlack"
+            android:minLines="2"
+            app:textColorDefault="false"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDialog" />
+
+        <com.sutech.common.text.TextViewMedium
+            android:id="@+id/btnConfirmDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="@string/ok"
+            android:textColor="@color/colorTextBlack"
+            app:textColorDefault="false"
+            android:textSize="14sp"
+            android:padding="@dimen/img_padding_large"
+            android:layout_marginTop="@dimen/space_screen_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvContentDialog"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.sutech.common.text.TextViewMedium
+            android:id="@+id/btnCancelDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:padding="@dimen/img_padding_large"
+            android:text="@string/cancel"
+            android:textColor="@color/colorTextBlack"
+            android:layout_marginTop="@dimen/space_screen_small"
+            app:textColorDefault="false"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/tvContentDialog"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnConfirmDialog"  />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

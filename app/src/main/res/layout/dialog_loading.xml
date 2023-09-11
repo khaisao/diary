@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_radius_6"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/img_padding_large"
+        android:paddingHorizontal="@dimen/space_screen_large"
+        android:gravity="center"
+        android:layout_centerInParent="true">
+        <ProgressBar
+            android:theme="@style/DialogTheme"
+            android:layout_width="@dimen/img_s_normal"
+            android:layout_height="@dimen/img_s_normal"/>
+
+        <com.sutech.common.text.TextViewMedium
+            android:id="@+id/tvLoadingContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/img_padding"
+            android:textColor="@color/colorTextBlack"
+            app:textColorDefault="false"
+            android:textSize="@dimen/text_s_16"
+            android:text="@string/loading"
+            />
+        <com.sutech.common.text.TextViewRegular
+            android:id="@+id/tvSideContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/img_padding"
+            android:textColor="@color/colorTextBlack"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:textColorDefault="false"
+            android:textSize="@dimen/text_s_14"
+            android:text="(There may be display advertisements)"
+
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

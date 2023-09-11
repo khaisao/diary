@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_close_iap"
+        android:padding="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/space_screen_small"
+        android:layout_marginStart="@dimen/space_screen_small"
+        app:tint="@color/colorTextBlack" />
+
+
+    <ImageView
+        android:id="@+id/ivImg"
+        android:src="@drawable/banner_iap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintTop_toBottomOf="@id/ivBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp" />
+
+    <View
+        android:id="@+id/bgContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/ivImg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/radius_top_iap" />
+
+    <com.sutech.common.text.TextViewMedium
+        android:id="@+id/tvAppName"
+        android:layout_width="wrap_content"
+        android:text="@string/my_diary_premium"
+        android:textSize="24sp"
+        android:layout_marginTop="@dimen/space_screen_small"
+        android:gravity="center"
+        android:textColor="#F5B700"
+        app:textColorDefault="false"
+        app:layout_constraintTop_toTopOf="@id/bgContent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content" />
+
+    <com.sutech.common.text.TextViewMedium
+        android:id="@+id/tvDes1"
+        android:layout_width="wrap_content"
+        android:text="@string/des_1"
+        android:textSize="14sp"
+        android:layout_marginTop="@dimen/space_screen_small"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        app:textColorDefault="false"
+        app:layout_constraintTop_toBottomOf="@id/tvAppName"
+        app:layout_constraintStart_toStartOf="@id/tvAppName"
+        android:layout_height="wrap_content" />
+
+
+    <com.sutech.common.text.TextViewMedium
+        android:id="@+id/tvDes2"
+        android:layout_width="wrap_content"
+        android:text="@string/des_2"
+        android:textSize="14sp"
+        android:layout_marginTop="@dimen/space_screen_small"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        app:textColorDefault="false"
+        app:layout_constraintTop_toBottomOf="@id/tvDes1"
+        app:layout_constraintStart_toStartOf="@id/tvAppName"
+        android:layout_height="wrap_content" />
+
+
+    <com.sutech.common.text.TextViewMedium
+        android:id="@+id/tvDes3"
+        android:layout_width="wrap_content"
+        android:text="@string/des_3"
+        android:textSize="14sp"
+        android:layout_marginTop="@dimen/space_screen_small"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        app:textColorDefault="false"
+        app:layout_constraintTop_toBottomOf="@id/tvDes2"
+        app:layout_constraintStart_toStartOf="@id/tvAppName"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerVertical="true"
+        android:padding="6dp"
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="@id/tvDes1"
+        app:layout_constraintBottom_toBottomOf="@id/tvDes1"
+        app:layout_constraintEnd_toStartOf="@id/tvDes1"
+        android:layout_marginEnd="@dimen/img_padding"
+        android:background="@drawable/bg_circle"
+        android:backgroundTint="#F5B700" />
+
+    <View
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerVertical="true"
+        android:padding="6dp"
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="@id/tvDes2"
+        app:layout_constraintBottom_toBottomOf="@id/tvDes2"
+        app:layout_constraintEnd_toStartOf="@id/tvDes1"
+        android:layout_marginEnd="@dimen/img_padding"
+        android:background="@drawable/bg_circle"
+        android:backgroundTint="#F5B700" />
+
+    <View
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerVertical="true"
+        android:padding="6dp"
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="@id/tvDes3"
+        app:layout_constraintBottom_toBottomOf="@id/tvDes3"
+        app:layout_constraintEnd_toStartOf="@id/tvDes1"
+        android:layout_marginEnd="@dimen/img_padding"
+        android:background="@drawable/bg_circle"
+        android:backgroundTint="#F5B700" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="@id/bgContent"
+        app:layout_constraintStart_toEndOf="@id/tvAppName"
+        android:src="@drawable/ic_iap_pro"
+        android:visibility="gone" />
+
+
+    <com.sutech.common.text.TextViewRegular
+        android:id="@+id/tvOldPrice"
+        android:layout_width="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/strike_through"
+        app:textColorDefault="false"
+        android:text=""
+        android:textColor="#F5B700"
+        android:layout_marginTop="32dp"
+        android:textSize="24sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvDes3" />
+
+
+    <com.sutech.common.text.TextViewRegular
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:textColorDefault="false"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="2dp"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/tvOldPrice"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_centerVertical="true"
+        app:layout_constraintTop_toTopOf="@id/tvPrice"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/tvPrice"
+        app:layout_constraintStart_toEndOf="@id/tvPrice"
+        android:src="@drawable/ic_sale_iap"
+        android:visibility="visible" />
+
+    <com.sutech.common.text.TextViewBold
+        android:id="@+id/tvBuyNow"
+        android:layout_width="wrap_content"
+        android:text="@string/buy_now"
+        android:paddingStart="28dp"
+        android:textSize="25sp"
+        android:paddingEnd="28dp"
+        app:textColorDefault="false"
+        android:textColor="@color/white"
+        android:textAllCaps="true"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:backgroundTint="#F5B700"
+        android:background="@drawable/bg_radius_8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintTop_toBottomOf="@id/tvPrice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content" />
+</androidx.constraintlayout.widget.ConstraintLayout>

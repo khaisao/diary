@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.sutech.journal.diary.diarywriting.lockdiary",
+  "variantName": "processReleaseResources",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "versionCode": 40,
+      "versionName": "40",
+      "outputFile": "app-release.apk"
+    }
+  ]
+}

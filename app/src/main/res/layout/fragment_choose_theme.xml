@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintCircleRadius="@dimen/space_screen_small"
+    >
+
+    <com.sutech.common.BackgroundView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"    />
+        <RelativeLayout
+            android:id="@+id/tbTheme"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+            <com.sutech.common.IconView
+                android:id="@+id/btnThemeBack"
+                android:layout_width="@dimen/img_s_normal"
+                android:layout_height="@dimen/img_s_normal"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/img_padding_large"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back" />
+
+
+            <com.sutech.common.text.TextViewMedium
+                android:id="@+id/btnSaveTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_s_16"
+                android:paddingVertical="4dp"
+                android:paddingHorizontal="8dp"
+                android:background="@drawable/bg_radius_4"
+                android:layout_alignParentEnd="true"
+                android:text="@string/save"
+                android:layout_marginEnd="@dimen/space_screen_small"
+                app:textColorDefault="false"
+                android:textColor="@color/colorTextBlack"
+                android:layout_centerVertical="true"
+                />
+
+            <com.sutech.common.text.TextViewArt
+                android:id="@+id/tbTitleTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/choose_theme"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/text_s_22" />
+
+        </RelativeLayout>
+
+    <com.youth.banner.Banner
+        android:id="@+id/vpChooseTheme"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:banner_indicator_normal_color="#EAEAEA"
+        app:banner_indicator_normal_width="0dp"
+        app:banner_indicator_selected_color="#48CBDC"
+        app:banner_indicator_selected_width="0dp"
+        app:banner_indicator_space="0dp"
+        android:layout_marginBottom="@dimen/space_screen_large"
+        app:banner_radius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tbTheme" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

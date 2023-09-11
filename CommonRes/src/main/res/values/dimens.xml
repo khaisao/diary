@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="img_s_largest">72dp</dimen>
+    <dimen name="img_s_large">50dp</dimen>
+    <dimen name="img_s_normal">36dp</dimen>
+    <dimen name="img_s_small">24dp</dimen>
+
+    <dimen name="radius_4">4dp</dimen>
+    <dimen name="radius_6">6dp</dimen>
+    <dimen name="radius_8">6dp</dimen>
+
+    <dimen name="img_padding">6dp</dimen>
+    <dimen name="img_padding_large">8dp</dimen>
+
+    <dimen name="line_space">4dp</dimen>
+    <dimen name="line_space_large">12dp</dimen>
+
+    <dimen name="space_screen_small">16dp</dimen>
+    <dimen name="space_screen_normal">24dp</dimen>
+    <dimen name="space_screen_large">32dp</dimen>
+
+    <dimen name="text_s_28">28sp</dimen>
+    <dimen name="text_s_24">24sp</dimen>
+    <dimen name="text_s_22">22sp</dimen>
+    <dimen name="text_s_20">20sp</dimen>
+    <dimen name="text_s_18">18sp</dimen>
+    <dimen name="text_s_16">16sp</dimen>
+    <dimen name="text_s_14">14sp</dimen>
+    <dimen name="text_s_12">12sp</dimen>
+    <dimen name="text_s_10">10sp</dimen>
+</resources>

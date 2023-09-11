@@ -1,0 +1,6 @@
+include ':CommonRes'
+include ':draw'
+include ':app'
+include ':dialogLib'
+include ':Ads'
+rootProject.name = "Your Diary"

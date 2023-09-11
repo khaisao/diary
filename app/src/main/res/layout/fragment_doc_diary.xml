@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.sutech.common.BackgroundView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"    />
+
+
+    <LinearLayout
+        android:id="@+id/layoutAdsDoc"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/viewGoneAdGallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Loading ad..."
+            android:textColor="@color/black" />
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/tbRead"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/layoutAdsDoc">
+
+        <com.sutech.common.IconView
+            android:id="@+id/btnWriteBack"
+            android:layout_width="@dimen/img_s_normal"
+            android:layout_height="@dimen/img_s_normal"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/img_padding_large"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_back" />
+
+        <com.sutech.common.IconView
+            android:id="@+id/btnEditReaDia"
+            android:layout_width="@dimen/img_s_normal"
+            android:layout_height="@dimen/img_s_normal"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/space_screen_small"
+            android:layout_toStartOf="@id/btnDeleteReaDia"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/img_padding"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_edit" />
+
+        <com.sutech.common.IconView
+            android:id="@+id/btnDeleteReaDia"
+            android:layout_width="@dimen/img_s_normal"
+            android:layout_height="@dimen/img_s_normal"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/space_screen_small"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/img_padding"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_delete" />
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tbRead">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.sutech.common.text.TextViewLight
+                android:id="@+id/tvDiaryCreateAt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_screen_small"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Create At: 11/11/2020"
+                android:textColor="@color/colorTextGrey"
+                android:textSize="@dimen/text_s_14" />
+
+            <com.sutech.common.text.TextViewBold
+                android:id="@+id/tvDiaryTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_screen_small"
+                android:layout_marginTop="@dimen/space_screen_small"
+                android:text="@string/app_name"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/text_s_24" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvDiaryImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_screen_small"
+                android:layout_marginTop="@dimen/space_screen_small" />
+
+            <com.sutech.common.text.TextViewRegular
+                android:id="@+id/tvDiaryContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_screen_small"
+                android:layout_marginTop="@dimen/space_screen_small"
+                android:text="Hôm nay là 1 ngày Tuyệt vòi của tôi"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/text_s_18" />
+
+            <RelativeLayout
+                android:id="@+id/rlRateApp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="43dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_radius_8"
+                android:backgroundTint="#EEEEEE">
+
+                <com.sutech.common.text.TextViewMedium
+                    android:id="@+id/tvRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="@dimen/space_screen_small"
+                    android:layout_marginTop="22dp"
+                    android:text="@string/rate_app"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="@dimen/text_s_18"
+                    app:textColorDefault="false" />
+
+                <com.sutech.common.text.TextViewRegular
+                    android:id="@+id/tvContents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvRate"
+                    android:layout_marginHorizontal="@dimen/space_screen_small"
+                    android:layout_marginTop="19dp"
+                    android:text="@string/content_rate"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="@dimen/text_s_14"
+                    app:textColorDefault="false" />
+
+                <LinearLayout
+                    android:id="@+id/layoutRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/tvContents"
+                    android:layout_marginHorizontal="@dimen/space_screen_large"
+                    android:layout_marginTop="16dp"
+                    android:weightSum="5">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/ivStar1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="4dp"
+                            app:srcCompat="@drawable/ic_un_star_up" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/ivStar2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:padding="4dp"
+                            app:srcCompat="@drawable/ic_un_star_up" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/ivStar3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="4dp"
+                            app:srcCompat="@drawable/ic_un_star_up" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/ivStar4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="4dp"
+                            app:srcCompat="@drawable/ic_un_star_up" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/ivStar5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="4dp"
+                            app:srcCompat="@drawable/ic_un_star_up" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <com.sutech.common.text.TextViewRegular
+                    android:id="@+id/btnRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/layoutRate"
+                    android:layout_marginHorizontal="32dp"
+                    android:layout_marginVertical="22dp"
+                    android:background="@drawable/bg_radius_8"
+                    android:backgroundTint="#007AFF"
+                    android:gravity="center"
+                    android:text="@string/remind_me_later"
+                    android:textSize="@dimen/text_s_14"
+                    app:textColorDefault="false" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</RelativeLayout>

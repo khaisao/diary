@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.sutech.common.BackgroundView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/toolbarSetting"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <com.sutech.common.IconView
+                android:id="@+id/btnSettingBack"
+                android:layout_width="@dimen/img_s_large"
+                android:layout_height="@dimen/img_s_large"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/img_padding_large"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back" />
+
+            <com.sutech.common.text.TextViewRegular
+                android:id="@+id/tbTitleSetting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/setting"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/text_s_22" />
+
+
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/btnSettingFeedBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/img_padding">
+
+                    <com.sutech.common.IconView
+                        android:id="@+id/imgFeedBack"
+                        android:layout_width="@dimen/img_s_large"
+                        android:layout_height="@dimen/img_s_large"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/space_screen_small"
+                        android:layout_marginEnd="@dimen/space_screen_small"
+                        android:contentDescription="@string/app_name"
+                        android:padding="@dimen/img_padding"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_feedback"
+                        app:tint="@color/black" />
+
+                    <com.sutech.common.text.TextViewMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/imgFeedBack"
+                        android:text="@string/feed_back"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="@dimen/text_s_16" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnSettingRateApp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/img_padding"
+                    android:visibility="gone">
+
+                    <com.sutech.common.IconView
+                        android:id="@+id/imgRateApp"
+                        android:layout_width="@dimen/img_s_large"
+                        android:layout_height="@dimen/img_s_normal"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/space_screen_small"
+                        android:contentDescription="@string/app_name"
+                        android:padding="@dimen/img_padding"
+                        app:srcCompat="@drawable/ic_rate_app"
+                        app:tint="@color/black" />
+
+                    <com.sutech.common.text.TextViewMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/imgRateApp"
+                        android:text="@string/rate_app"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="@dimen/text_s_16" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/btnLock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/img_padding">
+
+                    <com.sutech.common.IconView
+                        android:id="@+id/imgLock"
+                        android:layout_width="@dimen/img_s_large"
+                        android:layout_height="@dimen/img_s_large"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/space_screen_small"
+                        android:layout_marginEnd="@dimen/space_screen_small"
+                        android:contentDescription="@string/app_name"
+                        android:padding="@dimen/img_padding"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_lock"
+                        app:tint="@color/black" />
+
+                    <com.sutech.common.text.TextViewMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/imgLock"
+                        android:text="@string/setting_lock"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="@dimen/text_s_16" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnUsePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/img_padding">
+
+                    <com.sutech.common.IconView
+                        android:id="@+id/imgPassword"
+                        android:layout_width="@dimen/img_s_large"
+                        android:layout_height="@dimen/img_s_large"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/space_screen_small"
+                        android:layout_marginEnd="@dimen/space_screen_small"
+                        android:contentDescription="@string/app_name"
+                        android:padding="@dimen/img_padding"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_use_password"
+                        app:tint="@color/black" />
+
+                    <com.sutech.common.text.TextViewMedium
+                        android:id="@+id/tvUsePassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/imgPassword"
+                        android:text="@string/use_password"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="@dimen/text_s_16" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/swPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/img_s_small"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:theme="@style/DialogTheme" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnDarkTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/img_padding">
+
+                    <com.sutech.common.IconView
+                        android:id="@+id/imgDarkTheme"
+                        android:layout_width="@dimen/img_s_large"
+                        android:layout_height="@dimen/img_s_large"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/space_screen_small"
+                        android:layout_marginEnd="@dimen/space_screen_small"
+                        android:contentDescription="@string/app_name"
+                        android:padding="@dimen/img_padding"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_dark_mode"
+                        app:tint="@color/black" />
+
+                    <com.sutech.common.text.TextViewMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/imgDarkTheme"
+                        android:text="@string/change_theme"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="@dimen/text_s_16" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/swDarkTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/img_s_small"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:theme="@style/DialogTheme"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnSettingShare"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/img_padding">
+
+                    <com.sutech.common.IconView
+                        android:id="@+id/imgShare"
+                        android:layout_width="@dimen/img_s_large"
+                        android:layout_height="@dimen/img_s_large"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/space_screen_small"
+                        android:layout_marginEnd="@dimen/space_screen_small"
+                        android:contentDescription="@string/app_name"
+                        android:padding="@dimen/img_padding"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_share"
+                        app:tint="@color/black" />
+
+                    <com.sutech.common.text.TextViewMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+
+                        android:layout_toEndOf="@+id/imgShare"
+                        android:text="@string/share"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="@dimen/text_s_16" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnSettingPolicy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/img_padding">
+
+                    <com.sutech.common.IconView
+                        android:id="@+id/imgPolicy"
+                        android:layout_width="@dimen/img_s_large"
+                        android:layout_height="@dimen/img_s_large"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/space_screen_small"
+                        android:layout_marginEnd="@dimen/space_screen_small"
+                        android:contentDescription="@string/app_name"
+                        android:padding="@dimen/img_padding"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_policy"
+                        app:tint="@color/black" />
+
+                    <com.sutech.common.text.TextViewMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+
+                        android:layout_toEndOf="@+id/imgPolicy"
+                        android:text="@string/policy"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="@dimen/text_s_16" />
+                </RelativeLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</RelativeLayout>

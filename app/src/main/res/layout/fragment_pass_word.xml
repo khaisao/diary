@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_main"
+    android:layout_height="match_parent" >
+
+    <com.sutech.common.BackgroundView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.sutech.common.text.TextViewRegular
+        android:gravity="center"
+        android:id="@+id/tvPasscode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_pass_word"
+        android:textAllCaps="true"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="@dimen/text_s_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <com.sutech.common.text.TextViewMedium
+        android:id="@+id/tvWrongPass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/passCodeView"
+        app:layout_constraintStart_toStartOf="@id/passCodeView"
+        android:gravity="center"
+        android:text="@string/wrong_password"
+        android:textColor="#BD1206"
+        android:visibility="gone"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@id/passCodeView"
+        app:textColorDefault="false"/>
+
+    <com.sutech.common.PassCodeView
+        android:id="@+id/passCodeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="23dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPasscode" />
+
+
+    <com.sutech.common.text.TextViewMedium
+        android:gravity="center"
+        android:id="@+id/tvWrong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textAllCaps="true" 
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/passCodeView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.sutech.common.text.TextViewMedium
+        android:gravity="center"
+        android:id="@+id/btn1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_btn_circle_black"
+        android:textColor="@color/colorTextWhite"
+        android:text="1" 
+        android:textSize="38sp"
+        app:layout_constraintBottom_toTopOf="@id/btn4"
+        app:layout_constraintDimensionRatio="1:1"
+        app:textColorDefault="false"
+        app:layout_constraintEnd_toStartOf="@id/btn2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.17" />
+
+    <com.sutech.common.text.TextViewMedium
+        android:gravity="center"
+        android:id="@+id/btn2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        app:textColorDefault="false"
+        android:background="@drawable/bg_btn_circle_black"
+        android:textColor="@color/colorTextWhite"  
+        android:text="2" 
+        android:textSize="38sp"
+        app:layout_constraintBottom_toTopOf="@id/btn5"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/btn3"
+        app:layout_constraintStart_toEndOf="@id/btn1"
+        app:layout_constraintWidth_percent="0.17" />
+
+    <com.sutech.common.text.TextViewMedium
+        android:gravity="center"
+        android:id="@+id/btn3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_btn_circle_black"
+        android:textColor="@color/colorTextWhite"
+        android:text="3"
+        android:textSize="38sp"
+        app:layout_constraintBottom_toTopOf="@id/btn6"
+        app:textColorDefault="false"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn2"
+        app:layout_constraintWidth_percent="0.17" />
+
+    <com.sutech.common.text.TextViewMedium
+        android:gravity="center"
+        android:id="@+id/btn4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/bg_btn_circle_black"
+        android:textColor="@color/colorTextWhite"
+        app:textColorDefault="false"
+        android:text="4"
+        android:textSize="38sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/btn5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.17" />
+
+    <com.sutech.common.text.TextViewMedium
+        android:gravity="center"
+        android:id="@+id/btn5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginRight="24dp"
+        app:textColorDefault="false"
+        android:background="@drawable/bg_btn_circle_black"
+        android:textColor="@color/colorTextWhite"
+        android:text="5"
+        android:textSize="38sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/btn6"
+        app:layout_constraintStart_toEndOf="@id/btn4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.17" />
+
+    <com.sutech.common.text.TextViewMedium
+        android:gravity="center"
+        android:id="@+id/btn6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="56dp"
+        app:textColorDefault="false"
+        android:text="6"
+        android:background="@drawable/bg_btn_circle_black"
+        android:textColor="@color/colorTextWhite"
+        android:textSize="38sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.17" />
+
+    <com.sutech.common.text.TextViewMedium
+        android:gravity="center"
+        android:id="@+id/btn7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:textColorDefault="false"
+        android:text="7"
+        android:background="@drawable/bg_btn_circle_black"
+        android:textColor="@color/colorTextWhite"
+        android:textSize="38sp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/btn8"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn4"
+        app:layout_constraintWidth_percent="0.17" />
+
+    <com.sutech.common.text.TextViewMedium
+        android:gravity="center"
+        android:id="@+id/btn8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="24dp"
+        android:text="8"
+        android:background="@drawable/bg_btn_circle_black"
+        android:textColor="@color/colorTextWhite"
+        app:textColorDefault="false"
+        android:textSize="38sp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/btn9"
+        app:layout_constraintStart_toEndOf="@id/btn7"
+        app:layout_constraintTop_toBottomOf="@id/btn5"
+        app:layout_constraintWidth_percent="0.17" />
+
+    <com.sutech.common.text.TextViewMedium
+        android:gravity="center"
+        android:id="@+id/btn9"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:textColorDefault="false"
+        android:text="9"
+        android:background="@drawable/bg_btn_circle_black"
+        android:textColor="@color/colorTextWhite"
+        android:textSize="38sp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn8"
+        app:layout_constraintTop_toBottomOf="@id/btn6"
+        app:layout_constraintWidth_percent="0.17" />
+
+
+    <ImageView
+        android:id="@+id/btnReset"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:text="0"
+        app:srcCompat="@drawable/ic_reset"
+        android:scaleType="centerInside"
+        android:padding="@dimen/space_screen_small"
+        android:background="@drawable/bg_btn_circle_black"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/btn0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn8"
+        app:layout_constraintWidth_percent="0.17" />
+
+    <com.sutech.common.text.TextViewMedium
+        android:id="@+id/btn0"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="0"
+        android:background="@drawable/bg_btn_circle_black"
+        android:textColor="@color/colorTextWhite"
+        android:textSize="38sp"
+        app:textColorDefault="false"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/btnDelete"
+        app:layout_constraintStart_toEndOf="@id/btnReset"
+        app:layout_constraintTop_toBottomOf="@id/btn8"
+        app:layout_constraintWidth_percent="0.17" />
+
+
+    <ImageView
+        android:id="@+id/btnDelete"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:background="@drawable/bg_btn_circle_black"
+        app:srcCompat="@drawable/ic_btn_delete"
+        android:visibility="visible"
+        android:scaleType="centerInside"
+        android:padding="@dimen/img_padding"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn0"
+        app:layout_constraintTop_toBottomOf="@id/btn8"
+        app:layout_constraintWidth_percent="0.17" />
+
+
+    <com.sutech.common.text.TextViewMedium
+        android:gravity="center"
+        android:id="@+id/tvCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="@string/skip"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="@dimen/text_s_20"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <LinearLayout
+        android:id="@+id/layoutAdsPassword"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/viewGoneAdGallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Loading ad..."
+            android:textColor="@color/black" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

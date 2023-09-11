@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/layoutAdsViet"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/viewGoneAdGallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Loading ad..."
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/toolbarWrite"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@+id/layoutAdsViet"
+        android:background="@color/white">
+
+
+        <ImageView
+            android:id="@+id/btnWriteBack"
+            android:layout_width="@dimen/img_s_normal"
+            android:layout_height="@dimen/img_s_normal"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/img_padding_large"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back" />
+
+        <com.sutech.common.text.TextViewRegular
+            android:id="@+id/btnSaveDiary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="@dimen/space_screen_small"
+            android:background="@drawable/bg_radius_6"
+            android:backgroundTint="#4992DF"
+            android:paddingHorizontal="@dimen/space_screen_small"
+            android:paddingVertical="@dimen/img_padding"
+            android:text="@string/save"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_s_16"
+            app:textColorDefault="false" />
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layoutWrite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rlBtn"
+        android:layout_below="@+id/toolbarWrite"
+        android:layout_marginBottom="@dimen/space_screen_small">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rlCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_screen_small"
+                android:paddingHorizontal="@dimen/img_padding_large"
+                android:paddingVertical="@dimen/img_padding">
+
+                <com.sutech.common.text.TextViewRegular
+                    android:id="@+id/tvDateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/space_screen_small"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="@dimen/text_s_14"
+                    app:textColorDefault="false" />
+
+                <ImageView
+                    android:id="@+id/btnMoreCalendar"
+                    android:layout_width="@dimen/space_screen_small"
+                    android:layout_height="@dimen/space_screen_normal"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/tvDateTime"
+                    android:background="?attr/selectableItemBackground"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_more_calendar" />
+            </RelativeLayout>
+
+            <com.sutech.common.edit_text.EditTextMedium
+                android:id="@+id/edtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_screen_small"
+                android:layout_marginTop="@dimen/img_padding"
+                android:background="@drawable/bg_radius_8"
+                android:focusable="true"
+                android:hint="@string/enter_title"
+                android:imeOptions="actionNext"
+                android:inputType="text|textCapWords"
+                android:paddingHorizontal="@dimen/img_padding_large"
+                android:paddingVertical="12dp"
+                android:textColor="@color/colorTextBlack"
+                android:textColorHint="#CCCCCC"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/text_s_16"
+                app:textColorDefault="false" />
+
+            <RelativeLayout
+                android:id="@+id/rlContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/space_screen_small"
+                android:layout_marginTop="@dimen/img_padding"
+                android:background="@drawable/bg_radius_8"
+                android:minHeight="440dp">
+
+                <com.sutech.common.edit_text.EditTextRegular
+                    android:id="@+id/edtContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_radius_4"
+                    android:gravity="start"
+                    android:hint="@string/write_more"
+                    android:imeOptions="actionDone"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:minLines="2"
+                    android:padding="@dimen/img_padding_large"
+                    android:textColor="@color/colorTextBlack"
+                    android:textColorHint="#CCCCCC"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/text_s_16"
+                    app:textColorDefault="false" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvImageDiary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edtContent"
+                    android:background="@drawable/bg_radius_4"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingStart="@dimen/img_padding" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rlBtn"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_radius_top_10"
+        android:backgroundTint="#F7F7F7">
+
+        <ImageView
+            android:id="@+id/btnAddImage"
+            android:layout_width="@dimen/img_s_large"
+            android:layout_height="@dimen/img_s_large"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/btnDraw"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/img_padding_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_image" />
+
+        <ImageView
+            android:id="@+id/btnDraw"
+            android:layout_width="@dimen/img_s_large"
+            android:layout_height="@dimen/img_s_large"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/img_padding_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnAddImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_drawing" />
+
+        <ImageView
+            android:id="@+id/btnDate"
+            android:layout_width="@dimen/img_s_large"
+            android:layout_height="@dimen/img_s_large"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/img_padding_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnAddImage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_calendar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

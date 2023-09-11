@@ -1,0 +1,103 @@
+<resources>
+    <string name="app_name" translatable="false">My Diary</string>
+    <string name="admob_app_unit_id"  translatable="false">ca-app-pub-2094788208346877~9909993115</string>
+
+    <string name="share">Share</string>
+    <string name="tit_more_app">More App</string>
+    <string name="policy">Policy</string>
+    <string name="rate">Rate App</string>
+    <string name="search">search</string>
+    <string name="wrong_password">The incorrect password!</string>
+    <string name="err">Some thing went wrong!</string>
+    <string name="input_can_not_empty">Can\'t empty!</string>
+    <string name="password_not_match">Password not match!</string>
+    <string name="no_internet_connected">No internet connected!</string>
+    <string name="loading">Loading…</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="successful">Successful.</string>
+    <string name="update">Update</string>
+    <string name="home">Home</string>
+    <string name="write">Write</string>
+    <string name="title">Title</string>
+    <string name="story">Story</string>
+    <string name="enter_title">Enter Title</string>
+    <string name="write_more">Write more here</string>
+    <string name="submit">Submit</string>
+    <string name="enter_pass_word">Enter Password</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="please_choose_image">Please choose Image!</string>
+    <string name="max_image_selected">Selected max is 10 image!</string>
+    <string name="please_input_title">Please input title!</string>
+    <string name="please_input_content">Please input content</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="re_password_wrong">Re-enter the incorrect password</string>
+    <string name="old_password_wrong">Re-enter the incorrect old password</string>
+    <string name="enter_old_password">Enter old password</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="setting">Setting</string>
+    <string name="alert">Alert</string>
+    <string name="confirm_save">Save Diary?</string>
+    <string name="ok">OK</string>
+    <string name="delete">Delete</string>
+    <string name="delete_diary">Delete Diary</string>
+    <string name="update_diary">Update Diary</string>
+    <string name="confirm_delete_diary">You sure delete this diary?</string>
+    <string name="delete_diary_success">Delete diary success</string>
+    <string name="create_at">Create at:\t</string>
+    <string name="update_at">Update at:\t</string>
+    <string name="update_diary_successful">Update diary successful</string>
+    <string name="create_diary_successful">Create diary successful</string>
+    <string name="rate_app">Rate app</string>
+    <string name="feed_back">Feed back</string>
+    <string name="save_diary_load">Save diary…</string>
+    <string name="load_ads">Loading…</string>
+    <string name="search_diary">Search Diary</string>
+    <string name="write_first_diary">Write first diary…</string>
+    <string name="not_found_diary">Oh! No diary here yet</string>
+    <string name="policy_content">"This application is free, all of your data is stored on the device, we do not collect, use and do not provide your data to any third party to use.  All data are saved in your device, so if you remove or delete data, we cannot restore the data for you. Any questions or suggestions please click on the feedback button in the application. We will answer your questions via Email.  Our Free apps use AdMob as an ad provider. AdMob wants to show ads that are relevant to you, and uses the device ad id to serve personalized ads based on a user's interests. Link to the Google page to opt out of personalized advertising: https://adssettings.google.com/u/0/authenticated and to the Google Privacy Policy: https://policies.google.com/privacy and https://policies.google.com/technologies/partner-sites. "</string>
+    <string name="confirm_back_diary">Your diary has not been saved. Do you want to save it?</string>
+    <string name="input_title_diary">Input title diary…</string>
+    <string name="use_password">Use password</string>
+    <string name="not_use_password">Not use password</string>
+    <string name="diary_image">Diary Image</string>
+    <string name="setting_lock">Setting Lock</string>
+
+    <string name="rateapp">rate app</string>
+    <string name="remind_me_later">Remind me later</string>
+    <string name="feedback_to_us">Feedback to us</string>
+    <string name="mail_to_us">Mail to us</string>
+    <string name="open_gp">Open Google play</string>
+    <string name="content_rate">Rate us 5 - stars to help make My Diary more awesome. Thanks!</string>
+    <string name="content_rate_1_star">Oh no! Please tell us how we can improve your experience.</string>
+    <string name="content_rate_3_star">Would you like to share your review with us? This will help and motivate us a lot.</string>
+    <string name="content_rate_5_star">Thanks for the 5 star rating!</string>
+
+    <string name="message_dialog_feed_back">Request bug fix and implement new features via email</string>
+    <string name="typeyourfeedbackhere"><i>Type your feedback here</i></string>
+    <string name="rateus">rate us</string>
+    <string name="save">Save</string>
+    <string name="get_started">Get started with My Diary!</string>
+    <string name="content_introduce">Hi, thank you for using our My Diary app. We will always listen, always discuss and always find effective solutions to contribute to bringing you better experiences in all our abilities.\nBest regards!\nSutech Mobile</string>
+    <string name="use_dark_theme">Use dark theme</string>
+    <string name="goto_note">This action will redirect you to Kitty Note of we store</string>
+    <string name="set_password">Set Password</string>
+
+    <string name="choose_theme">Choose Theme</string>
+    <string name="change_theme">Change Theme</string>
+    <string name="remove_all_ads">Remove all annoying ads with one purchase</string>
+    <string name="not_now">Not now</string>
+    <string name="check_internet">Check your internet connection and try again</string>
+    <string name="skip">Skip</string>
+    <string name="edit">Edit</string>
+
+    <string name="upgrade_to">Upgrade to Non-Ad Permanently version with only:</string>
+    <string name="buy_now">buy now</string>
+    <string name="loading_selected">The selected photos will be displayed here</string>
+    <string name="des_1">Remove annoying ADS</string>
+    <string name="des_2">One time purchase</string>
+    <string name="des_3">Optimize user experience</string>
+    <string name="my_diary_premium">My Diary Premium</string>
+    <string name="discard">Discard</string>
+
+</resources>

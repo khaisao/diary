@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFrag">
+    <fragment
+        android:id="@+id/mainFrag"
+        android:name="com.sutech.diary.view.home.HomeFrag"
+        android:label="MainFrag" >
+        <action
+            android:id="@+id/action_mainFrag_to_writeFrag"
+            app:destination="@id/writeFrag" />
+        <action
+            android:id="@+id/action_mainFrag_to_passWordFrag"
+            app:destination="@id/passWordFrag" />
+        <action
+            android:id="@+id/action_mainFrag_to_readDiaryFrag"
+            app:destination="@id/readDiaryFrag" />
+        <action
+            android:id="@+id/action_mainFrag_to_settingFrag"
+            app:destination="@id/settingFrag" />
+        <action
+            android:id="@+id/action_mainFrag_to_IAPFragment"
+            app:destination="@id/IAPFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeFrag"
+        android:name="com.sutech.diary.view.viet.VietFrag"
+        android:label="WriteFrag" >
+        <action
+            android:id="@+id/action_writeFrag_to_viewImageFrag"
+            app:destination="@id/viewImageFrag" />
+        <action
+            android:id="@+id/action_writeFrag_to_chooseImageAct"
+            app:destination="@id/chooseImageAct" />
+        <action
+            android:id="@+id/action_writeFrag_to_veAct"
+            app:destination="@id/veAct" />
+    </fragment>
+    <fragment
+        android:id="@+id/passWordFrag"
+        android:name="com.sutech.diary.view.password.PassWordFrag"
+        android:label="passWordFrag" >
+        <action
+            android:id="@+id/action_passWordFrag_to_mainFrag"
+            app:destination="@id/mainFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/readDiaryFrag"
+        android:name="com.sutech.diary.view.doc.DocDiaryFrag"
+        android:label="ReadDiaryFrag" >
+        <action
+            android:id="@+id/action_readDiaryFrag_to_writeFrag"
+            app:destination="@id/writeFrag" />
+        <action
+            android:id="@+id/action_readDiaryFrag_to_viewImageFrag"
+            app:destination="@id/viewImageFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFrag"
+        android:name="com.sutech.diary.view.SettingFrag"
+        android:label="SettingFrag" >
+        <action
+            android:id="@+id/action_settingFrag_to_passWordFrag"
+            app:destination="@id/passWordFrag" />
+        <action
+            android:id="@+id/action_settingFrag_to_themeFrag"
+            app:destination="@id/themeFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewImageFrag"
+        android:name="com.sutech.diary.view.ViewImageFrag"
+        android:label="ViewImageFrag" />
+    <fragment
+        android:id="@+id/splashFrag"
+        android:name="com.sutech.diary.view.splash.SplashFrag"
+        android:label="SplashFrag" >
+        <action
+            android:id="@+id/action_splashFrag_to_passWordFrag"
+            app:destination="@id/passWordFrag" />
+        <action
+            android:id="@+id/action_splashFrag_to_mainFrag"
+            app:destination="@id/mainFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/themeFrag"
+        android:name="com.sutech.diary.view.theme.ChooseThemeFrag"
+        android:label="ThemeFrag" />
+    <fragment
+        android:id="@+id/IAPFragment"
+        android:name="com.sutech.diary.view.iap.RemoveAdsFragment"
+        android:label="IAPFragment" />
+    <fragment
+        android:id="@+id/chooseImageAct"
+        android:name="com.sutech.diary.view.chooseImage.ChooseImageAct"
+        android:label="ChooseImageAct" />
+    <fragment
+        android:id="@+id/veAct"
+        android:name="com.sutech.diary.view.VeAct"
+        android:label="VeAct" />
+</navigation>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/rlToolbarBrush"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFF">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            app:srcCompat="@drawable/ic_back" />
+
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/btnUndo"
+                android:padding="5dp"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_undo_select" />
+
+            <ImageView
+                android:id="@+id/btnRedo"
+                android:layout_width="50dp"
+                android:padding="5dp"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_redo_select" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="Done"
+            android:textColor="@color/color_select"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/rlToolbarBrush"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <nv.module.brushdraw.ui.customview.HandWriteCanvasView
+            android:id="@+id/canvasView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#d7d7d7" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

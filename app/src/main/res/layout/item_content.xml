@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingVertical="@dimen/space_screen_small"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="12dp"
+    android:background="@drawable/bg_radius_6"
+    android:minHeight="80dp"
+    android:orientation="horizontal"
+    android:elevation="2dp"
+    android:outlineAmbientShadowColor="#CCCCCC"
+    android:outlineSpotShadowColor="#CCCCCC"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <ImageView
+        android:id="@+id/btnMore"
+        android:layout_width="@dimen/img_s_small"
+        android:layout_height="@dimen/img_s_small"
+        android:layout_alignParentEnd="true"
+        android:alpha="0.8"
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@drawable/ic_more_menu" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_toStartOf="@+id/btnMore"
+    android:orientation="vertical"
+    android:layout_marginEnd="10dp"
+    android:elevation="2dp" >
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/rlContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginStart="@dimen/space_screen_small"
+        android:layout_marginTop="@dimen/line_space_large"
+        >
+
+        <com.sutech.common.text.TextViewBold
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/imgPreview"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Hôm nay là 1 ngày Tuyệt vòi của tôi"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/text_s_16"
+            app:textColorDefault="false" />
+
+
+        <com.sutech.common.text.TextViewRegular
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTitle"
+            android:layout_marginEnd="@dimen/img_padding_large"
+            android:layout_toStartOf="@+id/imgPreview"
+            android:ellipsize="end"
+            android:maxLines="6"
+            android:minLines="2"
+            android:text="Hôm nay là 1 ngày Tuyệt vòi của tôi"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/text_s_14"
+            app:textColorDefault="false" />
+
+        <ImageView
+            android:id="@+id/imgPreview"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/line_black"
+            android:scaleType="centerCrop"
+            android:layout_alignParentEnd="true"  />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imgMoreImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerCrop"
+            android:src="@color/transparent_40"
+            app:riv_corner_radius="@dimen/img_padding_large" />
+
+        <com.sutech.common.text.TextViewMedium
+            android:id="@+id/tvMoreImage"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:textColorDefault="false" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlDiaryImage"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginStart="@dimen/space_screen_small"
+        android:layout_marginTop="@dimen/line_space_large"
+        >
+
+        <ImageView
+            android:id="@+id/imgDiaryImagePreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/line_black"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="@dimen/img_padding_large"
+            android:layout_alignParentEnd="true"  />
+
+        <ImageView
+            android:id="@+id/imgMoreDiaryImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerCrop"
+            android:src="@color/transparent_40"
+            app:riv_corner_radius="@dimen/img_padding_large" />
+        <com.sutech.common.text.TextViewMedium
+            android:id="@+id/tvMoreDiaryImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            app:textColorDefault="false"
+            />
+
+
+    </RelativeLayout>
+</LinearLayout>
+</RelativeLayout>

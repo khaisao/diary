@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <com.sutech.common.BackgroundView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="fitXY"
+        android:minWidth="250dp"
+        android:layout_marginTop="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.sutech.common.IconView
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="@dimen/space_screen_small"
+        android:src="@drawable/ic_my_diary"
+        app:layout_constraintStart_toStartOf="@id/imgLogo"
+        app:layout_constraintEnd_toEndOf="@id/imgLogo"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
+
+    <com.sutech.common.text.TextViewRegular
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_screen_small"
+        android:text="@string/load_ads"
+        android:visibility="visible"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_s_18"
+        android:layout_marginBottom="6dp"
+        android:textColor="@color/colorTextBlack"
+        app:layout_constraintBottom_toTopOf="@id/pgSplash"/>
+    <ProgressBar
+        android:id="@+id/pgSplash"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/img_padding"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_marginHorizontal="@dimen/space_screen_small"
+        android:progressTint="#4978D4"
+        android:progressBackgroundTint="#D9D9D9"
+        android:progress="0"
+        android:layout_marginBottom="@dimen/space_screen_large"
+        app:layout_constraintBottom_toBottomOf="parent"  />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

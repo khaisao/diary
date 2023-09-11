@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/space_screen_normal">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+
+    <com.sutech.common.BackgroundView
+        android:id="@+id/bgItemTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <include
+        android:id="@+id/tbItemTheme"
+        layout="@layout/toolbar_main" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_screen_normal"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <com.sutech.common.text.TextViewLight
+            android:id="@+id/tvDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thursday 24-11-2022"
+            android:layout_marginHorizontal="@dimen/line_space_large"
+            android:textColor="#000000"
+            app:textColorDefault="false"
+            android:textSize="@dimen/text_s_16"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <com.sutech.common.text.TextViewArt
+            android:id="@+id/tvTitleTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_s_22"
+            android:layout_marginTop="@dimen/img_padding_large"
+            android:layout_marginEnd="@dimen/space_screen_small"
+            android:textColor="@color/colorTextBlack"
+            app:textColorDefault="false"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@+id/tvDay"
+            app:layout_constraintStart_toStartOf="@+id/tvDay"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/get_started" />
+
+        <com.sutech.common.text.TextViewRegular
+            android:id="@+id/tvContentTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_s_14"
+            android:textColor="@color/colorTextBlack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvTitleTheme"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleTheme"
+            android:minLines="2"
+            android:layout_marginEnd="@dimen/space_screen_small"
+            app:textColorDefault="false"
+            android:ellipsize="end"
+            android:text="@string/content_introduce" />
+
+        <com.sutech.common.text.TextViewLight
+            android:id="@+id/tvDay2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thursday 24-11-2022"
+            android:layout_marginHorizontal="@dimen/line_space_large"
+            android:textColor="#000000"
+            app:textColorDefault="false"
+            android:textSize="@dimen/text_s_16"
+            android:layout_marginTop="@dimen/space_screen_small"
+            app:layout_constraintTop_toBottomOf="@+id/tvContentTheme"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <com.sutech.common.text.TextViewArt
+            android:id="@+id/tvTitleTheme2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_s_22"
+            android:layout_marginTop="@dimen/img_padding_large"
+            android:layout_marginEnd="@dimen/space_screen_small"
+            android:textColor="@color/colorTextBlack"
+            app:textColorDefault="false"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@+id/tvDay2"
+            app:layout_constraintStart_toStartOf="@+id/tvDay2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/get_started" />
+
+        <com.sutech.common.text.TextViewRegular
+            android:id="@+id/tvContentTheme2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_s_14"
+            android:textColor="@color/colorTextBlack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvTitleTheme2"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleTheme2"
+            android:minLines="2"
+            android:layout_marginEnd="@dimen/space_screen_small"
+            app:textColorDefault="false"
+            android:ellipsize="end"
+            android:text="@string/content_introduce" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

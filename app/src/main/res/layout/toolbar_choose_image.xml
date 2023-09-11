@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/tbSelectImage"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:elevation="@dimen/img_padding"
+    android:orientation="horizontal"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.sutech.common.IconView
+        android:id="@+id/tbBack"
+        android:layout_width="@dimen/img_s_normal"
+        android:layout_height="@dimen/img_s_normal"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/img_padding"
+        android:visibility="visible"
+        android:contentDescription="@string/app_name"
+        android:minWidth="@dimen/img_s_large"
+        android:padding="@dimen/img_padding"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/ic_back" />
+
+    <com.sutech.common.text.TextViewArt
+        android:id="@+id/tvTbTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:layout_toEndOf="@+id/tbBack"
+        android:layout_toStartOf="@id/btnDone"
+        android:text="@string/choose_image"
+        android:textSize="@dimen/text_s_22"
+        android:textColor="@color/colorTextBlack" />
+    <com.sutech.common.IconView
+        android:id="@+id/btnDone"
+        android:layout_width="@dimen/img_s_normal"
+        android:layout_height="@dimen/img_s_normal"
+        android:layout_centerVertical="true"
+        android:visibility="visible"
+        android:contentDescription="@string/app_name"
+        android:minWidth="@dimen/img_s_large"
+        android:padding="@dimen/img_padding"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/img_padding"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/ic_done" />
+
+</RelativeLayout>

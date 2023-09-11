@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="colorBlack">#3D3D3D</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="textColor">#363636</color>
+
+</resources>

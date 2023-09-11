@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#000000</color>
+<!--    #F2EEED-->
+    <!--    <color name="colorPrimary">#fff952</color>-->
+    <!--    <color name="colorPrimaryDark">#fff952</color>-->
+    <!--    <color name="colorAccent">#1e1f21</color>-->
+
+    <color name="colorMain">#163DFF</color>
+    <color name="colorToolbar">#2B3138</color>
+    <color name="colorMainTransparent">#99070707</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorTransparentWhite">#00FFFFFF</color>
+    <color name="colorPrimaryRed">#ff1616</color>
+    <color name="colorPrimaryGreen">#41FF16</color>
+    <color name="colorPrimaryBlue">#163DFF</color>
+    <color name="colorGrey">#666668</color>
+    <color name="colorGreen">#03ad54</color>
+
+    <color name="bg_main">#F2F2F2</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000</color>
+    <color name="transparent_10">#1A000000</color>
+    <color name="transparent_20">#33000000</color>
+    <color name="transparent_40">#65000000</color>
+    <color name="transparent_60">#9A000000</color>
+    <color name="transparent_80">#CC000000</color>
+    <color name="transparent_white_20">#33FFFFFF</color>
+    <color name="transparent_white_40">#66FFFFFF</color>
+    <color name="transparent_white_60">#99FFFFFF</color>
+    <color name="icon_tint">#fff</color>
+
+
+    <color name="colorTitleToolbar">#fff</color>
+    <color name="colorTextTitle">#1e1f21</color>
+    <color name="colorTextBlack">#1e1f21</color>
+    <color name="textPrimary">#FF9AA2</color>
+<!--    <color name="textPrimary">#00CBE7</color>-->
+    <color name="textGrey">#696160</color>
+    <color name="colorTextGrey">#9E9898</color>
+    <color name="colorTextWhite">#F8FAFF</color>
+    <color name="colorTextTint">#C1F8FAFF</color>
+    <color name="backgroundTintGrey">#DADADA</color>
+    <color name="backgroundGrey">#f2f2f2</color>
+    <array name="array_background">
+        <item>@color/background_1</item>
+        <item>@color/background_3</item>
+        <item>@color/background_10</item>
+        <item>@color/background_4</item>
+        <item>@color/background_5</item>
+        <item>@color/background_6</item>
+        <item>@color/background_7</item>
+        <item>@color/background_8</item>
+        <item>@color/background_9</item>
+        <item>@color/background_2</item>
+        <item>@color/background_11</item>
+    </array>
+    <color name="background_1">#6200EA</color>
+    <color name="background_2">#E91E63</color>
+    <color name="background_3">#9C27B0</color>
+    <color name="background_4">#673AB7</color>
+    <color name="background_5">#3F51B5</color>
+    <color name="background_6">#2196F3</color>
+    <color name="background_7">#DD2C00</color>
+    <color name="background_8">#4CAF50</color>
+    <color name="background_9">#2962FF</color>
+    <color name="background_10">#6200EA</color>
+    <color name="background_11">#FF8C00</color>
+    <color name="background_12">#304FFE</color>
+</resources>
