@@ -3,24 +3,23 @@ package com.sutech.diary.view.chooseImage
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
-import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sutech.diary.base.BaseFragment
-import com.sutech.journal.diary.diarywriting.lockdiary.R
 import com.sutech.diary.model.ImageObj
 import com.sutech.diary.util.AppUtil
 import com.sutech.diary.util.DeviceUtil
 import com.sutech.diary.util.setOnClickScaleView
 import com.sutech.diary.view.chooseImage.adapter.AdapterChooseImage
-import kotlinx.android.synthetic.main.activity_choose_image.*
-import kotlinx.android.synthetic.main.toolbar_choose_image.*
+import com.sutech.journal.diary.diarywriting.lockdiary.R
+import kotlinx.android.synthetic.main.activity_choose_image.rcvChooseImage
+import kotlinx.android.synthetic.main.toolbar_choose_image.btnDone
+import kotlinx.android.synthetic.main.toolbar_choose_image.tbBack
 
 class ChooseImageAct :  BaseFragment(R.layout.activity_choose_image) {
-    private val STORAGE_REQUEST = 100
     private var arrImageObj: ArrayList<ImageObj> = ArrayList()
     private var arrImageSelected: ArrayList<ImageObj> = ArrayList()
     private lateinit var adapterImage: AdapterChooseImage
@@ -47,26 +46,32 @@ class ChooseImageAct :  BaseFragment(R.layout.activity_choose_image) {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGrandted ->
+            if (isGrandted) {
+                getAllImage()
+            } else {
+                Toast.makeText(
+                    context,
+                    "You must grant a write storage permission to use this functionality",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
 
     private fun requestStoragePermission() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    STORAGE_REQUEST
-                )
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         } else {
-
-            getAllImage()
-
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                getAllImage()
+            }
         }
     }
 
@@ -100,30 +105,4 @@ class ChooseImageAct :  BaseFragment(R.layout.activity_choose_image) {
         }
         adapterImage.notifyDataSetChanged()
     }
-
-
-    //
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String?>,
-        grantResults: IntArray
-    ) {
-
-        when (requestCode) {
-            STORAGE_REQUEST -> {
-                if (grantResults.isNotEmpty()
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                ) {
-                    getAllImage()
-                } else {
-                    Toast.makeText(
-                        context,
-                        "You must grant a write storage permission to use this functionality",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
-    }
-
 }

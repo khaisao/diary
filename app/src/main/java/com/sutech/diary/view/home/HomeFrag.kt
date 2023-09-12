@@ -33,6 +33,7 @@ import kotlinx.android.synthetic.main.layout_item_drawer.cl_use_password
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_change_passcode
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_change_theme
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_feedback
+import kotlinx.android.synthetic.main.layout_item_drawer.ll_our_other_app
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_policy
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_share
 import kotlinx.android.synthetic.main.layout_item_drawer.swPassword
@@ -288,6 +289,14 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                 DataStore.setUsePassword(false)
             }
             swPassword?.isChecked = DataStore.getUsePassword()
+        }
+
+        ll_our_other_app.setOnClick(500) {
+            AppUtil.openBrowser(
+                requireContext(),
+                "https://play.google.com/store/apps/developer?id=Sutech+Mobile"
+            )
+            drawer_layout.closeDrawer(GravityCompat.START)
         }
 
         context?.let { ctx ->
