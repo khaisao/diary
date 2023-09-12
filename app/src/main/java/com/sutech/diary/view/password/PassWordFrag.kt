@@ -1,13 +1,19 @@
 package com.sutech.diary.view.password
 
+import android.os.Bundle
+import android.util.Log
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.sutech.common.PassCodeView
 import com.sutech.diary.base.BaseFragment
 import com.sutech.diary.database.DataStore
-import com.sutech.diary.util.Constant.CREATE_FROM_SPLASH
+import com.sutech.diary.util.Constant
+import com.sutech.diary.util.Constant.COME_FROM_SECURITY
 import com.sutech.diary.util.Constant.TYPE_PASSWORD
 import com.sutech.diary.util.show
+import com.sutech.diary.view.password.SecurityQuesFrag.Companion.TYPE_INPUT_NEW_SECURITY
+import com.sutech.diary.view.password.SecurityQuesFrag.Companion.TYPE_INPUT_SECURITY_TO_CHANGE_PASSWORD
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import com.test.dialognew.setPreventDoubleClick
 import kotlinx.android.synthetic.main.fragment_pass_word.*
@@ -25,8 +31,6 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
      * $param 3: check splash
      */
     var isTypePassword = -1
-    var createFromSplash = -1
-
 
     override fun initView() {
         getDataBundle()
@@ -37,16 +41,17 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
             } else {
                 isTypePassword = 2
             }
-            tvCancel.text = getString(R.string.cancel)
         } else if (isTypePassword == 1) {
             tvPasscode.text = getString(R.string.enter_old_password)
-            tvCancel.text = getString(R.string.cancel)
             logEvent("OldPassword_Show")
 
         } else if (isTypePassword == 0) {
             logEvent("SetpassScr_Show")
             tvPasscode.text = getString(R.string.set_password)
-            tvCancel.text = getString(R.string.skip)
+        }
+        Log.d("asgawagwawg", "initView: $isTypePassword")
+        if (isTypePassword != 3) {
+            ll_forgot_password.isVisible = false
         }
         setClick()
     }
@@ -55,19 +60,17 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
         val bundle = arguments
         if (bundle != null) {
             val type = bundle.getInt(TYPE_PASSWORD, -1)
-            createFromSplash = bundle.getInt(CREATE_FROM_SPLASH, -1)
+            val comeFromSecurity = bundle.getBoolean(COME_FROM_SECURITY, false)
             if (type != -1) {
                 if (type == 3) {
                     isTypePassword = 3
                 } else {
-
-                    isTypePassword = if (DataStore.getPassword().isNullOrEmpty()) {
+                    isTypePassword = if (DataStore.getPassword().isNullOrEmpty() || comeFromSecurity) {
                         0
                     } else {
                         1
                     }
                 }
-
             }
         }
     }
@@ -81,43 +84,43 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
             }
         }
         btn1.setOnClickListener {
-            tvWrongPass.text = ""
+            tvWrongPass.isVisible = false
             passCodeView.addPassCode(1)
         }
         btn2.setOnClickListener {
-            tvWrongPass.text = ""
+            tvWrongPass.isVisible = false
             passCodeView.addPassCode(2)
         }
         btn3.setOnClickListener {
-            tvWrongPass.text = ""
+            tvWrongPass.isVisible = false
             passCodeView.addPassCode(3)
         }
         btn4.setOnClickListener {
-            tvWrongPass.text = ""
+            tvWrongPass.isVisible = false
             passCodeView.addPassCode(4)
         }
         btn5.setOnClickListener {
-            tvWrongPass.text = ""
+            tvWrongPass.isVisible = false
             passCodeView.addPassCode(5)
         }
         btn6.setOnClickListener {
-            tvWrongPass.text = ""
+            tvWrongPass.isVisible = false
             passCodeView.addPassCode(6)
         }
         btn7.setOnClickListener {
-            tvWrongPass.text = ""
+            tvWrongPass.isVisible = false
             passCodeView.addPassCode(7)
         }
         btn8.setOnClickListener {
-            tvWrongPass.text = ""
+            tvWrongPass.isVisible = false
             passCodeView.addPassCode(8)
         }
         btn9.setOnClickListener {
-            tvWrongPass.text = ""
+            tvWrongPass.isVisible = false
             passCodeView.addPassCode(9)
         }
         btn0.setOnClickListener {
-            tvWrongPass.text = ""
+            tvWrongPass.isVisible = false
             passCodeView.addPassCode(0)
         }
 
@@ -140,12 +143,6 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
             if (isTypePassword == 2 || isTypePassword == 3) {
                 activity?.finish()
             } else {
-                if (isTypePassword == 0 && createFromSplash != -1) {
-                    gotoFrag(
-                        R.id.passWordFrag,
-                        R.id.action_passWordFrag_to_mainFrag
-                    )
-                }
                 onBackPress(R.id.passWordFrag)
             }
         }
@@ -154,6 +151,18 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
         }
         btnDelete.setPreventDoubleClick(300) {
             passCodeView.removePassCode()
+        }
+
+        ll_forgot_password.setOnClickListener {
+            val ques = DataStore.getQues()
+            val ans = DataStore.getAns()
+            val bundle = Bundle()
+            if (ques.isNullOrBlank() || ans.isNullOrBlank()) {
+                bundle.putInt(Constant.TYPE_SECURITY, TYPE_INPUT_NEW_SECURITY)
+            } else {
+                bundle.putInt(Constant.TYPE_SECURITY, TYPE_INPUT_SECURITY_TO_CHANGE_PASSWORD)
+            }
+            gotoFrag(R.id.passWordFrag, R.id.action_passWordFrag_to_securityQuesFrag, bundle)
         }
 
         passCodeView.setOnDoneListener(object : PassCodeView.PassCodeViewListener {
@@ -171,14 +180,10 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                             if (passwordAfter == passwordBefore) {
                                 DataStore.savePassword(passCode)
                                 DataStore.setUsePassword(true)
-                                if (createFromSplash == -1) {
-                                    onBackPress(R.id.passWordFrag)
-                                } else {
-                                    gotoFrag(
-                                        R.id.passWordFrag,
-                                        R.id.action_passWordFrag_to_mainFrag
-                                    )
-                                }
+                                gotoFrag(
+                                    R.id.passWordFrag,
+                                    R.id.action_passWordFrag_to_mainFrag
+                                )
                             } else {
                                 tvWrongPass.text = getString(R.string.re_password_wrong)
                                 passCodeWrong()

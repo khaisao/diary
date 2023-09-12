@@ -189,18 +189,17 @@ class SplashFrag : BaseFragment(R.layout.fragment_splash), SplashAppOpenListener
 
     private fun goHome() {
         isGoHome = true
-        if (DataStore.getUsePassword() && !DataStore.getPassword().isNullOrBlank()) {
-            val bundle = Bundle()
-            bundle.putInt(Constant.TYPE_PASSWORD, 3)
-            gotoFrag(R.id.splashFrag, R.id.action_splashFrag_to_passWordFrag, bundle)
-        } else if (DataStore.getUsePassword() && DataStore.getPassword().isNullOrEmpty()) {
-            val bundle = Bundle()
-            bundle.putInt(Constant.TYPE_PASSWORD, 0)
-            bundle.putInt(Constant.CREATE_FROM_SPLASH, 0)
-            gotoFrag(R.id.splashFrag, R.id.action_splashFrag_to_passWordFrag, bundle)
-        } else {
+        if (DataStore.getFirstTimeOpenApp()) {
             gotoFrag(R.id.splashFrag, R.id.action_splashFrag_to_mainFrag)
+            DataStore.setFirstTimeOpenApp(false)
+        } else {
+            if (DataStore.getUsePassword() && !DataStore.getPassword().isNullOrBlank()) {
+                val bundle = Bundle()
+                bundle.putInt(Constant.TYPE_PASSWORD, 3)
+                gotoFrag(R.id.splashFrag, R.id.action_splashFrag_to_passWordFrag, bundle)
+            }  else {
+                gotoFrag(R.id.splashFrag, R.id.action_splashFrag_to_mainFrag)
+            }
         }
-
     }
 }

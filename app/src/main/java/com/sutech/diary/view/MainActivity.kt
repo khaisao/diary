@@ -34,26 +34,6 @@ class MainActivity : AppCompatActivity() {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.e("TAG", "onResume: ${DataStore.getUsePassword()}")
-        Log.e("TAG", "onResume: ${DataStore.getPassword()}")
-        Log.e("TAG", "onResume: ${fistOpen}")
-       if (DataStore.getUsePassword() &&!DataStore.getPassword().isNullOrBlank() && fistOpen && !checkInter) {
-           try {
-               if (findNavController(R.id.nav_host_fragment).currentDestination!!.id != R.id.passWordFrag&&findNavController(
-                       R.id.nav_host_fragment
-                   ).currentDestination!!.id != R.id.splashFrag) {
-                   findNavController(R.id.nav_host_fragment).navigate(R.id.passWordFrag)
-               }
-           } catch (e: Exception) {
-               Log.e("TAG", "onResumeException: ${e.message}")
-           }
-        } else {
-           fistOpen =  true
-        }
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         isOpening = false

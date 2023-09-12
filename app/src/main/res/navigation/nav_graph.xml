@@ -18,11 +18,13 @@
             android:id="@+id/action_mainFrag_to_readDiaryFrag"
             app:destination="@id/readDiaryFrag" />
         <action
-            android:id="@+id/action_mainFrag_to_settingFrag"
-            app:destination="@id/settingFrag" />
-        <action
             android:id="@+id/action_mainFrag_to_IAPFragment"
             app:destination="@id/IAPFragment" />
+        <action
+            android:id="@+id/action_mainFrag_to_themeFrag"
+            app:destination="@id/themeFrag" />
+
+
     </fragment>
     <fragment
         android:id="@+id/writeFrag"
@@ -45,6 +47,9 @@
         <action
             android:id="@+id/action_passWordFrag_to_mainFrag"
             app:destination="@id/mainFrag" />
+        <action
+            android:id="@+id/action_passWordFrag_to_securityQuesFrag"
+            app:destination="@id/securityQuesFrag" />
     </fragment>
     <fragment
         android:id="@+id/readDiaryFrag"
@@ -57,17 +62,7 @@
             android:id="@+id/action_readDiaryFrag_to_viewImageFrag"
             app:destination="@id/viewImageFrag" />
     </fragment>
-    <fragment
-        android:id="@+id/settingFrag"
-        android:name="com.sutech.diary.view.SettingFrag"
-        android:label="SettingFrag" >
-        <action
-            android:id="@+id/action_settingFrag_to_passWordFrag"
-            app:destination="@id/passWordFrag" />
-        <action
-            android:id="@+id/action_settingFrag_to_themeFrag"
-            app:destination="@id/themeFrag" />
-    </fragment>
+
     <fragment
         android:id="@+id/viewImageFrag"
         android:name="com.sutech.diary.view.ViewImageFrag"
@@ -99,4 +94,15 @@
         android:id="@+id/veAct"
         android:name="com.sutech.diary.view.VeAct"
         android:label="VeAct" />
+    <fragment
+        android:id="@+id/securityQuesFrag"
+        android:name="com.sutech.diary.view.password.SecurityQuesFrag"
+        android:label="SecurityQuesFrag" >
+        <action
+            android:id="@+id/action_securityQuesFrag_to_passWordFrag"
+            app:destination="@id/passWordFrag" />
+        <action
+            android:id="@+id/action_securityQuesFrag_self"
+            app:destination="@id/securityQuesFrag" />
+    </fragment>
 </navigation>

@@ -69,4 +69,13 @@
     <color name="background_10">#6200EA</color>
     <color name="background_11">#FF8C00</color>
     <color name="background_12">#304FFE</color>
+
+    <color name="color_c1deff">#c1deff</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_4355FF">#4355FF</color>
+    <color name="color_80000000">#80000000</color>
+    <color name="color_4278FE">#4278FE</color>
+
+
 </resources>

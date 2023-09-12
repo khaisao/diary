@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="facebook_app_id" translatable="false">821656608968804</string>
+    <string name="security_question">Security Question</string>
+    <string name="security_question_des">In case you forget password, you can use it.</string>
+    <string name="enter_a_security_question">Enter a security question to reset your password.</string>
+    <string name="hint_ques">What is your favorite color?</string>
+    <string name="hint_ans">Please enter your answer</string>
+    <string name="confirm">confirm</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="statistics">Statistics</string>
+    <string name="change_theme">Change theme</string>
+    <string name="hashtags">Hashtags</string>
+    <string name="use_password">Use password</string>
+    <string name="change_passcode">Change passcode</string>
+    <string name="feedback">Feedback</string>
+    <string name="share">Share</string>
+    <string name="policy">Policy</string>
+    <string name="our_other_apps_ad">Our other apps (AD)</string>
 </resources>

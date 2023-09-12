@@ -9,6 +9,7 @@
     <dimen name="radius_4">4dp</dimen>
     <dimen name="radius_6">6dp</dimen>
     <dimen name="radius_8">6dp</dimen>
+    <dimen name="radius_50">50dp</dimen>
 
     <dimen name="img_padding">6dp</dimen>
     <dimen name="img_padding_large">8dp</dimen>
@@ -19,6 +20,11 @@
     <dimen name="space_screen_small">16dp</dimen>
     <dimen name="space_screen_normal">24dp</dimen>
     <dimen name="space_screen_large">32dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
+    <dimen name="padding_18">18dp</dimen>
+    <dimen name="padding_19">19dp</dimen>
+    <dimen name="padding_20">20dp</dimen>
 
     <dimen name="text_s_28">28sp</dimen>
     <dimen name="text_s_24">24sp</dimen>
