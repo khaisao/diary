@@ -2,12 +2,15 @@ package com.sutech.diary.view.home
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -21,10 +24,18 @@ import com.sutech.diary.util.*
 import com.sutech.diary.util.Constant.EXTRA_DIARY
 import com.sutech.diary.util.Constant.EXTRA_POSITION_CONTENT
 import com.sutech.diary.util.Constant.showRateToday
+import com.sutech.journal.diary.diarywriting.lockdiary.BuildConfig
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import com.test.dialognew.*
 import kotlinx.android.synthetic.main.fragment_doc_diary.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.layout_item_drawer.cl_use_password
+import kotlinx.android.synthetic.main.layout_item_drawer.ll_change_passcode
+import kotlinx.android.synthetic.main.layout_item_drawer.ll_change_theme
+import kotlinx.android.synthetic.main.layout_item_drawer.ll_feedback
+import kotlinx.android.synthetic.main.layout_item_drawer.ll_policy
+import kotlinx.android.synthetic.main.layout_item_drawer.ll_share
+import kotlinx.android.synthetic.main.layout_item_drawer.swPassword
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -83,6 +94,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
+        swPassword?.isChecked = DataStore.getUsePassword()
     }
 
 
@@ -198,8 +210,86 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         }
         btnMenu?.setOnClickScaleView {
             logEvent("MainScr_IconSetting_Clicked")
-            gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_settingFrag)
+            drawer_layout.openDrawer(GravityCompat.START)
+            logEvent("SettingScr_Show")
         }
+
+        ll_change_passcode?.setOnClick(1500) {
+            logEvent("SettingScr_Changepasscode_Clicked")
+            val bundle = Bundle()
+            bundle.putInt(Constant.TYPE_PASSWORD, 1)
+            gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_passWordFrag, bundle)
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }
+
+        ll_policy?.setOnClick(1500) {
+            logEvent("SettingScr_Policy_Clicked")
+            AppUtil.openBrowser(
+                requireContext(),
+                "https://sutechmobile.blogspot.com/2022/12/my-diary-privacy-policy.html"
+            )
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }
+
+        ll_share?.setOnClick(2000) {
+            logEvent("SettingScr_Share_Clicked")
+            try {
+                val shareIntent = Intent(Intent.ACTION_SEND)
+                shareIntent.type = "text/plain"
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "My diary")
+                var shareMessage = "\nLet me recommend you this application\n\n"
+                shareMessage =
+                    "${shareMessage}https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}".trimIndent()
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
+                startActivity(Intent.createChooser(shareIntent, "choose one"))
+            } catch (e: java.lang.Exception) {
+
+            }
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }
+
+        ll_change_theme?.setOnClick(100) {
+            logEvent("SettingScr_Changetheme_Clicked")
+            gotoFrag(R.id.mainFrag,R.id.action_mainFrag_to_themeFrag)
+//            if (AppController.getInstance().themeId == 0) {
+//                DataStore.saveTheme(1)
+//                AppController.getInstance().setThemeApp(1)
+//            } else {
+//                AppController.getInstance().setThemeApp(0)
+//                DataStore.saveTheme(0)
+//            }
+//            setSwDarkTheme()
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }
+
+        ll_feedback?.setOnClick(1500) {
+            context?.let { ctx ->
+                logEvent("SettingScr_Feedback_Clicked")
+                AppUtil.sendEmailMore(
+                    ctx,
+                    arrayOf("Sutechmobile@gmail.com"),
+                    "Feedback to My diary ${BuildConfig.VERSION_NAME}",
+                    ""
+                )
+            }
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }
+
+        cl_use_password.setOnClick(500) {
+            if (!DataStore.getUsePassword()) {
+                if (DataStore.getPassword().isNullOrBlank()) {
+                    val bundle = Bundle()
+                    bundle.putInt(Constant.TYPE_PASSWORD, 1)
+                    gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_passWordFrag, bundle)
+                } else {
+                    DataStore.setUsePassword(true)
+                }
+            } else {
+                DataStore.setUsePassword(false)
+            }
+            swPassword?.isChecked = DataStore.getUsePassword()
+        }
+
         context?.let { ctx ->
         if (AppUtil.isIAP||!AppUtil.isNetworkAvailable(ctx)) {
             btnIap?.gone()

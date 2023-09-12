@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_c1deff">
+
+    <ImageView
+        android:id="@+id/tvCancel"
+        android:layout_width="@dimen/margin_32"
+        android:layout_height="@dimen/margin_32"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_16"
+        android:background="@drawable/bg_btn_circle_white"
+        android:gravity="center"
+        android:padding="4dp"
+        android:src="@drawable/ic_cancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.sutech.common.text.TextViewLight
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/security_question"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCancel"
+        app:textColorDefault="false" />
+
+    <com.sutech.common.text.TextViewLight
+        android:id="@+id/tv_ques_des"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="44dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/security_question_des"
+        android:textColor="@color/color_333333"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:textColorDefault="false" />
+
+    <EditText
+        android:id="@+id/edt_ques"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bg_radius_50"
+        android:hint="@string/hint_ques"
+        android:paddingHorizontal="16dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/color_666666"
+        app:layout_constraintTop_toBottomOf="@id/tv_ques_des" />
+
+    <EditText
+        android:id="@+id/edt_ans"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_radius_50"
+        android:hint="@string/hint_ans"
+        android:paddingHorizontal="16dp"
+        android:textColor="@color/black"
+        android:inputType="textPassword"
+        android:textColorHint="@color/color_666666"
+        app:layout_constraintTop_toBottomOf="@id/edt_ques" />
+
+    <com.sutech.common.text.TextViewLight
+        android:id="@+id/tv_wrong_security_ans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/the_incorrect_password"
+        android:textColor="#BD1206"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/edt_ans"
+        app:layout_constraintTop_toBottomOf="@id/edt_ans"
+        app:textColorDefault="false" />
+
+    <com.sutech.common.text.TextViewLight
+        android:id="@+id/tv_confirm_security"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bg_blue_radius_50"
+        android:gravity="center"
+        android:text="@string/confirm"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/edt_ans"
+        app:textColorDefault="false" />
+
+    <LinearLayout
+        android:id="@+id/layoutAdsPassword"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/viewGoneAdGallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Loading ad..."
+            android:textColor="@color/black" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,297 +1,341 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <com.sutech.common.BackgroundView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-    <View
-        android:id="@+id/toolbarMain"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/grFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:constraint_referenced_ids="bgFilter,icFilter,tvFilter,icCloseFilter"/>
-    <View
-        android:id="@+id/bgFilter"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="@id/icFilter"
-        app:layout_constraintBottom_toBottomOf="@id/icFilter"
-        app:layout_constraintStart_toStartOf="@id/icFilter"
-        app:layout_constraintEnd_toEndOf="@id/icCloseFilter"
-        android:background="@color/white"
-        />
-
-    <ImageView
-        android:id="@+id/icFilter"
-        android:layout_width="@dimen/img_s_small"
-        android:layout_height="@dimen/img_s_small"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/space_screen_small"
-        android:contentDescription="@string/app_name"
-        android:scaleType="fitXY"
-        android:visibility="visible"
-        app:layout_constraintTop_toTopOf="@id/tvFilter"
-        app:layout_constraintBottom_toBottomOf="@id/tvFilter"
-        app:layout_constraintEnd_toStartOf="@id/tvFilter"
-        app:srcCompat="@drawable/ic_filter" />
-
-    <com.sutech.common.text.TextViewLight
-        android:id="@+id/tvFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="@dimen/img_padding_large"
-        android:text="@string/app_name"
-        android:textColor="#121010"
-        app:textColorDefault="false"
-        android:textSize="@dimen/text_s_16"
-        app:layout_constraintTop_toBottomOf="@id/toolbarMain"
-        app:layout_constraintEnd_toStartOf="@id/icCloseFilter"/>
-
-    <ImageView
-        android:id="@+id/icCloseFilter"
-        android:layout_width="@dimen/img_s_small"
-        android:layout_height="@dimen/img_s_small"
-        android:padding="@dimen/img_padding"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/space_screen_small"
-        android:contentDescription="@string/app_name"
-        app:layout_constraintTop_toTopOf="@id/tvFilter"
-        app:layout_constraintBottom_toBottomOf="@id/tvFilter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_close"
-        app:tint="@color/black" />
-
-
-    <ImageButton
-        android:id="@+id/btnMenu"
-        android:layout_width="@dimen/img_s_large"
-        android:layout_height="@dimen/img_s_large"
-        android:layout_centerVertical="true"
-        android:background="?attr/selectableItemBackground"
-        android:contentDescription="@string/app_name"
-        android:padding="@dimen/img_padding_large"
-        android:scaleType="fitXY"
-        android:tint="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
-        app:layout_constraintTop_toTopOf="@id/toolbarMain"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_menu_left" />
-
-    <com.sutech.common.text.TextViewLight
-        android:id="@+id/tbTitleMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="@dimen/space_screen_small"
-        android:text="@string/app_name"
-        android:textColor="#121010"
-        app:textColorDefault="false"
-        android:textSize="@dimen/text_s_24"
-        app:layout_constraintStart_toEndOf="@id/btnMenu"
-        app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
-        app:layout_constraintTop_toTopOf="@id/toolbarMain"/>
-
-    <ImageView
-        android:id="@+id/btnSearchDiary"
-        android:layout_width="@dimen/img_s_normal"
-        android:layout_height="@dimen/img_s_normal"
-        android:padding="3dp"
-        android:layout_marginEnd="@dimen/space_screen_small"
-        android:contentDescription="@string/app_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
-        app:layout_constraintTop_toTopOf="@id/toolbarMain"
-        app:srcCompat="@drawable/ic_calendar"
-        app:tint="#000000" />
-
-    <ImageView
-        android:id="@+id/btnShowSearch"
-        android:layout_width="@dimen/img_s_normal"
-        android:layout_height="@dimen/img_s_normal"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/space_screen_small"
-        android:contentDescription="@string/app_name"
-        android:scaleType="fitXY"
-        android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@id/btnIap"
-        app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
-        app:layout_constraintTop_toTopOf="@id/toolbarMain"
-        app:srcCompat="@drawable/ic_search" />
-
-    <ImageView
-        android:id="@+id/btnIap"
-        android:layout_width="@dimen/img_s_normal"
-        android:layout_height="@dimen/img_s_normal"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/space_screen_small"
-        android:contentDescription="@string/app_name"
-        android:scaleType="fitXY"
-        android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@id/btnSearchDiary"
-        app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
-        app:layout_constraintTop_toTopOf="@id/toolbarMain"
-        app:srcCompat="@drawable/ic_pro_iap" />
-
-
-    <RelativeLayout
-        android:id="@+id/rlSearch"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        app:layout_constraintTop_toTopOf="@id/toolbarMain"
-        app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/white"
-        android:elevation="1dp" >
-
-        <com.sutech.common.edit_text.EditTextRegular
-            android:id="@+id/edtSearch"
+        <com.sutech.common.BackgroundView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="match_parent" />
+
+        <View
+            android:id="@+id/toolbarMain"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/grFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="bgFilter,icFilter,tvFilter,icCloseFilter" />
+
+        <View
+            android:id="@+id/bgFilter"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/icFilter"
+            app:layout_constraintEnd_toEndOf="@id/icCloseFilter"
+            app:layout_constraintStart_toStartOf="@id/icFilter"
+            app:layout_constraintTop_toTopOf="@id/icFilter" />
+
+        <ImageView
+            android:id="@+id/icFilter"
+            android:layout_width="@dimen/img_s_small"
+            android:layout_height="@dimen/img_s_small"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/btnCloseSearch"
-            android:layout_toStartOf="@id/btnClearSearch"
-            android:background="@null"
-            android:imeOptions="actionDone"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:hint="@string/search_diary"
-            android:paddingHorizontal="@dimen/img_padding_large"
-            android:textColor="@color/colorTextBlack"
-            android:textColorHint="#ABA1A1"
+            android:layout_marginEnd="@dimen/space_screen_small"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/tvFilter"
+            app:layout_constraintEnd_toStartOf="@id/tvFilter"
+            app:layout_constraintTop_toTopOf="@id/tvFilter"
+            app:srcCompat="@drawable/ic_filter" />
+
+        <com.sutech.common.text.TextViewLight
+            android:id="@+id/tvFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/img_padding_large"
+            android:text="@string/app_name"
+            android:textColor="#121010"
             android:textSize="@dimen/text_s_16"
+            app:layout_constraintEnd_toStartOf="@id/icCloseFilter"
+            app:layout_constraintTop_toBottomOf="@id/toolbarMain"
             app:textColorDefault="false" />
 
         <ImageView
-            android:id="@+id/btnCloseSearch"
-            android:layout_width="@dimen/img_s_normal"
-            android:layout_height="@dimen/img_s_normal"
+            android:id="@+id/icCloseFilter"
+            android:layout_width="@dimen/img_s_small"
+            android:layout_height="@dimen/img_s_small"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/img_padding_large"
-            android:background="@drawable/bg_radius_4"
-            android:padding="@dimen/img_padding_large"
-            app:srcCompat="@drawable/ic_back"
-            app:tint="@color/black" />
-        <ImageView
-            android:id="@+id/btnClearSearch"
-            android:layout_width="@dimen/img_s_normal"
-            android:layout_height="@dimen/img_s_normal"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/img_padding_large"
-            android:background="@drawable/bg_radius_4"
-            android:padding="@dimen/img_padding_large"
+            android:layout_marginEnd="@dimen/space_screen_small"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/img_padding"
+            app:layout_constraintBottom_toBottomOf="@id/tvFilter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvFilter"
             app:srcCompat="@drawable/ic_close"
             app:tint="@color/black" />
-    </RelativeLayout>
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/layoutAdsHome"
-        app:layout_constraintTop_toBottomOf="@+id/bgFilter">
+
+
+        <ImageButton
+            android:id="@+id/btnMenu"
+            android:layout_width="@dimen/img_s_large"
+            android:layout_height="@dimen/img_s_large"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/img_padding_large"
+            android:scaleType="fitXY"
+            android:tint="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/toolbarMain"
+            app:srcCompat="@drawable/ic_menu_left" />
+
+        <com.sutech.common.text.TextViewLight
+            android:id="@+id/tbTitleMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/space_screen_small"
+            android:text="@string/app_name"
+            android:textColor="#121010"
+            android:textSize="@dimen/text_s_24"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
+            app:layout_constraintStart_toEndOf="@id/btnMenu"
+            app:layout_constraintTop_toTopOf="@id/toolbarMain"
+            app:textColorDefault="false" />
+
+        <ImageView
+            android:id="@+id/btnSearchDiary"
+            android:layout_width="@dimen/img_s_normal"
+            android:layout_height="@dimen/img_s_normal"
+            android:layout_marginEnd="@dimen/space_screen_small"
+            android:contentDescription="@string/app_name"
+            android:padding="3dp"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/toolbarMain"
+            app:srcCompat="@drawable/ic_calendar"
+            app:tint="#000000" />
+
+        <ImageView
+            android:id="@+id/btnShowSearch"
+            android:layout_width="@dimen/img_s_normal"
+            android:layout_height="@dimen/img_s_normal"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/space_screen_small"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
+            app:layout_constraintEnd_toStartOf="@id/btnIap"
+            app:layout_constraintTop_toTopOf="@id/toolbarMain"
+            app:srcCompat="@drawable/ic_search" />
+
+        <ImageView
+            android:id="@+id/btnIap"
+            android:layout_width="@dimen/img_s_normal"
+            android:layout_height="@dimen/img_s_normal"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/space_screen_small"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
+            app:layout_constraintEnd_toStartOf="@id/btnSearchDiary"
+            app:layout_constraintTop_toTopOf="@id/toolbarMain"
+            app:srcCompat="@drawable/ic_pro_iap" />
+
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="true"
-            android:paddingBottom="@dimen/img_padding_large"
-            >
+            android:id="@+id/rlSearch"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:background="@color/white"
+            android:clickable="true"
+            android:elevation="1dp"
+            android:focusable="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/toolbarMain">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcvData"
+            <com.sutech.common.edit_text.EditTextRegular
+                android:id="@+id/edtSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/btnClearSearch"
+                android:layout_toEndOf="@+id/btnCloseSearch"
+                android:background="@null"
+                android:hint="@string/search_diary"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/img_padding_large"
+                android:singleLine="true"
+                android:textColor="@color/colorTextBlack"
+                android:textColorHint="#ABA1A1"
+                android:textSize="@dimen/text_s_16"
+                app:textColorDefault="false" />
+
+            <ImageView
+                android:id="@+id/btnCloseSearch"
+                android:layout_width="@dimen/img_s_normal"
+                android:layout_height="@dimen/img_s_normal"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/img_padding_large"
+                android:background="@drawable/bg_radius_4"
+                android:padding="@dimen/img_padding_large"
+                app:srcCompat="@drawable/ic_back"
+                app:tint="@color/black" />
+
+            <ImageView
+                android:id="@+id/btnClearSearch"
+                android:layout_width="@dimen/img_s_normal"
+                android:layout_height="@dimen/img_s_normal"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/img_padding_large"
+                android:background="@drawable/bg_radius_4"
+                android:padding="@dimen/img_padding_large"
+                app:srcCompat="@drawable/ic_close"
+                app:tint="@color/black" />
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/layoutAdsHome"
+            app:layout_constraintTop_toBottomOf="@+id/bgFilter">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="true"
+                android:paddingBottom="@dimen/img_padding_large">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_screen_normal"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    tools:ignore="UnusedAttribute" />
+
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+        <ImageView
+            android:id="@+id/btnVietNhatKy"
+            android:layout_width="@dimen/img_s_large"
+            android:layout_height="@dimen/img_s_large"
+            android:layout_marginEnd="@dimen/space_screen_small"
+            android:layout_marginBottom="@dimen/space_screen_normal"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_add_diary"
+            app:layout_constraintBottom_toTopOf="@id/layoutAdsHome"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/layoutAdsHome"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/viewGoneAdGallery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Loading ad..."
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivNotFoundDiary"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="100dp"
+            android:contentDescription="@string/app_name"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_not_found" />
+
+        <com.sutech.common.text.TextViewArt
+            android:id="@+id/tvNotFoundDiary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_screen_small"
+            android:text="@string/not_found_diary"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/text_s_14"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivNotFoundDiary" />
+
+        <ImageView
+            android:id="@+id/icNotFoundDiarySad"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@string/app_name"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/tvNotFoundDiary"
+            app:layout_constraintStart_toEndOf="@id/tvNotFoundDiary"
+            app:layout_constraintTop_toTopOf="@id/tvNotFoundDiary"
+            app:srcCompat="@drawable/ic_not_found_sad" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_gravity="start|top"
+
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_screen_normal"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
-                tools:ignore="UnusedAttribute" />
+                android:adjustViewBounds="true"
+                android:src="@drawable/drawer_header"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <include
+                    android:id="@+id/layout_item_drawer"
+                    layout="@layout/layout_item_drawer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
 
-
-    <ImageView
-        android:id="@+id/btnVietNhatKy"
-        android:layout_width="@dimen/img_s_large"
-        android:layout_height="@dimen/img_s_large"
-        android:layout_marginEnd="@dimen/space_screen_small"
-        android:layout_marginBottom="@dimen/space_screen_normal"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toTopOf="@id/layoutAdsHome"
-        app:layout_constraintEnd_toEndOf="parent"
-       android:src="@drawable/ic_add_diary" />
-
-    <LinearLayout
-        android:id="@+id/layoutAdsHome"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/white"
-        android:layout_height="60dp" >
-        <TextView
-            android:id="@+id/viewGoneAdGallery"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:text="Loading ad..."
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/ivNotFoundDiary"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="100dp"
-        android:contentDescription="@string/app_name"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_not_found" />
-
-    <com.sutech.common.text.TextViewArt
-        android:id="@+id/tvNotFoundDiary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_screen_small"
-        android:text="@string/not_found_diary"
-        android:textColor="@color/colorTextBlack"
-        android:visibility="gone"
-        android:textSize="@dimen/text_s_14"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivNotFoundDiary" />
-
-    <ImageView
-        android:id="@+id/icNotFoundDiarySad"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:contentDescription="@string/app_name"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/tvNotFoundDiary"
-        app:layout_constraintStart_toEndOf="@id/tvNotFoundDiary"
-        app:layout_constraintTop_toTopOf="@id/tvNotFoundDiary"
-        app:srcCompat="@drawable/ic_not_found_sad" />
+            </ScrollView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>

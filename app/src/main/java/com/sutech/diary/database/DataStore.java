@@ -17,6 +17,9 @@ public class DataStore {
     private static final String KEY_PREF_USE_PASSWORD = "KEY_PREF_USE_PASSWORD";
     private static final String KEY_PREF_THEME_APP = "KEY_PREF_THEME_APP";
     private static final String KEY_PREF_CONFIRM_PASSWORD = "KEY_PREF_CONFIRM_PASSWORD";
+    private static final String KEY_PREF_QUES = "KEY_PREF_QUES";
+    private static final String KEY_PREF_ANS = "KEY_PREF_ANS";
+    private static final String KEY_FIRST_TIME_OPEN_APP = "KEY_FIRST_TIME_OPEN_APP";
 
     /**
      * Call when start application
@@ -59,12 +62,36 @@ public class DataStore {
         return getInstance().sharedPreferences.getStringValue(KEY_PREF_PASSWORD);
     }
 
+    public static void saveQues(String ques) {
+        getInstance().sharedPreferences.putStringValue(KEY_PREF_QUES, ques);
+    }
+
+    public static String getQues() {
+        return getInstance().sharedPreferences.getStringValue(KEY_PREF_QUES);
+    }
+
+    public static void saveAns(String ans) {
+        getInstance().sharedPreferences.putStringValue(KEY_PREF_ANS, ans);
+    }
+
+    public static String getAns() {
+        return getInstance().sharedPreferences.getStringValue(KEY_PREF_ANS);
+    }
+
     public static void setUsePassword(Boolean password) {
         getInstance().sharedPreferences.putBooleanValue(KEY_PREF_USE_PASSWORD, password);
     }
 
     public static Boolean getUsePassword() {
-        return getInstance().sharedPreferences.getBooleanValue(KEY_PREF_USE_PASSWORD,true);
+        return getInstance().sharedPreferences.getBooleanValue(KEY_PREF_USE_PASSWORD,false);
+    }
+
+    public static void setFirstTimeOpenApp(Boolean isFirstTimeOpenApp) {
+        getInstance().sharedPreferences.putBooleanValue(KEY_FIRST_TIME_OPEN_APP, isFirstTimeOpenApp);
+    }
+
+    public static Boolean getFirstTimeOpenApp() {
+        return getInstance().sharedPreferences.getBooleanValue(KEY_FIRST_TIME_OPEN_APP,true);
     }
 
 
