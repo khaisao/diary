@@ -80,35 +80,48 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/rlCalendar"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/space_screen_small"
                 android:paddingHorizontal="@dimen/img_padding_large"
                 android:paddingVertical="@dimen/img_padding">
 
-                <com.sutech.common.text.TextViewRegular
-                    android:id="@+id/tvDateTime"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/rlCalendar"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/space_screen_small"
-                    android:textColor="@color/colorTextBlack"
-                    android:textSize="@dimen/text_s_14"
-                    app:textColorDefault="false" />
+                    android:layout_weight="1">
+
+                    <com.sutech.common.text.TextViewRegular
+                        android:id="@+id/tvDateTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/space_screen_small"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="@dimen/text_s_14"
+                        app:textColorDefault="false" />
+
+                    <ImageView
+                        android:id="@+id/btnMoreCalendar"
+                        android:layout_width="@dimen/space_screen_small"
+                        android:layout_height="@dimen/space_screen_normal"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/tvDateTime"
+                        android:background="?attr/selectableItemBackground"
+                        android:contentDescription="@string/app_name"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_more_calendar" />
+                </RelativeLayout>
 
                 <ImageView
-                    android:id="@+id/btnMoreCalendar"
-                    android:layout_width="@dimen/space_screen_small"
-                    android:layout_height="@dimen/space_screen_normal"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/tvDateTime"
-                    android:background="?attr/selectableItemBackground"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="centerInside"
-                    app:srcCompat="@drawable/ic_more_calendar" />
-            </RelativeLayout>
+                    android:id="@+id/btnAddMood"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/mood_button"
+                    android:src="@drawable/ic_smiling" />
+            </LinearLayout>
 
             <com.sutech.common.edit_text.EditTextMedium
                 android:id="@+id/edtTitle"

@@ -3,6 +3,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingVertical="@dimen/space_screen_small"
+    android:paddingHorizontal="@dimen/space_screen_small"
     android:layout_marginTop="20dp"
     android:layout_marginEnd="12dp"
     android:background="@drawable/bg_radius_6"
@@ -15,13 +16,13 @@
 
 
     <ImageView
-        android:id="@+id/btnMore"
+        android:id="@+id/mood"
         android:layout_width="@dimen/img_s_small"
         android:layout_height="@dimen/img_s_small"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:alpha="0.8"
-        android:contentDescription="@string/app_name"
-        app:srcCompat="@drawable/ic_more_menu" />
+        android:contentDescription="@string/app_name" />
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -38,8 +39,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
-        android:layout_marginStart="@dimen/space_screen_small"
-        android:layout_marginTop="@dimen/line_space_large"
         >
 
         <com.sutech.common.text.TextViewBold
@@ -104,7 +103,6 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_below="@+id/tvTitle"
-        android:layout_marginStart="@dimen/space_screen_small"
         android:layout_marginTop="@dimen/line_space_large"
         >
 

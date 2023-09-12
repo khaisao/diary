@@ -17,4 +17,6 @@
     <string name="share">Share</string>
     <string name="policy">Policy</string>
     <string name="our_other_apps_ad">Our other apps (AD)</string>
+    <string name="mood_button">Mood button</string>
+    <string name="how_are_you_today">How are you today?</string>
 </resources>
