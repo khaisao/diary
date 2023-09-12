@@ -85,36 +85,7 @@ class AdapterContent(
                 itemView.rlDiaryImage.visibility = View.GONE
             }
 
-            itemView.btnMore.setPreventDoubleClickItem {
-                onClickMore(position)
-                val popup = PopupMenu(itemView.context, itemView.btnMore)
-                popup.inflate(R.menu.menu_item_content)
-                //adding click listener
-                //adding click listener
-                popup.setOnMenuItemClickListener { item ->
-                    when (item.getItemId()) {
-                        R.id.menuEdit -> {
-                            checkTime {
-                                onClickEdit(position)//handle menu1 click
-                            }
-                            true
-                        }
-                        R.id.menuDelete -> {
-                            checkTime {
-                            onClickDelete(position)//handle menu2 click
-
-                        }
-                            true
-                        }
-                        else -> false
-                    }
-                }
-                //displaying the popup
-                //displaying the popup
-                popup.show()
-
-
-            }
+            itemView.mood.setImageResource(content.mood.imageResource)
             itemView.setPreventDoubleClickItem {
                 onClickItem(position)
             }

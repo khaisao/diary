@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
@@ -26,6 +27,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 private const val TAG = "VietFrag"
 
@@ -47,6 +49,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
 
     private var titleDiary = ""
     private var contentDiary = ""
+    private var moodDiary = MoodUtil.getMoodByName(MoodUtil.Mood.SMILING.name)
     var arrDelete: ArrayList<String> = ArrayList()
     private lateinit var dirayDataBase: DiaryDatabase
 
@@ -294,6 +297,18 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
                 }
             }
         }
+        btnAddMood?.setOnClickListener {
+            context?.let { cxt ->
+                val loc = IntArray(2) { value -> value }
+                btnAddMood?.getLocationOnScreen(loc)
+                val x = loc[0] - btnAddMood?.measuredWidth!! * 8
+                val y = loc[1]
+                DialogUtil.showDialogMood(cxt, x, y) { mood ->
+                    moodDiary = mood
+                    btnAddMood?.setImageResource(mood.imageResource)
+                }
+            }
+        }
     }
 
 
@@ -341,6 +356,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
         contentModel?.images = arrImage
         contentModel?.dateTimeUpdate =
             SimpleDateFormat("dd-MM-yyyy", Locale.US).format(Date())
+        contentModel?.mood = moodDiary
 
         if (isOnClickUpdateDate) {
             contentModel?.dateTimeCreate = dateTime
@@ -433,7 +449,8 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
                 content = contentDiary,
                 images = arrImage,
                 createDate = date,
-                dateTimeCreate = dateTime
+                dateTimeCreate = dateTime,
+                mood = moodDiary
             )
         )
         if (addToDay) {
