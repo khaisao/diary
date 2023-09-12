@@ -11,7 +11,7 @@ android {
     compileSdk 33
     defaultConfig {
         applicationId "com.sutech.journal.diary.diarywriting.lockdiary"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdk 33
         versionCode 8
         versionName "2.6"

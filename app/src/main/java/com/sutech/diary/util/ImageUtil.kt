@@ -3,17 +3,21 @@ package com.sutech.diary.util
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Resources
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.sutech.journal.diary.diarywriting.lockdiary.R
 import com.sutech.diary.model.ImageObj
-import java.io.*
-import android.database.Cursor
-import android.provider.MediaStore
+import com.sutech.journal.diary.diarywriting.lockdiary.R
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 
 
 object ImageUtil {
@@ -26,35 +30,39 @@ object ImageUtil {
         Glide.with(image.context).load(drawable_image).into(image)
     }
 
-    fun setImage(image: ImageView, url_image: Uri?, width:Int, height:Int) {
-        Glide.with(image.context).load(url_image).thumbnail(0.01f).override(width,height).placeholder(R.drawable.no_image)
+    fun setImage(image: ImageView, url_image: Uri?, width: Int, height: Int) {
+        Glide.with(image.context).load(url_image).thumbnail(0.01f).override(width, height)
+            .placeholder(R.drawable.no_image)
             .error(R.color.black).into(image)
     }
+
     fun setImage(image: ImageView, url_image: String?) {
         Glide.with(image.context).load(url_image).placeholder(R.drawable.no_image)
-           .error(R.color.black).into(image)
+            .error(R.color.black).into(image)
     }
+
     fun setImage(image: ImageView, url_image: Bitmap?) {
         Glide.with(image.context).load(url_image).placeholder(R.drawable.no_image)
-           .error(R.color.black).into(image)
+            .error(R.color.black).into(image)
     }
 
     fun setImageByte(image: ImageView, url_image: ByteArray?) {
         Glide.with(image.context).load(url_image).placeholder(R.drawable.no_image)
-           .error(R.color.black).load(url_image).into(image)
+            .error(R.color.black).load(url_image).into(image)
     }
 
     fun convertBitmapFromDrawable(res: Resources?, resId: Int): Bitmap {
         return BitmapFactory.decodeResource(res, resId)
     }
 
-      fun imageToBitmap(res: Resources?, resId: Int): ByteArray {
-        val bitmap = convertBitmapFromDrawable(res,resId)
+    fun imageToBitmap(res: Resources?, resId: Int): ByteArray {
+        val bitmap = convertBitmapFromDrawable(res, resId)
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
 
         return stream.toByteArray()
     }
+
     fun convertBitmaptoFile(
         context: Context,
         bitmap: Bitmap,
@@ -84,7 +92,7 @@ object ImageUtil {
     }
 
 
-        fun saveToInternalStorage(applicationContext: Context, image: ImageObj): String? {
+    fun saveToInternalStorage(applicationContext: Context, image: ImageObj): String? {
         // path to /data/data/yourapp/app_data/imageDir
         val directory = getInternalPackage(applicationContext)
 
@@ -111,7 +119,8 @@ object ImageUtil {
         val cw = ContextWrapper(applicationContext)
         return cw.getDir("imageDir", Context.MODE_PRIVATE)
     }
-//    fun copyFileToInternal(context: Context, inputPath: String, id: String): String? {
+
+    //    fun copyFileToInternal(context: Context, inputPath: String, id: String): String? {
 //        val directory = getInternalPackage(context)
 ////        val src = Uri.parse(inputPath).toFile()
 //        val src = File(Uri.parse(inputPath).path)
@@ -129,26 +138,29 @@ object ImageUtil {
 //        }
 //        return mypath.absolutePath
 //    }
-    fun getFilePath(context: Context,_uri: Uri):File{
-    var filePath: String? = ""
-    Log.d("", "URI = $_uri")
-    if (_uri != null && "content" == _uri.scheme) {
-        val cursor: Cursor? = context.getContentResolver()
-            .query(_uri, arrayOf(MediaStore.Images.ImageColumns.DATA), null, null, null)
-        cursor?.moveToFirst()
-        filePath = cursor?.getString(0)
-        cursor?.close()
-    } else {
-        filePath = _uri!!.path
+    fun getFilePath(context: Context, _uri: Uri): File {
+        var filePath: String? = ""
+        Log.d("", "URI = $_uri")
+        if (_uri != null && "content" == _uri.scheme) {
+            val cursor: Cursor? = context.getContentResolver()
+                .query(_uri, arrayOf(MediaStore.Images.ImageColumns.DATA), null, null, null)
+            cursor?.moveToFirst()
+            filePath = cursor?.getString(0)
+            cursor?.close()
+        } else {
+            filePath = _uri!!.path
+        }
+        return File(filePath)
     }
-    return  File(filePath)
-    }
-    fun copyFileToInternal(context: Context,inputPath: String, id: String): String? {
+
+    fun copyFileToInternal(context: Context, inputPath: String, id: String): String? {
         try {
             Log.d("hhhh", "copyFileToInternal: 1 ${id}")
             val outPath = context.filesDir.path + "/file"
-            if (!File(outPath).exists()){ File(outPath).mkdirs()}
-            val input =     getFilePath(context,Uri.parse(inputPath))
+            if (!File(outPath).exists()) {
+                File(outPath).mkdirs()
+            }
+            val input = getFilePath(context, Uri.parse(inputPath))
             val output = File(
                 outPath, "${id}.png"
             )
@@ -164,7 +176,7 @@ object ImageUtil {
 
             return output.path
         } catch (e: Exception) {
-            Log.e("TAG", "copyFileToInternal: ${e.message}" )
+            Log.e("TAG", "copyFileToInternal: ${e.message}")
             return inputPath
         }
     }
