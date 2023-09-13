@@ -89,7 +89,7 @@ object DialogUtil {
 
     fun showDialogMood(context: Context, positionX: Int, positionY: Int, onMoodSelected: (MoodObj) -> Unit) {
         val dialog = Dialog(context)
-        val gridColumn = 6
+        val gridColumn = 5
         val icons = MoodUtil.moods
         val adapterMood = AdapterMood(icons, object : AdapterMood.MoodSelected {
             override fun onMoodSelectedListener(mood: MoodObj) {
@@ -103,6 +103,7 @@ object DialogUtil {
         dialog.icons.adapter = adapterMood
         dialog.icons.addItemDecoration(GridSpacingItemDecoration(gridColumn, 20, false))
         dialog.icons.layoutManager = GridLayoutManager(context, gridColumn)
+        dialog.window?.setDimAmount(0.0f)
         wmlp?.gravity = Gravity.TOP or Gravity.START
         wmlp?.x = positionX
         wmlp?.y = positionY
