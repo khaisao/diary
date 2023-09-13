@@ -10,9 +10,9 @@ class Common {
     companion object{
         fun getDay(dayTime:String,context:Context):String{
             val sdf = SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.getDefault())
-            val date: Date? = sdf.parse(dayTime)
+            val date: Date = sdf.parse(dayTime) as Date
             val calendar: Calendar = Calendar.getInstance()
-            calendar.time = date!!
+            calendar.time = date
             val dayName = when (calendar.get(Calendar.DAY_OF_WEEK)) {
                 Calendar.SUNDAY -> R.string.sunday
                 Calendar.MONDAY -> R.string.monday

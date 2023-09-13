@@ -42,7 +42,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Calendar
 
 
-class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapter.OnItemListener {
+class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapter.OnDateItemListener {
     private var adapterDiary: AdapterDiaryItem? = null
     private var calendarAdapter: CalendarAdapter? = null
     private val arrDiary: MutableList<DiaryModel> = ArrayList()
@@ -50,7 +50,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
     private var mcontext: Context? = null
 
     companion object {
-        lateinit var selectedDate: LocalDate
+        var selectedDate: LocalDate = LocalDate.now()
         fun checkListDiary(date: LocalDate, context: Context): ArrayList<Int> {
             val diaryDataBase2 = DiaryDatabase.getInstance(context)
             val yearMonth = YearMonth.from(date)
@@ -66,7 +66,6 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
                     } else {
                         "${(i - dayOfWeek)}-${selectedDate.format(formatter)}"
                     }
-
                     CoroutineScope(Dispatchers.IO).launch {
                         diaryDataBase2.getDiaryDao().searchDiaryByDateTime(dateTime).let {
                             withContext(Dispatchers.Main) {
@@ -80,22 +79,18 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
             }
             return listDiary
         }
-
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mcontext = context
     }
-
     override fun onDestroy() {
         super.onDestroy()
         mcontext = null
     }
 
     private fun initOnClick() {
-
-
         btn_back.setOnClickListener {
             onBackPress(R.id.calendarFlag)
         }
@@ -113,14 +108,12 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
             calendarAdapter!!.notifyDataSetChanged()
         }
     }
-
     private fun setMonthView() {
         tv_curenTime.text = monthYearFromDate(selectedDate)
         val daysInMonth = daysInMonthArray(selectedDate)
         calendarAdapter = CalendarAdapter(false,daysInMonth, this, mcontext!!)
         rcv_calendar.layoutManager = GridLayoutManager(mcontext, 7)
         rcv_calendar.adapter = calendarAdapter
-
         Handler(Looper.getMainLooper()).postDelayed({
             calendarAdapter!!.notifyDataSetChanged()
 
@@ -142,7 +135,6 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
         }
         return daysInMonthArray
     }
-
 
     private fun setRcvDiary() {
         adapterDiary = mcontext?.let {
@@ -173,13 +165,11 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
         setMonthView()
         mcontext?.let { checkListDiary(selectedDate, it) }
     }
-
     private fun nextMonthAction() {
         selectedDate = selectedDate.plusMonths(1)
         setMonthView()
         mcontext?.let { checkListDiary(selectedDate, it) }
     }
-
 
     override fun initView() {
         logEvent("CalendarScr_Show")
@@ -257,7 +247,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
         adapterDiary?.notifyDataSetChanged()
     }
 
-    override fun onItemClick(position: Int, dayText: String?) {
+    override fun onDateItemClick(position: Int, dayText: String?) {
         getDataClick(dayText)
         calendarAdapter?.updatePosition(position)
 
@@ -274,8 +264,6 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
             }
             val formatter = DateTimeFormatter.ofPattern(Constant.FormatdayMMYY)
             getDataDiary(dateTime = "$dayTime-${selectedDate.format(formatter)}")
-
-
             tvTimeDay.text = mcontext?.let {
                 Common.getDay("$dayTime-${selectedDate.format(formatter)}",
                     it
@@ -283,6 +271,4 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
             } + " " + "$dayTime-${selectedDate.format(formatter)}"
         }
     }
-
-
 }

@@ -19,9 +19,6 @@
             android:id="@+id/action_mainFrag_to_readDiaryFrag"
             app:destination="@id/readDiaryFrag" />
         <action
-            android:id="@+id/action_mainFrag_to_settingFrag"
-            app:destination="@id/settingFrag" />
-        <action
             android:id="@+id/action_mainFrag_to_calendarFrag"
             app:destination="@id/calendarFlag" />
         <action

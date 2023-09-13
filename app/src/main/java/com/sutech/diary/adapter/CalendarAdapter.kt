@@ -2,7 +2,6 @@ package com.sutech.diary.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,32 +16,31 @@ import java.time.LocalDate
 
 
 class CalendarAdapter(
-    private val fromAddnew:Boolean,
+    private val fromAddnew: Boolean,
     private val daysOfMonth: ArrayList<String>,
-    private val onItemListener: OnItemListener,
+    private val onItemListener: OnDateItemListener,
     private val context: Context
 ) :
     RecyclerView.Adapter<CalendarViewHolder?>() {
     private var diaryDataBase: DiaryDatabase? = null
     private var selected = 0
-    private var checkDiaryPosision =ArrayList<Int>()
+    private var checkDiaryPosision = ArrayList<Int>()
     private var isStart = false
 
     init {
-        checkDiaryPosision = if(fromAddnew){
+        checkDiaryPosision = if (fromAddnew) {
             ArrayList()
-        } else{
+        } else {
             checkListDiary(LocalDate.now(), context)
         }
     }
+
     @SuppressLint("NotifyDataSetChanged")
     fun updatePosition(position: Int) {
         isStart = true
         selected = position
         notifyDataSetChanged()
     }
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
         diaryDataBase = DiaryDatabase.getInstance(context)
@@ -56,13 +54,13 @@ class CalendarAdapter(
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
         val currentDate = LocalDate.now()
         val currentDateStr = currentDate.dayOfMonth.toString()
-
-        if (checkDiaryPosision.contains(position+1)) {
+        if (checkDiaryPosision.contains(position + 1)) {
             holder.dot.visibility = View.VISIBLE
         } else {
             holder.dot.visibility = View.INVISIBLE
         }
-        if(!fromAddnew) {
+
+        if (!fromAddnew) {
             if (selected == position && daysOfMonth[position] != "" && isStart) {
                 holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_selected)
                 holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.secondary))
@@ -76,8 +74,8 @@ class CalendarAdapter(
                 holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.white))
                 holder.dot.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white))
             }
-        }
-        else{
+
+        } else {
             if (selected == position && daysOfMonth[position] != "" && isStart) {
                 holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_selected)
                 holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.secondary))
@@ -99,8 +97,7 @@ class CalendarAdapter(
     override fun getItemCount(): Int {
         return daysOfMonth.size
     }
-
-    interface OnItemListener {
-        fun onItemClick(position: Int, dayText: String?)
+    interface OnDateItemListener {
+        fun onDateItemClick(position: Int, dayText: String?)
     }
 }

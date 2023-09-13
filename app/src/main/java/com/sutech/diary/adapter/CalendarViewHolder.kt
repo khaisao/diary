@@ -5,11 +5,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.sutech.diary.adapter.CalendarAdapter.OnItemListener
+import com.sutech.diary.adapter.CalendarAdapter.OnDateItemListener
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 
 
-class CalendarViewHolder(itemView: View, private val onItemListener: OnItemListener) :
+class CalendarViewHolder(itemView: View, private val onItemListener: OnDateItemListener) :
     RecyclerView.ViewHolder(itemView), View.OnClickListener {
     val dayOfMonth: TextView
     val lnCellDay : LinearLayout
@@ -23,6 +23,6 @@ class CalendarViewHolder(itemView: View, private val onItemListener: OnItemListe
     }
 
     override fun onClick(view: View) {
-        onItemListener.onItemClick(adapterPosition, dayOfMonth.text as String)
+        onItemListener.onDateItemClick(adapterPosition, dayOfMonth.text as String)
     }
 }

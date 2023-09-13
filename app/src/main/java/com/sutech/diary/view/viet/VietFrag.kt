@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
-import android.util.DisplayMetrics
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -30,9 +29,11 @@ import com.sutech.diary.util.Constant
 import com.sutech.diary.util.DeviceUtil
 import com.sutech.diary.util.DialogUtil
 import com.sutech.diary.util.ImageUtil
+import com.sutech.diary.util.MoodUtil
 import com.sutech.diary.util.setOnClickScaleView
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.fragment_viet_diary.btnAddImage
+import kotlinx.android.synthetic.main.fragment_viet_diary.btnAddMood
 import kotlinx.android.synthetic.main.fragment_viet_diary.btnDate
 import kotlinx.android.synthetic.main.fragment_viet_diary.btnDraw
 import kotlinx.android.synthetic.main.fragment_viet_diary.btnSaveDiary
@@ -49,7 +50,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 import java.time.LocalDate
 import java.time.YearMonth
@@ -60,15 +60,13 @@ import java.util.Locale
 
 private const val TAG = "VietFrag"
 
-class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnItemListener {
+class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDateItemListener {
 
     private var IS_CHOOSE = 0
     private var isOnClick = false
     private var isOnClickUpdateDate = false
     private val arrImage: ArrayList<ImageObj> = ArrayList()
     private lateinit var adapterImage: AdapterImageContent
-
-
     private var currentDate = Calendar.getInstance()
     private var diaryModel: DiaryModel? = null
     private var positionContent: Int = -1
@@ -76,16 +74,13 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnIt
     private var isUpdate = false
 
     private var calendarAdapter: CalendarAdapter? = null
-
-
     private var titleDiary = ""
     private var contentDiary = ""
     private var moodDiary = MoodUtil.getMoodByName(MoodUtil.Mood.SMILING.name)
     var arrDelete: ArrayList<String> = ArrayList()
     private lateinit var dirayDataBase: DiaryDatabase
-
     companion object{
-        lateinit var addNewsSlectedDate: LocalDate
+         var addNewsSlectedDate: LocalDate= LocalDate.now()
     }
     override fun onResume() {
         super.onResume()
@@ -185,7 +180,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnIt
             onBackPress(R.id.writeFrag)
         }
     }
-
     private fun initOnBackPress() {
         activity?.onBackPressedDispatcher?.addCallback(this, true) {
             confirmBack()
@@ -261,7 +255,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnIt
             logEvent("WriteDiary_IconCalen_Clicked")
             context?.let {
                 showCalendar(it)
-
             }
         }
 
@@ -271,7 +264,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnIt
         edtContent?.setOnFocusChangeListener { view, b ->
             logEvent("WriteDiary_Write_Clicked")
         }
-
         rlContent?.setOnClickListener {
             edtContent.requestFocus()
             context?.let { ctx ->
@@ -281,6 +273,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnIt
             }
 
         }
+
         btnAddImage?.setOnClickScaleView(1000) {
             logEvent("WriteDiary_IconPhoto_Clicked")
             context?.let { ctx ->
@@ -288,9 +281,8 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnIt
                 gotoFrag(R.id.writeFrag, R.id.action_writeFrag_to_chooseImageAct)
                 isOnClick = true
             }
-
-
         }
+
         btnDraw?.setOnClickScaleView(1000) {
             logEvent("WriteDiary_IconPen_Clicked")
             context?.let { ctx ->
@@ -316,12 +308,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnIt
                     )
                 }
                 context?.let { ctx ->
-//                    AdsUtil.loadInterstitialAndShow(
-//                        ctx,
-//                        getString(R.string.interstitial_save_diary),
-//                        12000
-//                    ) {
-//                        Log.e(TAG, "loadInterstitialAndShow: $it")
                     CoroutineScope(Dispatchers.IO).launch {
                         moveImageToInternal()
                         removeFileInternal()
@@ -332,7 +318,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnIt
                             updateDiary()
                         }
                     }
-//                    }
 
                 }
             }
@@ -667,7 +652,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnIt
         }
     }
 
-    override fun onItemClick(position: Int, dayText: String?) {
+    override fun onDateItemClick(position: Int, dayText: String?) {
         calendarAdapter?.updatePosition(position)
     }
 
