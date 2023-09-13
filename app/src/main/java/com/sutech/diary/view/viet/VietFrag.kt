@@ -24,6 +24,7 @@ import com.sutech.diary.database.DiaryDatabase
 import com.sutech.diary.model.ContentModel
 import com.sutech.diary.model.DiaryModel
 import com.sutech.diary.model.ImageObj
+import com.sutech.diary.util.*
 import com.sutech.diary.util.AppUtil
 import com.sutech.diary.util.Constant
 import com.sutech.diary.util.DeviceUtil
@@ -114,6 +115,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDa
         }
         addNewsSlectedDate = LocalDate.now()
         AppUtil.needUpdateDiary = false
+        btnAddMood?.setImageResource(moodDiary.imageResource)
         logEvent("WriteDiary_Show")
         showBanner("banner_read_nhat_ky", layoutAdsViet)
         initOnBackPress()
@@ -326,7 +328,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDa
             context?.let { cxt ->
                 val loc = IntArray(2) { value -> value }
                 btnAddMood?.getLocationOnScreen(loc)
-                val x = loc[0] - btnAddMood?.measuredWidth!! * 8
+                val x = loc[0] - btnAddMood?.measuredWidth!! * 7
                 val y = loc[1]
                 DialogUtil.showDialogMood(cxt, x, y) { mood ->
                     moodDiary = mood
