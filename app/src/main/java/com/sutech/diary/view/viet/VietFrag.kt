@@ -1,59 +1,87 @@
 package com.sutech.diary.view.viet
 
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.Context
-import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.sutech.diary.adapter.AdapterImageContent
+import com.sutech.diary.adapter.CalendarAdapter
 import com.sutech.diary.base.BaseFragment
 import com.sutech.diary.database.DiaryDatabase
 import com.sutech.diary.model.ContentModel
 import com.sutech.diary.model.DiaryModel
 import com.sutech.diary.model.ImageObj
-import com.sutech.diary.util.*
-import com.sutech.diary.view.VeAct
+import com.sutech.diary.util.AppUtil
+import com.sutech.diary.util.Constant
+import com.sutech.diary.util.DeviceUtil
+import com.sutech.diary.util.DialogUtil
+import com.sutech.diary.util.ImageUtil
+import com.sutech.diary.util.MoodUtil
+import com.sutech.diary.util.setOnClickScaleView
 import com.sutech.journal.diary.diarywriting.lockdiary.R
-import kotlinx.android.synthetic.main.fragment_viet_diary.*
+import kotlinx.android.synthetic.main.fragment_viet_diary.btnAddImage
+import kotlinx.android.synthetic.main.fragment_viet_diary.btnAddMood
+import kotlinx.android.synthetic.main.fragment_viet_diary.btnDate
+import kotlinx.android.synthetic.main.fragment_viet_diary.btnDraw
+import kotlinx.android.synthetic.main.fragment_viet_diary.btnSaveDiary
+import kotlinx.android.synthetic.main.fragment_viet_diary.btnWriteBack
+import kotlinx.android.synthetic.main.fragment_viet_diary.edtContent
+import kotlinx.android.synthetic.main.fragment_viet_diary.edtTitle
+import kotlinx.android.synthetic.main.fragment_viet_diary.layoutAdsViet
+import kotlinx.android.synthetic.main.fragment_viet_diary.rcvImageDiary
+import kotlinx.android.synthetic.main.fragment_viet_diary.rlCalendar
+import kotlinx.android.synthetic.main.fragment_viet_diary.rlContent
+import kotlinx.android.synthetic.main.fragment_viet_diary.tvDateTime
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 private const val TAG = "VietFrag"
 
-class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
+class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDateItemListener {
 
     private var IS_CHOOSE = 0
     private var isOnClick = false
     private var isOnClickUpdateDate = false
     private val arrImage: ArrayList<ImageObj> = ArrayList()
     private lateinit var adapterImage: AdapterImageContent
-
-
     private var currentDate = Calendar.getInstance()
     private var diaryModel: DiaryModel? = null
     private var positionContent: Int = -1
     private var contentModel: ContentModel? = null
     private var isUpdate = false
 
-
+    private var calendarAdapter: CalendarAdapter? = null
     private var titleDiary = ""
     private var contentDiary = ""
     private var moodDiary = MoodUtil.getMoodByName(MoodUtil.Mood.SMILING.name)
     var arrDelete: ArrayList<String> = ArrayList()
     private lateinit var dirayDataBase: DiaryDatabase
-
-
+    companion object{
+         var addNewsSlectedDate: LocalDate= LocalDate.now()
+    }
     override fun onResume() {
         super.onResume()
         if (isOnClick) {
@@ -84,6 +112,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
         context?.let { ctx ->
             dirayDataBase = DiaryDatabase.getInstance(ctx)
         }
+        addNewsSlectedDate = LocalDate.now()
         AppUtil.needUpdateDiary = false
         logEvent("WriteDiary_Show")
         showBanner("banner_read_nhat_ky", layoutAdsViet)
@@ -105,9 +134,9 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
                 logEvent("SaveDiary_IconSave_Clicked")
                 logEvent("DialogSave_IconSave_Clicked")
                 if (invalidateContent()) {
-                    date = SimpleDateFormat("dd-MM-yyyy", Locale.US).format(currentDate.time)
+                    date = SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(currentDate.time)
                     dateTime = SimpleDateFormat(
-                        "EEEE dd-MM-yyyy",
+                        Constant.FormatdayEEDDMMYY,
                         Locale.US
                     ).format(currentDate.time)
                     context?.let {
@@ -151,7 +180,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
             onBackPress(R.id.writeFrag)
         }
     }
-
     private fun initOnBackPress() {
         activity?.onBackPressedDispatcher?.addCallback(this, true) {
             confirmBack()
@@ -207,22 +235,27 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
 
     }
 
-    var date = SimpleDateFormat("dd-MM-yyyy", Locale.US).format(currentDate.time)
-    var dateTime = SimpleDateFormat("EEEE dd-MM-yyyy", Locale.US).format(currentDate.time)
+    var date = SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(currentDate.time)
+    var dateTime = SimpleDateFormat(Constant.FormatdayEEDDMMYY, Locale.US).format(currentDate.time)
 
     private fun initOnClick() {
-        tvDateTime.text = SimpleDateFormat("dd MMMM yyyy", Locale.US).format(currentDate.time)
+        tvDateTime.text = SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(currentDate.time)
 
         btnWriteBack?.setOnClickScaleView(1000) {
             confirmBack()
         }
         rlCalendar?.setOnClickScaleView(1000) {
             logEvent("WriteDiary_IconCalen_Clicked")
-            onClickChooseDate()
+            context?.let {
+                showCalendar(it)
+
+            }
         }
         btnDate?.setOnClickScaleView(1000) {
             logEvent("WriteDiary_IconCalen_Clicked")
-            onClickChooseDate()
+            context?.let {
+                showCalendar(it)
+            }
         }
 
         edtTitle?.setOnFocusChangeListener { view, b ->
@@ -231,7 +264,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
         edtContent?.setOnFocusChangeListener { view, b ->
             logEvent("WriteDiary_Write_Clicked")
         }
-
         rlContent?.setOnClickListener {
             edtContent.requestFocus()
             context?.let { ctx ->
@@ -241,6 +273,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
             }
 
         }
+
         btnAddImage?.setOnClickScaleView(1000) {
             logEvent("WriteDiary_IconPhoto_Clicked")
             context?.let { ctx ->
@@ -248,9 +281,8 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
                 gotoFrag(R.id.writeFrag, R.id.action_writeFrag_to_chooseImageAct)
                 isOnClick = true
             }
-
-
         }
+
         btnDraw?.setOnClickScaleView(1000) {
             logEvent("WriteDiary_IconPen_Clicked")
             context?.let { ctx ->
@@ -264,9 +296,9 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
             logEvent("WriteDiary_IconOK_Clicked")
             if (invalidateContent()) {
 
-                date = SimpleDateFormat("dd-MM-yyyy", Locale.US).format(currentDate.time)
+                date = SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(currentDate.time)
                 dateTime = SimpleDateFormat(
-                    "EEEE dd-MM-yyyy",
+                    Constant.FormatdayEEDDMMYY,
                     Locale.US
                 ).format(currentDate.time)
                 context?.let {
@@ -276,12 +308,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
                     )
                 }
                 context?.let { ctx ->
-//                    AdsUtil.loadInterstitialAndShow(
-//                        ctx,
-//                        getString(R.string.interstitial_save_diary),
-//                        12000
-//                    ) {
-//                        Log.e(TAG, "loadInterstitialAndShow: $it")
                     CoroutineScope(Dispatchers.IO).launch {
                         moveImageToInternal()
                         removeFileInternal()
@@ -292,7 +318,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
                             updateDiary()
                         }
                     }
-//                    }
 
                 }
             }
@@ -340,6 +365,85 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
             }
         }
     }
+    private fun showCalendar(context: Context){
+        val customDialog = Dialog(context)
+        val displayMetrics = DisplayMetrics()
+        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val width = displayMetrics.widthPixels
+        val height = displayMetrics.heightPixels
+        customDialog.setContentView(R.layout.calendar_layout)
+        customDialog.setCanceledOnTouchOutside(true)
+        customDialog.window!!.setLayout(width, height)
+        customDialog.window?.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT))
+        val btnNext = customDialog.findViewById<ImageView>(R.id.btn_nextMonth)
+        val btnPrev = customDialog.findViewById<ImageView>(R.id.btn_backMonth)
+        val rcvCalendar = customDialog.findViewById<RecyclerView>(R.id.rcv_calendar)
+        val btnToday = customDialog.findViewById<TextView>(R.id.tv_today)
+        val tvCurrentTime = customDialog.findViewById<TextView>(R.id.tv_curenTime)
+        val btnOK = customDialog.findViewById<LinearLayout>(R.id.btn_ok)
+        btnToday.paintFlags = btnToday.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+
+        btnNext.setOnClickListener {
+            nextMonthAction(rcvCalendar,tvCurrentTime)
+        }
+        btnPrev.setOnClickListener {
+            previousMonthAction(rcvCalendar,tvCurrentTime)
+        }
+        btnToday.setOnClickListener {
+            addNewsSlectedDate = LocalDate.now()
+            setMonthView(rcvCalendar,tvCurrentTime)
+            calendarAdapter!!.notifyDataSetChanged()
+        }
+        setMonthView(rcvCalendar,tvCurrentTime)
+
+        btnOK.setOnClickListener {
+            customDialog.dismiss()
+        }
+        customDialog.show()
+    }
+    private fun setMonthView(rcvCalendar:RecyclerView,tvCurrentTime:TextView) {
+        context?.let { ctx ->
+            tvCurrentTime.text = monthYearFromDate(addNewsSlectedDate)
+            val daysInMonth = daysInMonthArray(addNewsSlectedDate)
+            calendarAdapter = CalendarAdapter(true,daysInMonth, this, ctx)
+            rcvCalendar.layoutManager = GridLayoutManager(ctx, 7)
+            rcvCalendar.adapter = calendarAdapter
+        }
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            calendarAdapter!!.notifyDataSetChanged()
+
+        }, 1000)
+    }
+    private fun daysInMonthArray(date: LocalDate): ArrayList<String> {
+        val daysInMonthArray = ArrayList<String>()
+        val yearMonth = YearMonth.from(date)
+        val daysInMonth = yearMonth.lengthOfMonth()
+        val firstOfMonth: LocalDate = addNewsSlectedDate.withDayOfMonth(1)!!
+        val dayOfWeek = firstOfMonth.dayOfWeek.value
+        for (i in 1..42) {
+            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
+                daysInMonthArray.add("")
+            } else {
+                daysInMonthArray.add((i - dayOfWeek).toString())
+            }
+        }
+        return daysInMonthArray
+    }
+    private fun monthYearFromDate(date: LocalDate): String {
+        val formatter = DateTimeFormatter.ofPattern(Constant.FormatdayMMMMYY)
+        return date.format(formatter)
+    }
+    private fun previousMonthAction(rcvCalendar:RecyclerView,tvCurrentTime:TextView) {
+        addNewsSlectedDate = addNewsSlectedDate.minusMonths(1)
+        setMonthView(rcvCalendar,tvCurrentTime)
+    }
+
+    private fun nextMonthAction(rcvCalendar:RecyclerView,tvCurrentTime:TextView) {
+        addNewsSlectedDate = addNewsSlectedDate.plusMonths(1)
+        setMonthView(rcvCalendar,tvCurrentTime)
+    }
+
 
     private fun setDateTime(date: Calendar? = null) {
         isOnClickUpdateDate = true
@@ -347,7 +451,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
             currentDate = date
         }
         tvDateTime.text =
-            SimpleDateFormat("dd MMMM yyyy", Locale.US).format(currentDate.time)
+            SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(currentDate.time)
     }
 
     private suspend fun updateDiary() {
@@ -355,8 +459,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
         contentModel?.content = contentDiary
         contentModel?.images = arrImage
         contentModel?.dateTimeUpdate =
-            SimpleDateFormat("dd-MM-yyyy", Locale.US).format(Date())
-        contentModel?.mood = moodDiary
+            SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(Date())
 
         if (isOnClickUpdateDate) {
             contentModel?.dateTimeCreate = dateTime
@@ -390,7 +493,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
         }
 
 
-        if (!diaryModel!!.listContent!!.isNullOrEmpty()) {
+        if (diaryModel!!.listContent!!.isNotEmpty()) {
             dirayDataBase.getDiaryDao().updateDiary(diaryModel!!).let {
                 withContext(Dispatchers.Main) {
                     context?.let {
@@ -503,7 +606,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
                 contentDiary.substring(0, 150)
             } else if (contentDiary.isNotEmpty() && contentDiary.length < 150) {
                 contentDiary
-            } else if (!arrImage.isNullOrEmpty()) {
+            } else if (arrImage.isNotEmpty()) {
                 getString(R.string.diary_image)
             } else {
                 AppUtil.showToast(context, R.string.please_input_content)
@@ -515,7 +618,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
     }
 
     private fun moveImageToInternal() {
-        if (!arrImage.isNullOrEmpty()) {
+        if (arrImage.isNotEmpty()) {
             Log.e(TAG, "moveImageToInternal: $arrImage")
             context?.let { ctx ->
                 for (i in 0 until arrImage.size) {
@@ -542,11 +645,15 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary) {
     }
 
     private fun removeFileInternal() {
-        if (!arrDelete.isNullOrEmpty()) {
+        if (arrDelete.isNotEmpty()) {
             for (path in arrDelete) {
                 Log.e(TAG, "$path delete: ${AppUtil.deleteFileFromInternalStorage(path)}")
             }
         }
+    }
+
+    override fun onDateItemClick(position: Int, dayText: String?) {
+        calendarAdapter?.updatePosition(position)
     }
 
 }

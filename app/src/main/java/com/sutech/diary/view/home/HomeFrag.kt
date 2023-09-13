@@ -128,7 +128,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                         Log.e("TAG", "getAllDiary: ${Gson().toJson(it)}")
                         Log.e("TAG", "getAllDiary: $keyword date $dateTime")
                         DialogUtil.cancelDialogLoading()
-                        showNotFoundDiary(it.isNullOrEmpty())
+                        showNotFoundDiary(it.isEmpty())
                         updateDataDiary(it)
                         adapterDiary?.notifyDataSetChanged()
                     }
@@ -136,7 +136,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
             } else if (!dateTime.isNullOrBlank()) {
                 diaryDataBase?.getDiaryDao()?.searchDiaryByDateTime(dateTime)?.let {
                     withContext(Dispatchers.Main) {
-                        showNotFoundDiary(it.isNullOrEmpty())
+                        showNotFoundDiary(it.isEmpty())
                         updateDataDiary(it)
                         adapterDiary?.notifyDataSetChanged()
                         DialogUtil.cancelDialogLoading()
@@ -145,7 +145,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
             } else if (!keyword.isNullOrBlank()) {
                 diaryDataBase?.getDiaryDao()?.searchDiaryByTitle("%$keyword%")?.let {
                     withContext(Dispatchers.Main) {
-                        showNotFoundDiary(it.isNullOrEmpty())
+                        showNotFoundDiary(it.isEmpty())
                         updateDataDiary(it)
                         Log.e("TAG", "getDataDiaryssdasdasd: $it")
                         adapterDiary?.notifyDataSetChanged()
@@ -203,7 +203,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         }
         btnSearchDiary?.setOnClickScaleView {
             logEvent("MainScr_ButtonCalendar_Clicked")
-            showDialogSearchDiary()
+            gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_calendarFrag)
         }
         btnVietNhatKy?.setOnClickScaleView {
             logEvent("MainScr_ButtonPlus_Clicked")
@@ -317,64 +317,28 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         rlSearch?.hideKeyboard()
         edtSearch?.setText("")
     }
-
-    private fun showDialogSearchDiary() {
-
-        context?.let { ctx ->
-            Locale.setDefault(Locale.US);
-            logEvent("CalendarScr_Show")
-            val dialogSearchDiary = DatePickerDialog(
-                ctx, R.style.DialogDayTheme,
-                { view, year, month, dayOfMonth ->
-                    var keyMonth = if (month < 10) {
-                        "0${month + 1}"
-                    } else {
-                        "${month + 1}"
-                    }
-                    val cal = Calendar.getInstance()
-                    cal.set(Calendar.YEAR, year)
-                    cal.set(Calendar.MONTH, month)
-                    cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-                    grFilter?.show()
-                    setDateTime(cal)
-                    context?.let {
-                        DialogUtil.showDialogLoading(it, getString(R.string.loading))
-                        getDataDiary(dateTime = "$dayOfMonth-$keyMonth-$year")
-                    }
-                },
-                currentDate.get(Calendar.YEAR),
-                currentDate.get(Calendar.MONTH),
-                currentDate.get(Calendar.DAY_OF_MONTH)
-            )
-            dialogSearchDiary.datePicker.maxDate = System.currentTimeMillis()
-
-            if (!dialogSearchDiary.isShowing) {
-                dialogSearchDiary.show()
-            }
-        }
-
-    }
-
     private fun setRcvDiary() {
-        adapterDiary = AdapterDiaryItem({ positionDiary, positionContent ->
-            logEvent("MainScr_IconDots_Clicked")
-        }, { positionDiary, positionContent ->
-            val bundle = Bundle()
-            bundle.putString(EXTRA_DIARY, Gson().toJson(arrDiary[positionDiary]))
-            bundle.putInt(EXTRA_POSITION_CONTENT, positionContent)
-            gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_readDiaryFrag, bundle)
-            closeSearch()
-        }, { positionDiary, positionContent ->
-            logEvent("MainScr_IconEdit_Clicked")
-            closeSearch()
-            onClickUpdateDiary(positionDiary, positionContent)
-        }, { positionDiary, positionContent ->
-            logEvent("MainScr_IconDelete_Clicked")
-            onClickDeleteDiary(positionDiary, positionContent)
-        })
-        rcvData.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        rcvData.adapter = adapterDiary
+        context?.let {
+            adapterDiary =
+                AdapterDiaryItem(false, it, { _, _ ->
+                    logEvent("MainScr_IconDots_Clicked")
+                }, { positionDiary, positionContent ->
+                    val bundle = Bundle()
+                    bundle.putString(EXTRA_DIARY, Gson().toJson(arrDiary[positionDiary]))
+                    bundle.putInt(EXTRA_POSITION_CONTENT, positionContent)
+                    gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_readDiaryFrag, bundle)
+                    closeSearch()
+                }, { positionDiary, positionContent ->
+                    logEvent("MainScr_IconEdit_Clicked")
+                    closeSearch()
+                    onClickUpdateDiary(positionDiary, positionContent)
+                }, { positionDiary, positionContent ->
+                    logEvent("MainScr_IconDelete_Clicked")
+                    onClickDeleteDiary(positionDiary, positionContent)
+                })
+            rcvData.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            rcvData.adapter = adapterDiary
+        }
     }
 
 
@@ -419,7 +383,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                                 }
                         }
                     } catch (e: Exception) {
-
+e.printStackTrace()
                     }
                 }
             }, {
@@ -431,12 +395,14 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun removeFileInternal(arrImage: ArrayList<ImageObj>) {
-        if (!arrImage.isNullOrEmpty()) {
+        if (arrImage.isNotEmpty()) {
             for (path in arrImage) {
                 Log.e("TAG", "$path delete: ${AppUtil.deleteFileFromInternalStorage(path.path!!)}")
             }
         }
     }
+
+
 
 
     private fun showRate() {

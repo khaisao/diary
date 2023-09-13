@@ -1,7 +1,6 @@
 package com.sutech.ads.utils
 
 object Constant {
-
     var isShowDetailAlbum = false
     var isShowDetailMedia = false
     var isShowRate = 1
@@ -9,7 +8,6 @@ object Constant {
     var SHOW_CENTER_HELP = false
     var SHOW_REPORT_ERROR = false
     var isShowToastDebug = false
-
 
 //    const val ID_ADMOB_INTERSTITIAL_TEST = "ca-app-pub-3940256099942544/8691691433"
     const val ID_ADMOB_INTERSTITIAL_TEST = "ca-app-pub-3940256099942544/1033173712"

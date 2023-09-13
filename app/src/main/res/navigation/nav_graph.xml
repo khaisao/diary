@@ -2,6 +2,7 @@
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashFrag">
     <fragment
@@ -17,6 +18,9 @@
         <action
             android:id="@+id/action_mainFrag_to_readDiaryFrag"
             app:destination="@id/readDiaryFrag" />
+        <action
+            android:id="@+id/action_mainFrag_to_calendarFrag"
+            app:destination="@id/calendarFlag" />
         <action
             android:id="@+id/action_mainFrag_to_IAPFragment"
             app:destination="@id/IAPFragment" />
@@ -105,4 +109,9 @@
             android:id="@+id/action_securityQuesFrag_self"
             app:destination="@id/securityQuesFrag" />
     </fragment>
+    <fragment
+        android:id="@+id/calendarFlag"
+        android:name="com.sutech.diary.view.calendar.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
 </navigation>
