@@ -38,6 +38,7 @@ import kotlinx.android.synthetic.main.layout_item_drawer.ll_feedback
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_our_other_app
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_policy
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_share
+import kotlinx.android.synthetic.main.layout_item_drawer.ll_update_to_pro
 import kotlinx.android.synthetic.main.layout_item_drawer.swPassword
 import kotlinx.android.synthetic.main.pop_up_windown_sort.view.tv_latest_first
 import kotlinx.android.synthetic.main.pop_up_windown_sort.view.tv_oldest_first
@@ -139,7 +140,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
 
         val xOffset = (btnSortWidth - popupWindow.width) / 2
 
-        popupWindow.showAsDropDown(btnSort, xOffset, 4)
+        popupWindow.showAsDropDown(btnSort, -xOffset + 17, 4)
     }
 
     private fun setDateTime(date: Calendar? = null) {
@@ -314,6 +315,12 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
             drawer_layout.closeDrawer(GravityCompat.START)
         }
 
+        ll_update_to_pro?.setOnClick(1500) {
+            logEvent("MainScr_IconIAP_Clicked")
+            gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_IAPFragment)
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }
+
         cl_use_password.setOnClick(500) {
             if (!DataStore.getUsePassword()) {
                 if (DataStore.getPassword().isNullOrBlank()) {
@@ -425,7 +432,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                                 }
                         }
                     } catch (e: Exception) {
-e.printStackTrace()
+                        e.printStackTrace()
                     }
                 }
             }, {
