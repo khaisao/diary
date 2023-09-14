@@ -18,8 +18,8 @@
         <View
             android:id="@+id/toolbarMain"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@color/white"
+            android:layout_height="64dp"
+            android:background="@color/color_5EA9FF"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Group
@@ -83,18 +83,19 @@
 
         <ImageButton
             android:id="@+id/btnMenu"
-            android:layout_width="@dimen/img_s_large"
-            android:layout_height="@dimen/img_s_large"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_centerVertical="true"
-            android:background="?attr/selectableItemBackground"
+            android:background="@drawable/bg_white_radius_20"
             android:contentDescription="@string/app_name"
             android:padding="@dimen/img_padding_large"
             android:scaleType="fitXY"
             android:tint="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
+            android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/toolbarMain"
-            app:srcCompat="@drawable/ic_menu_left" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_menu_home" />
 
         <com.sutech.common.text.TextViewLight
             android:id="@+id/tbTitleMain"
@@ -110,47 +111,61 @@
             app:layout_constraintTop_toTopOf="@id/toolbarMain"
             app:textColorDefault="false" />
 
-        <ImageView
-            android:id="@+id/btnSearchDiary"
-            android:layout_width="@dimen/img_s_normal"
-            android:layout_height="@dimen/img_s_normal"
-            android:layout_marginEnd="@dimen/space_screen_small"
-            android:contentDescription="@string/app_name"
-            android:padding="3dp"
-            app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
+
+        
+        <LinearLayout
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/toolbarMain"
-            app:srcCompat="@drawable/ic_calendar"
-            app:tint="#000000" />
-
-        <ImageView
-            android:id="@+id/btnShowSearch"
-            android:layout_width="@dimen/img_s_normal"
-            android:layout_height="@dimen/img_s_normal"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/space_screen_small"
-            android:contentDescription="@string/app_name"
-            android:scaleType="fitXY"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
-            app:layout_constraintEnd_toStartOf="@id/btnIap"
-            app:layout_constraintTop_toTopOf="@id/toolbarMain"
-            app:srcCompat="@drawable/ic_search" />
-
-        <ImageView
-            android:id="@+id/btnIap"
-            android:layout_width="@dimen/img_s_normal"
-            android:layout_height="@dimen/img_s_normal"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/space_screen_small"
-            android:contentDescription="@string/app_name"
-            android:scaleType="fitXY"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
-            app:layout_constraintEnd_toStartOf="@id/btnSearchDiary"
-            app:layout_constraintTop_toTopOf="@id/toolbarMain"
-            app:srcCompat="@drawable/ic_pro_iap" />
-
+            app:layout_constraintTop_toTopOf="@id/tbTitleMain"
+            app:layout_constraintBottom_toBottomOf="@id/tbTitleMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/btnShowSearch"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="24dp"
+                android:padding="4dp"
+                android:scaleType="fitXY"
+                android:visibility="visible"
+                android:background="@drawable/bg_white_radius_20"
+                app:srcCompat="@drawable/ic_search" />
+            <ImageView
+                android:id="@+id/btnSearchDiary"
+                android:layout_height="24dp"
+                android:layout_width="24dp"
+                android:layout_marginEnd="24dp"
+                android:padding="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/toolbarMain"
+                app:srcCompat="@drawable/ic_calendar_home"
+                android:background="@drawable/bg_white_radius_20"
+                 />
+            <ImageView
+                android:id="@+id/btnSort"
+                android:layout_height="24dp"
+                android:layout_width="24dp"
+                android:padding="4dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/toolbarMain"
+                app:srcCompat="@drawable/ic_sort_home"
+                android:background="@drawable/bg_white_radius_20"
+                />
+            <ImageView
+                android:id="@+id/btnIap"
+                android:layout_height="24dp"
+                android:layout_width="24dp"
+                android:layout_marginEnd="@dimen/space_screen_small"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
+                app:layout_constraintEnd_toStartOf="@id/btnSearchDiary"
+                app:layout_constraintTop_toTopOf="@id/toolbarMain"
+                app:srcCompat="@drawable/ic_pro_iap_home" />
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/rlSearch"

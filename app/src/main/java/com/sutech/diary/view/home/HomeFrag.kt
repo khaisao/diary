@@ -1,14 +1,15 @@
 package com.sutech.diary.view.home
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
+import android.view.ViewGroup
+import android.widget.PopupWindow
 import androidx.activity.addCallback
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,7 @@ import com.sutech.diary.model.ImageObj
 import com.sutech.diary.util.*
 import com.sutech.diary.util.Constant.EXTRA_DIARY
 import com.sutech.diary.util.Constant.EXTRA_POSITION_CONTENT
+import com.sutech.diary.util.Constant.FormatdayDDMMYY
 import com.sutech.diary.util.Constant.showRateToday
 import com.sutech.journal.diary.diarywriting.lockdiary.BuildConfig
 import com.sutech.journal.diary.diarywriting.lockdiary.R
@@ -37,6 +39,8 @@ import kotlinx.android.synthetic.main.layout_item_drawer.ll_our_other_app
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_policy
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_share
 import kotlinx.android.synthetic.main.layout_item_drawer.swPassword
+import kotlinx.android.synthetic.main.pop_up_windown_sort.view.tv_latest_first
+import kotlinx.android.synthetic.main.pop_up_windown_sort.view.tv_oldest_first
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,7 +50,6 @@ import java.util.*
 
 @SuppressLint("SimpleDateFormat")
 class HomeFrag : BaseFragment(R.layout.fragment_home) {
-
 
     private var currentDate = Calendar.getInstance()
     private var adapterDiary: AdapterDiaryItem? = null
@@ -112,6 +115,33 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         }
     }
 
+    private fun showPopupSort() {
+        val inflater = LayoutInflater.from(requireContext())
+        val popupView = inflater.inflate(R.layout.pop_up_windown_sort, null)
+
+        val popupWindow = PopupWindow(
+            popupView,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            true)
+
+        popupView.tv_latest_first.setOnClick(500) {
+            sortListDiaryByDay(false)
+            popupWindow.dismiss()
+        }
+        popupView.tv_oldest_first.setOnClick(500) {
+            sortListDiaryByDay(true)
+            popupWindow.dismiss()
+        }
+
+        btnSort.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+        val btnSortWidth = btnSort.measuredWidth
+
+        val xOffset = (btnSortWidth - popupWindow.width) / 2
+
+        popupWindow.showAsDropDown(btnSort, xOffset, 4)
+    }
+
     private fun setDateTime(date: Calendar? = null) {
         if (date != null) {
             currentDate = date
@@ -120,17 +150,13 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun getDataDiary(keyword: String? = null, dateTime: String? = null) {
-        Log.e("TAG", "getDataDiary: $keyword date $dateTime")
         CoroutineScope(Dispatchers.IO).launch {
             if (keyword.isNullOrBlank() && dateTime.isNullOrBlank()) {
                 diaryDataBase?.getDiaryDao()?.getAllDiary()?.let {
                     withContext(Dispatchers.Main) {
-                        Log.e("TAG", "getAllDiary: ${Gson().toJson(it)}")
-                        Log.e("TAG", "getAllDiary: $keyword date $dateTime")
                         DialogUtil.cancelDialogLoading()
                         showNotFoundDiary(it.isEmpty())
                         updateDataDiary(it)
-                        adapterDiary?.notifyDataSetChanged()
                     }
                 }
             } else if (!dateTime.isNullOrBlank()) {
@@ -138,7 +164,6 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                     withContext(Dispatchers.Main) {
                         showNotFoundDiary(it.isEmpty())
                         updateDataDiary(it)
-                        adapterDiary?.notifyDataSetChanged()
                         DialogUtil.cancelDialogLoading()
                     }
                 }
@@ -147,8 +172,6 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                     withContext(Dispatchers.Main) {
                         showNotFoundDiary(it.isEmpty())
                         updateDataDiary(it)
-                        Log.e("TAG", "getDataDiaryssdasdasd: $it")
-                        adapterDiary?.notifyDataSetChanged()
                         DialogUtil.cancelDialogLoading()
                     }
                 }
@@ -160,7 +183,22 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         arrDiary.clear()
         arrDiary.addAll(it)
         adapterDiary?.submitList(arrDiary)
-        adapterDiary?.notifyDataSetChanged()
+    }
+
+    private fun sortListDiaryByDay(isAscending: Boolean) {
+        val dateFormat = FormatdayDDMMYY
+        val unsortedList: List<DiaryModel> = adapterDiary?.currentList?.toList() ?: emptyList()
+        val sortedList = if (isAscending) {
+            unsortedList.sortedBy { parseDate(it.dateTime, dateFormat) }
+        } else {
+            unsortedList.sortedByDescending { parseDate(it.dateTime, dateFormat) }
+        }
+        adapterDiary?.submitList(sortedList)
+    }
+
+    private fun parseDate(dateString: String, dateFormat: String): Date {
+        val sdf = SimpleDateFormat(dateFormat, Locale.getDefault())
+        return sdf.parse(dateString) ?: Date()
     }
 
     private fun showNotFoundDiary(isShow: Boolean) {
@@ -297,6 +335,10 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                 "https://play.google.com/store/apps/developer?id=Sutech+Mobile"
             )
             drawer_layout.closeDrawer(GravityCompat.START)
+        }
+
+        btnSort.setOnClick(500) {
+            showPopupSort()
         }
 
         context?.let { ctx ->
