@@ -25,10 +25,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
-    var diaryModel: DiaryModel? = null
-    var positionContent: Int = -1
-    var contentModel: ContentModel? = null
-    var adapterImage: AdapterImageContent? = null
+    private var diaryModel: DiaryModel? = null
+    private var positionContent: Int = -1
+    private var contentModel: ContentModel? = null
+    private var adapterImage: AdapterImageContent? = null
     private lateinit var dirayDataBase: DiaryDatabase
 
 
@@ -176,6 +176,7 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
     private fun setDataDiary() {
         tvDiaryTitle?.text = contentModel?.title
         tvDiaryCreateAt?.text = contentModel?.dateTimeCreate
+        tvDiaryCreateAt?.text =contentModel?.dateTimeCreate
         tvDiaryContent?.text = contentModel?.content
         if (contentModel != null) {
             for (item in contentModel?.listHashtag!!) {
@@ -190,7 +191,7 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
 
     private fun setRcvDiary() {
         contentModel?.let {
-            if (it.images.isNullOrEmpty()) {
+            if (it.images.isEmpty()) {
                 rcvDiaryImage?.gone()
             } else {
                 rcvDiaryImage?.show()
@@ -222,7 +223,7 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
 
 /*---------- rate -------*/
 
-    var numRate = 0
+    private var numRate = 0
     private fun showRate() {
         context?.let { ctx ->
             resetStar()

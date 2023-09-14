@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/rlToolbarBrush"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5EA9FF">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/bg_white_radius_20"
+            android:contentDescription="@string/app_name"
+            android:padding="4dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_perv_page" />
+
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnUndo"
+                android:padding="5dp"
+                android:background="@drawable/bg_white_radius_20"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                app:srcCompat="@drawable/ic_undo_select" />
+
+            <ImageView
+                android:id="@+id/btnRedo"
+                android:layout_width="40dp"
+                android:padding="5dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_white_radius_20"
+                android:layout_height="40dp"
+                app:srcCompat="@drawable/ic_redo_select" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_radius_20"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginVertical="8dp"
+            >
+
+            <TextView
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingHorizontal="12dp"
+                android:layout_marginVertical="8dp"
+                android:text="Done"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/rlToolbarBrush"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <nv.module.brushdraw.ui.customview.HandWriteCanvasView
+            android:id="@+id/canvasView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

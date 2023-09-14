@@ -17,4 +17,6 @@ object Constant {
     var FormatdayMMYY = "MM-yyyy"
     var FormatdayMMMMYY = "MMMM yyyy"
     var FormatdayEEDDMMYY = "EEEE dd-MM-yyyy"
+    var FormatdayDDMMMMYY = "dd MMMM yyyy"
+
 }

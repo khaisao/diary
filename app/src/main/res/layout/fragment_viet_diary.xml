@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_c1deff"
+    android:background="@color/bg_main"
     android:backgroundTint="@null"
     android:orientation="vertical">
 
@@ -38,67 +38,67 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
+            android:layout_margin="16dp"
             android:background="@drawable/bg_white_radius_20"
             android:contentDescription="@string/app_name"
             android:padding="4dp"
             android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back" />
+            app:srcCompat="@drawable/ic_perv_page" />
 
         <com.sutech.common.text.TextViewRegular
             android:id="@+id/btnSaveDiary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginHorizontal="@dimen/space_screen_small"
             android:background="@drawable/bg_radius_15"
             android:backgroundTint="#4992DF"
             android:paddingHorizontal="@dimen/space_screen_small"
-            android:paddingVertical="@dimen/img_padding"
+            android:layout_margin="16dp"
             android:text="@string/save"
+            android:paddingVertical="4dp"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/text_s_16"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:textColorDefault="false" />
 
-        <com.sutech.common.text.TextViewRegular
-            android:id="@+id/tvDateTime"
-            android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="@id/btnWriteBack"
-            app:layout_constraintTop_toBottomOf="@id/btnWriteBack"
+        <LinearLayout
+            android:id="@+id/btn_selectDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorTextBlack"
-            android:textSize="16sp"
-            app:textColorDefault="false" />
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="@id/btnWriteBack"
+            app:layout_constraintTop_toBottomOf="@id/btnWriteBack">
+            <com.sutech.common.text.TextViewRegular
+                android:id="@+id/tvDateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="16sp"
+                android:text="asdasdada"
+                app:textColorDefault="false" />
 
-        <ImageView
-            app:layout_constraintStart_toEndOf="@id/tvDateTime"
-            app:layout_constraintBottom_toBottomOf="@id/tvDateTime"
-            app:layout_constraintTop_toTopOf="@id/tvDateTime"
-            android:id="@+id/btnMoreCalendar"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/tvDateTime"
-            android:background="@drawable/bg_white_radius_20"
-            android:contentDescription="@string/app_name"
-            android:padding="4dp"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/ic_drop_down" />
+            <ImageView
+                android:id="@+id/btnMoreCalendar"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/bg_white_radius_20"
+                android:contentDescription="@string/app_name"
+                android:padding="4dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_drop_down" />
+
+        </LinearLayout>
 
         <ImageView
             app:layout_constraintEnd_toEndOf="@id/btnSaveDiary"
-            app:layout_constraintBottom_toBottomOf="@id/tvDateTime"
-            app:layout_constraintTop_toTopOf="@id/tvDateTime"
+            app:layout_constraintBottom_toBottomOf="@id/btn_selectDate"
+            app:layout_constraintTop_toTopOf="@id/btn_selectDate"
             android:id="@+id/btnAddMood"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.sutech.common.edit_text.EditTextMedium
+            <com.sutech.common.edit_text.EditTextBold
                 android:id="@+id/edtTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

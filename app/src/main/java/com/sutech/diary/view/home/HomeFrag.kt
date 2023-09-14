@@ -285,7 +285,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
                 startActivity(Intent.createChooser(shareIntent, "choose one"))
             } catch (e: java.lang.Exception) {
-
+                e.printStackTrace()
             }
             drawer_layout.closeDrawer(GravityCompat.START)
         }
