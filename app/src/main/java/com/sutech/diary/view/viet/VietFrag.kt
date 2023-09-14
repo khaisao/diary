@@ -248,10 +248,9 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDa
         }
         rlCalendar?.setOnClickScaleView(1000) {
             logEvent("WriteDiary_IconCalen_Clicked")
-            context?.let {
-                showCalendar(it)
+            //TODO Remove
+            onClickChooseDate()
 
-            }
         }
         btnDate?.setOnClickScaleView(1000) {
             logEvent("WriteDiary_IconCalen_Clicked")

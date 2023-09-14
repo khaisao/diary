@@ -38,4 +38,6 @@
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
     <string name="txtOK">OK</string>
+    <string name="latest_first">Latest First</string>
+    <string name="oldest_first">Oldest First</string>
 </resources>
