@@ -2,7 +2,6 @@ package com.sutech.diary.view.iap
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.util.Log
 import android.widget.Toast
 import com.android.billingclient.api.Purchase
 import com.sutech.diary.base.BaseFragment
@@ -33,7 +32,6 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
 
     override fun initView() {
         logEvent("IAPScr_Show")
-        setPrice()
         tvBuyNow.setPreventDoubleClickScaleView(5000) {
             logEvent("IAPScr_IconBuynow_Clicked")
             if (!context?.let { haveNetworkConnection(it) }!!) {
@@ -41,7 +39,6 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
                 return@setPreventDoubleClickScaleView
             }
             val buyNow = sdkBilling.buyNow(requireActivity(), AppUtil.SKU_FOREVER)
-            Log.i("aaaaaaaaaaaa", "buyNow: $buyNow")
         }
 
         ivBack.setPreventDoubleClickScaleView {
@@ -59,19 +56,9 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
             }
 
             override fun onBillingError(billingError: BillingError) {
-                Log.i("aaaaaaaaaaaa", "onBillingError: ${billingError.name} ")
             }
         }
         sdkBilling.startConnection()
-    }
-
-    private fun setPrice() {
-        try {
-            tvPrice.text = AppUtil.PRICE_FOREVER
-            tvOldPrice.text = AppUtil.PRICE_FOREVER_FAKE
-        } catch (e: Exception) {
-            Log.e("TAG", "setPriceException: ${e.message} ")
-        }
     }
 
     private fun haveNetworkConnection(ctx: Context): Boolean {
@@ -98,6 +85,4 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
             false
         }
     }
-
-
 }

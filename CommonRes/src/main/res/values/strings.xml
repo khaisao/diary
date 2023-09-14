@@ -93,12 +93,13 @@
     <string name="edit">Edit</string>
 
     <string name="upgrade_to">Upgrade to Non-Ad Permanently version with only:</string>
-    <string name="buy_now">buy now</string>
+    <string name="buy_now">buy now!</string>
     <string name="loading_selected">The selected photos will be displayed here</string>
     <string name="des_1">Remove annoying ADS</string>
     <string name="des_2">One time purchase</string>
     <string name="des_3">Optimize user experience</string>
     <string name="my_diary_premium">My Diary Premium</string>
+    <string name="premium">Premium</string>
     <string name="discard">Discard</string>
 
 </resources>
