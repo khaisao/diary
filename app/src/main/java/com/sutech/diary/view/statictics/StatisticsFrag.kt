@@ -2,7 +2,6 @@ package com.sutech.diary.view.statictics
 
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.annotation.MenuRes
@@ -49,7 +48,6 @@ class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
             onBackToHome(R.id.statisticsFrag)
         }
         btnFilter.setOnClick(500) {
-            Log.d("", "handleEvent: ")
             showMenu(it, R.menu.menu_item_mood_filter)
         }
     }
@@ -59,7 +57,7 @@ class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
         setupChart()
         lifecycleScope.launch {
             filter.collect { filter ->
-                statistic_filter_text.text = filter.title
+                statistic_filter_text.text = resources.getString(filter.stringRes)
                 setData()
             }
         }
@@ -96,12 +94,10 @@ class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
             BitmapFactory.decodeResource(resources, mood.imageResource)
         }
         lifecycleScope.launch {
-            val yVals1 = this@StatisticsFrag.context?.let { context ->
-                MoodUtil.moods.mapIndexed { index, moodObj ->
-                    lifecycleScope.async {
-                        BarEntry(index.toFloat(), MoodUtil.calTrendOnTenScale(context, moodObj.id, filter = filter.value))
-                    }.await()
-                }
+            val yVals1 = MoodUtil.moods.mapIndexed { index, moodObj ->
+                lifecycleScope.async {
+                    BarEntry(index.toFloat(), MoodUtil.calTrendOnTenScale(requireContext(), moodObj.id, filter = filter.value))
+                }.await()
             }
             val set = BarDataSet(yVals1, "")
             set.color = ResourcesCompat.getColor(resources, R.color.color_chart, null)
@@ -119,9 +115,11 @@ class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
 
     private fun setupRV() {
         val spanCount = 2
-        trendRV.adapter = AdapterTrend()
+        trendRV.adapter = AdapterTrend().also {
+            it.submitList(MoodUtil.moods)
+        }
         trendRV.addItemDecoration(GridSpacingItemDecoration(spanCount, 50, false))
-        trendRV.layoutManager = GridLayoutManager(this.context, spanCount)
+        trendRV.layoutManager = GridLayoutManager(requireContext(), spanCount)
     }
 
     private fun showMenu(v: View, @MenuRes menuRes: Int) {

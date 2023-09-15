@@ -1,8 +1,7 @@
 package com.sutech.diary.util
 
-enum class MoodFilter(val title: String) {
-    ALL("All"),
-    SEVEN_DAY("Last 7 days"),
-    THIRTY_DAY("Last 30 days"),
-    NINETY_DAY("Last 90 days")
+import com.sutech.journal.diary.diarywriting.lockdiary.R
+
+enum class MoodFilter(val stringRes: Int) {
+    ALL(R.string.all), SEVEN_DAY(R.string.last_7_days), THIRTY_DAY(R.string.last_30_days), NINETY_DAY(R.string.last_90_days)
 }
