@@ -2,4 +2,8 @@
 <resources>
     <dimen name="radius_15">15dp</dimen>
     <dimen name="margin_32">32dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
+    <dimen name="radius_10">10dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="padding_68">68dp</dimen>
 </resources>
