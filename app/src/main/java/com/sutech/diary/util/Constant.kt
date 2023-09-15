@@ -9,6 +9,7 @@ object Constant {
     const val EXTRA_POSITION_CONTENT = "EXTRA_POSITION_CONTENT"
     const val EXTRA_ARRAY_IMAGE = "EXTRA_ARRAY_IMAGE"
     const val EXTRA_POSITION_IMAGE = "EXTRA_POSITION_IMAGE"
+    const val EXTRA_HASHTAG = "EXTRA_HASHTAG"
     var isOpening = false
     var showRate = true
     var showRateToday = 0

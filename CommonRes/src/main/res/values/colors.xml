@@ -6,6 +6,8 @@
     <color name="color_toolbar">#77B7FF</color>
     <color name="secondary">#FF4278FE</color>
     <color name="color_chart">#2484DD</color>
+    <color name="color_subtitle">#222222</color>
+    <color name="divider">#4D222222</color>
 
 <!--    #F2EEED-->
     <!--    <color name="colorPrimary">#fff952</color>-->

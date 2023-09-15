@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_mainFrag_to_statisticsFrag"
             app:destination="@+id/statisticsFrag" />
+        <action
+            android:id="@+id/action_mainFrag_to_hashtagsFrag"
+            app:destination="@+id/hashtagsFrag" />
 
 
     </fragment>
@@ -122,4 +125,21 @@
         android:name="com.sutech.diary.view.statictics.StatisticsFrag"
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics" />
+    <fragment
+        android:id="@+id/hashtagsFrag"
+        android:name="com.sutech.diary.view.hashtags.HashtagsFrag"
+        android:label="fragment_hashtags"
+        tools:layout="@layout/fragment_hashtags">
+        <action
+            android:id="@+id/action_hashtagsFrag_to_hashtagDetailFrag"
+            app:destination="@id/hashtagDetailFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/hashtagDetailFrag"
+        android:name="com.sutech.diary.view.hashtags.HashtagDetailFrag"
+        android:label="HashtagDetailFrag">
+        <action
+            android:id="@+id/action_hashtagDetailFrag_to_readDiaryFrag"
+            app:destination="@id/readDiaryFrag" />
+    </fragment>
 </navigation>
