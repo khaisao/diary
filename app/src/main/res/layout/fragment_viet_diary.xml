@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_main"
+    android:background="@color/color_c1deff"
     android:backgroundTint="@null"
     android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white" />
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:id="@+id/layoutAdsViet"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/viewGoneAdGallery"
@@ -28,22 +27,21 @@
             android:textColor="@color/black" />
     </LinearLayout>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbarWrite"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_below="@+id/layoutAdsViet"
-        android:background="@color/white">
-
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutAdsViet">
 
         <ImageView
             android:id="@+id/btnWriteBack"
-            android:layout_width="@dimen/img_s_normal"
-            android:layout_height="@dimen/img_s_normal"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_centerVertical="true"
-            android:background="?attr/selectableItemBackground"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/bg_white_radius_20"
             android:contentDescription="@string/app_name"
-            android:padding="@dimen/img_padding_large"
+            android:padding="4dp"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +55,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="@dimen/space_screen_small"
-            android:background="@drawable/bg_radius_6"
+            android:background="@drawable/bg_radius_15"
             android:backgroundTint="#4992DF"
             android:paddingHorizontal="@dimen/space_screen_small"
             android:paddingVertical="@dimen/img_padding"
@@ -65,64 +63,62 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/text_s_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:textColorDefault="false" />
 
-    </RelativeLayout>
+        <com.sutech.common.text.TextViewRegular
+            android:id="@+id/tvDateTime"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="@id/btnWriteBack"
+            app:layout_constraintTop_toBottomOf="@id/btnWriteBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="16sp"
+            app:textColorDefault="false" />
+
+        <ImageView
+            app:layout_constraintStart_toEndOf="@id/tvDateTime"
+            app:layout_constraintBottom_toBottomOf="@id/tvDateTime"
+            app:layout_constraintTop_toTopOf="@id/tvDateTime"
+            android:id="@+id/btnMoreCalendar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/tvDateTime"
+            android:background="@drawable/bg_white_radius_20"
+            android:contentDescription="@string/app_name"
+            android:padding="4dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_drop_down" />
+
+        <ImageView
+            app:layout_constraintEnd_toEndOf="@id/btnSaveDiary"
+            app:layout_constraintBottom_toBottomOf="@id/tvDateTime"
+            app:layout_constraintTop_toTopOf="@id/tvDateTime"
+            android:id="@+id/btnAddMood"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/mood_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/layoutWrite"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/rlBtn"
-        android:layout_below="@+id/toolbarWrite"
-        android:layout_marginBottom="@dimen/space_screen_small">
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="@dimen/space_screen_small"
+        app:layout_constraintBottom_toTopOf="@id/rlBtn"
+        app:layout_constraintTop_toBottomOf="@id/toolbarWrite">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/space_screen_small"
-                android:paddingHorizontal="@dimen/img_padding_large"
-                android:paddingVertical="@dimen/img_padding">
-
-                <RelativeLayout
-                    android:id="@+id/rlCalendar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <com.sutech.common.text.TextViewRegular
-                        android:id="@+id/tvDateTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/space_screen_small"
-                        android:textColor="@color/colorTextBlack"
-                        android:textSize="@dimen/text_s_14"
-                        app:textColorDefault="false" />
-
-                    <ImageView
-                        android:id="@+id/btnMoreCalendar"
-                        android:layout_width="@dimen/space_screen_small"
-                        android:layout_height="@dimen/space_screen_normal"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@id/tvDateTime"
-                        android:background="?attr/selectableItemBackground"
-                        android:contentDescription="@string/app_name"
-                        android:scaleType="centerInside"
-                        app:srcCompat="@drawable/ic_more_calendar" />
-                </RelativeLayout>
-
-                <ImageView
-                    android:id="@+id/btnAddMood"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="@string/mood_button" />
-            </LinearLayout>
 
             <com.sutech.common.edit_text.EditTextMedium
                 android:id="@+id/edtTitle"
@@ -130,76 +126,74 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/space_screen_small"
                 android:layout_marginTop="@dimen/img_padding"
-                android:background="@drawable/bg_radius_8"
-                android:focusable="true"
+                android:background="@null"
                 android:hint="@string/enter_title"
-                android:imeOptions="actionNext"
                 android:inputType="text|textCapWords"
-                android:paddingHorizontal="@dimen/img_padding_large"
+                app:layout_constraintTop_toTopOf="parent"
                 android:paddingVertical="12dp"
                 android:textColor="@color/colorTextBlack"
-                android:textColorHint="#CCCCCC"
-                android:textCursorDrawable="@null"
+                android:textColorHint="@color/color_938282"
                 android:textSize="@dimen/text_s_16"
                 app:textColorDefault="false" />
 
-            <RelativeLayout
-                android:id="@+id/rlContent"
+            <com.sutech.common.edit_text.EditTextRegular
+                android:id="@+id/edtContent"
+                android:layout_width="0dp"
+                app:layout_constraintEnd_toEndOf="@id/edtTitle"
+                app:layout_constraintStart_toStartOf="@id/edtTitle"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine|textCapWords|textNoSuggestions"
+                android:minHeight="200dp"
+                android:background="@null"
+                android:gravity="start"
+                android:hint="@string/write_more"
+                android:minLines="2"
+                android:textColor="@color/colorTextBlack"
+                android:textColorHint="@color/color_938282"
+                android:textSize="@dimen/text_s_16"
+                app:layout_constraintTop_toBottomOf="@id/edtTitle"
+                app:textColorDefault="false" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvImageDiary"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/space_screen_small"
-                android:layout_marginTop="@dimen/img_padding"
-                android:background="@drawable/bg_radius_8"
-                android:minHeight="440dp">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edtContent"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edtContent" />
 
-                <com.sutech.common.edit_text.EditTextRegular
-                    android:id="@+id/edtContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_radius_4"
-                    android:gravity="start"
-                    android:hint="@string/write_more"
-                    android:imeOptions="actionDone"
-                    android:inputType="textMultiLine|textCapSentences"
-                    android:minLines="2"
-                    android:padding="@dimen/img_padding_large"
-                    android:textColor="@color/colorTextBlack"
-                    android:textColorHint="#CCCCCC"
-                    android:textCursorDrawable="@null"
-                    android:textSize="@dimen/text_s_16"
-                    app:textColorDefault="false" />
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/view_input_hashtag"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:flexWrap="wrap"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rcvImageDiary"
+                app:layout_flexGrow="3">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcvImageDiary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/edtContent"
-                    android:background="@drawable/bg_radius_4"
-                    android:nestedScrollingEnabled="false"
-                    android:paddingStart="@dimen/img_padding" />
+            </com.google.android.flexbox.FlexboxLayout>
 
-            </RelativeLayout>
-
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rlBtn"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_radius_top_10"
-        android:backgroundTint="#F7F7F7">
+        android:background="@drawable/bg_white_radius_top_10"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
             android:id="@+id/btnAddImage"
-            android:layout_width="@dimen/img_s_large"
-            android:layout_height="@dimen/img_s_large"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/btnDraw"
             android:contentDescription="@string/app_name"
-            android:padding="@dimen/img_padding_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -208,11 +202,10 @@
 
         <ImageView
             android:id="@+id/btnDraw"
-            android:layout_width="@dimen/img_s_large"
-            android:layout_height="@dimen/img_s_large"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_centerVertical="true"
             android:contentDescription="@string/app_name"
-            android:padding="@dimen/img_padding_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnAddImage"
             app:layout_constraintStart_toStartOf="parent"
@@ -220,17 +213,16 @@
             app:srcCompat="@drawable/ic_drawing" />
 
         <ImageView
-            android:id="@+id/btnDate"
-            android:layout_width="@dimen/img_s_large"
-            android:layout_height="@dimen/img_s_large"
+            android:id="@+id/btnHashtag"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_centerVertical="true"
             android:contentDescription="@string/app_name"
-            android:padding="@dimen/img_padding_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btnAddImage"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_calendar" />
+            app:srcCompat="@drawable/ic_hashtag_viet" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
