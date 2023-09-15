@@ -38,6 +38,14 @@
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
     <string name="txtOK">OK</string>
+    <string name="back_navigation">Back navigation</string>
+    <string name="trend">Trend</string>
+    <string name="loading_ad">Loading ad...</string>
+    <string name="mood_statistics">Mood statistics</string>
+    <string name="last_7_days">Last 7 days</string>
+    <string name="last_30_days">Last 30 days</string>
+    <string name="last_90_days">Last 90 days</string>
+    <string name="all">All</string>
     <string name="latest_first">Latest First</string>
     <string name="oldest_first">Oldest First</string>
 </resources>

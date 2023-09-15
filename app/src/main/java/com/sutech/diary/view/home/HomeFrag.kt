@@ -38,6 +38,7 @@ import kotlinx.android.synthetic.main.layout_item_drawer.ll_feedback
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_our_other_app
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_policy
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_share
+import kotlinx.android.synthetic.main.layout_item_drawer.ll_statistics
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_update_to_pro
 import kotlinx.android.synthetic.main.layout_item_drawer.swPassword
 import kotlinx.android.synthetic.main.pop_up_windown_sort.view.tv_latest_first
@@ -341,6 +342,12 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                 requireContext(),
                 "https://play.google.com/store/apps/developer?id=Sutech+Mobile"
             )
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }
+
+        ll_statistics.setOnClick(500) {
+            logEvent("SettingScr_Statistic_Clicked")
+            gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_statisticsFrag)
             drawer_layout.closeDrawer(GravityCompat.START)
         }
 

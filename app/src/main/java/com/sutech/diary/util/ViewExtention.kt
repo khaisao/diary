@@ -20,12 +20,12 @@ fun convertDpToPx(resources: Resources, dp: Float): Float =
         resources.displayMetrics
     )
 
-fun View.setOnClick(debounceTime : Long , action: () -> Unit) {
+fun View.setOnClick(debounceTime: Long, action: (v: View) -> Unit) {
     this.setOnClickListener(object : View.OnClickListener {
         private var lastClickTime: Long = 0
-        override fun onClick(v: View?) {
+        override fun onClick(v: View) {
             if (SystemClock.elapsedRealtime() - lastClickTime < debounceTime) return
-            action()
+            action(v)
             lastClickTime = SystemClock.elapsedRealtime()
         }
     })

@@ -5,6 +5,7 @@
     <dimen name="img_s_large">50dp</dimen>
     <dimen name="img_s_normal">36dp</dimen>
     <dimen name="img_s_small">24dp</dimen>
+    <dimen name="img_s_tiny">16dp</dimen>
 
     <dimen name="radius_4">4dp</dimen>
     <dimen name="radius_6">6dp</dimen>
