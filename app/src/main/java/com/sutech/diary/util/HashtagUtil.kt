@@ -1,7 +1,6 @@
 package com.sutech.diary.util
 
 import android.content.Context
-import android.util.Log
 import com.sutech.diary.database.DiaryDatabase
 import com.sutech.diary.model.HashtagQuantity
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +22,6 @@ object HashtagUtil {
                     emptyList()
                 }
             }.groupBy { it }.map {
-                Log.d("", "getHashtagQuantities: key: ${it.key}, value: ${it.value}")
                 HashtagQuantity(it.key, it.value.size)
             }
         }

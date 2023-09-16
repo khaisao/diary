@@ -50,9 +50,7 @@ class HashtagDetailFrag : BaseFragment(R.layout.fragment_hashtag_detail) {
     }
 
     private fun setupRV() {
-        adapterDiary = AdapterDiaryItem(false, requireContext(), { _, _ ->
-            logEvent("MainScr_IconDots_Clicked")
-        }, { positionDiary, positionContent ->
+        adapterDiary = AdapterDiaryItem(false, requireContext(), { _, _ -> }, { positionDiary, positionContent ->
             val bundle = Bundle()
             bundle.putString(EXTRA_DIARY, Gson().toJson(arrDiary[positionDiary]))
             bundle.putInt(EXTRA_POSITION_CONTENT, positionContent)
