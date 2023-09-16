@@ -176,7 +176,6 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
     private fun setDataDiary() {
         tvDiaryTitle?.text = contentModel?.title
         tvDiaryCreateAt?.text = contentModel?.dateTimeCreate
-        tvDiaryCreateAt?.text =contentModel?.dateTimeCreate
         tvDiaryContent?.text = contentModel?.content
         if (contentModel != null) {
             for (item in contentModel?.listHashtag!!) {

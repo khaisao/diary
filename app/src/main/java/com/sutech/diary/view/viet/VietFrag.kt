@@ -409,7 +409,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         btnOK.setOnClick(500) {
             if (isClick) {
                 isOnClickUpdateDate = true
-                Log.d(TAG, "checked: ")
                 currentDate = selectDate
                 isClick = false
                 tvDateTime.text = SimpleDateFormat(Constant.FormatdayDDMMMMYY, Locale.US).format(currentDate.time)
@@ -672,7 +671,4 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
     override fun onInputEmptyHashtag(view: InputHashtagView) {
         view_input_hashtag.removeView(view)
     }
-
 }
-
-
