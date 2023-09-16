@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_c1deff"
     android:orientation="vertical">
-
-    <com.sutech.common.BackgroundView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"    />
-
 
     <LinearLayout
         android:id="@+id/layoutAdsDoc"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/viewGoneAdGallery"
@@ -25,68 +23,86 @@
             android:text="Loading ad..."
             android:textColor="@color/black" />
     </LinearLayout>
-    <RelativeLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/tbRead"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_below="@id/layoutAdsDoc">
+        android:layout_below="@id/layoutAdsDoc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutAdsDoc">
 
         <com.sutech.common.IconView
             android:id="@+id/btnWriteBack"
-            android:layout_width="@dimen/img_s_normal"
-            android:layout_height="@dimen/img_s_normal"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/img_padding_large"
-            android:background="?attr/selectableItemBackground"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_white_radius_20"
             android:contentDescription="@string/app_name"
+            android:padding="4dp"
             android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_back" />
 
         <com.sutech.common.IconView
             android:id="@+id/btnEditReaDia"
-            android:layout_width="@dimen/img_s_normal"
-            android:layout_height="@dimen/img_s_normal"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/space_screen_small"
+            android:layout_marginEnd="24dp"
             android:layout_toStartOf="@id/btnDeleteReaDia"
+            android:background="@drawable/bg_white_radius_20"
             android:contentDescription="@string/app_name"
-            android:padding="@dimen/img_padding"
+            android:padding="8dp"
             android:scaleType="centerInside"
+            app:layout_constraintEnd_toStartOf="@id/btnDeleteReaDia"
+            app:layout_constraintTop_toTopOf="@id/btnDeleteReaDia"
             app:srcCompat="@drawable/ic_edit" />
 
         <com.sutech.common.IconView
             android:id="@+id/btnDeleteReaDia"
-            android:layout_width="@dimen/img_s_normal"
-            android:layout_height="@dimen/img_s_normal"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/space_screen_small"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_white_radius_20"
             android:contentDescription="@string/app_name"
-            android:padding="@dimen/img_padding"
+            android:padding="8dp"
             android:scaleType="centerInside"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_delete" />
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.sutech.common.text.TextViewRegular
+        android:id="@+id/tvDiaryCreateAt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_screen_small"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Create At: 11/11/2020"
+        android:textColor="@color/colorTextGrey"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tbRead" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tbRead">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tbRead"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDiaryCreateAt">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <com.sutech.common.text.TextViewLight
-                android:id="@+id/tvDiaryCreateAt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/space_screen_small"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="Create At: 11/11/2020"
-                android:textColor="@color/colorTextGrey"
-                android:textSize="@dimen/text_s_14" />
 
             <com.sutech.common.text.TextViewBold
                 android:id="@+id/tvDiaryTitle"
@@ -98,6 +114,17 @@
                 android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/text_s_24" />
 
+            <com.sutech.common.text.TextViewRegular
+                android:id="@+id/tvDiaryContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_screen_small"
+                android:layout_marginTop="@dimen/space_screen_small"
+                android:minHeight="200dp"
+                android:text="Hôm nay là 1 ngày Tuyệt vòi của tôi"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/text_s_18" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvDiaryImage"
                 android:layout_width="match_parent"
@@ -105,15 +132,19 @@
                 android:layout_marginLeft="@dimen/space_screen_small"
                 android:layout_marginTop="@dimen/space_screen_small" />
 
-            <com.sutech.common.text.TextViewRegular
-                android:id="@+id/tvDiaryContent"
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/view_hashtag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/space_screen_small"
-                android:layout_marginTop="@dimen/space_screen_small"
-                android:text="Hôm nay là 1 ngày Tuyệt vòi của tôi"
-                android:textColor="@color/colorTextBlack"
-                android:textSize="@dimen/text_s_18" />
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                app:flexWrap="wrap"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rcvImageDiary"
+                app:layout_flexGrow="3">
+
+            </com.google.android.flexbox.FlexboxLayout>
 
             <RelativeLayout
                 android:id="@+id/rlRateApp"
@@ -123,7 +154,8 @@
                 android:layout_marginTop="60dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/bg_radius_8"
-                android:backgroundTint="#EEEEEE">
+                android:backgroundTint="#EEEEEE"
+                android:visibility="gone">
 
                 <com.sutech.common.text.TextViewMedium
                     android:id="@+id/tvRate"
@@ -247,6 +279,4 @@
 
     </androidx.core.widget.NestedScrollView>
 
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

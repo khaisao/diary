@@ -11,7 +11,7 @@ import com.sutech.journal.diary.diarywriting.lockdiary.databinding.ItemHashtagIn
 
 class InputHashtagView : ConstraintLayout {
 
-    private lateinit var binding :ItemHashtagInputBinding
+    private lateinit var binding: ItemHashtagInputBinding
 
     constructor(context: Context) : super(context) {
         init(context)
@@ -35,15 +35,10 @@ class InputHashtagView : ConstraintLayout {
 
     private var hashtagViewInputListener: HashtagInputViewListener? = null
 
-    fun setCustomViewListener(listener: HashtagInputViewListener) {
-        hashtagViewInputListener = listener
-    }
-
     private fun init(context: Context) {
         val inflater = LayoutInflater.from(context)
         binding = ItemHashtagInputBinding.inflate(inflater, this, true)
 
-        binding.edtHashtag.requestFocus()
 
         binding.edtHashtag.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -65,6 +60,26 @@ class InputHashtagView : ConstraintLayout {
             }
         }
 
+    }
+
+    fun setRequestHashtagInput(isRequest: Boolean) {
+        if (isRequest) {
+            binding.edtHashtag.requestFocus()
+        } else {
+            binding.edtHashtag.clearFocus()
+        }
+    }
+
+    fun setEnableHashtagInput(isEnable: Boolean) {
+        binding.edtHashtag.isEnabled = isEnable
+    }
+
+    fun setCustomViewListener(listener: HashtagInputViewListener) {
+        hashtagViewInputListener = listener
+    }
+
+    fun setTextForHashtag(value: String) {
+        binding.edtHashtag.setText(value)
     }
 
     fun getCurrentHashtagContent(): String {
