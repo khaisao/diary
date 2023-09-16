@@ -76,18 +76,16 @@ class CalendarAdapter(
             }
 
         } else {
-            if (selected == position && daysOfMonth[position] != "" && isStart) {
-                holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_selected)
-                holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.secondary))
+            if (selected == position && daysOfMonth[position] != "") {
+                holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday)
+                holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.white))
             } else {
                 holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_select)
                 holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.black))
-            }
-
-            if (daysOfMonth[position] == currentDateStr && addNewsSlectedDate == LocalDate.now()) {
-                holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday)
-                holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.white))
-                holder.dot.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white))
+                if (daysOfMonth[position] == currentDateStr && addNewsSlectedDate == LocalDate.now()) {
+                    holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_select)
+                    holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.secondary))
+                }
             }
         }
 

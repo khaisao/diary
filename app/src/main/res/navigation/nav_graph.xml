@@ -119,7 +119,12 @@
         android:id="@+id/calendarFlag"
         android:name="com.sutech.diary.view.calendar.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFlag_to_readDiaryFrag"
+            app:destination="@id/readDiaryFrag" />
+    </fragment>
+
     <fragment
         android:id="@+id/statisticsFrag"
         android:name="com.sutech.diary.view.statictics.StatisticsFrag"
@@ -142,4 +147,5 @@
             android:id="@+id/action_hashtagDetailFrag_to_readDiaryFrag"
             app:destination="@id/readDiaryFrag" />
     </fragment>
+
 </navigation>

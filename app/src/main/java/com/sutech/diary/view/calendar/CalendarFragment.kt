@@ -19,6 +19,7 @@ import com.sutech.diary.util.Common
 import com.sutech.diary.util.Constant
 import com.sutech.diary.util.DialogUtil
 import com.sutech.diary.util.gone
+import com.sutech.diary.util.setOnClick
 import com.sutech.diary.util.show
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.fragment_calendar.btn_back
@@ -40,7 +41,6 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
-
 
 class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapter.OnDateItemListener {
     private var adapterDiary: AdapterDiaryItem? = null
@@ -91,16 +91,16 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
     }
 
     private fun initOnClick() {
-        btn_back.setOnClickListener {
+        btn_back.setOnClick(500) {
             onBackPress(R.id.calendarFlag)
         }
-        btn_backMonth.setOnClickListener {
+        btn_backMonth.setOnClick(500) {
             previousMonthAction()
         }
-        btn_nextMonth.setOnClickListener {
+        btn_nextMonth.setOnClick(500) {
             nextMonthAction()
         }
-        tv_today.setOnClickListener {
+        tv_today.setOnClick(500) {
             selectedDate = LocalDate.now()
             setMonthView()
             val calendar = Calendar.getInstance()
@@ -109,8 +109,8 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
         }
     }
     private fun setMonthView() {
-        tv_curenTime.text = monthYearFromDate(selectedDate)
-        val daysInMonth = daysInMonthArray(selectedDate)
+        tv_curenTime.text = Common.monthYearFromDate(selectedDate)
+        val daysInMonth = Common.daysInMonthArray(selectedDate)
         calendarAdapter = CalendarAdapter(false,daysInMonth, this, mcontext!!)
         rcv_calendar.layoutManager = GridLayoutManager(mcontext, 7)
         rcv_calendar.adapter = calendarAdapter
@@ -119,23 +119,6 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
 
         }, 1000)
     }
-
-    private fun daysInMonthArray(date: LocalDate): ArrayList<String> {
-        val daysInMonthArray = ArrayList<String>()
-        val yearMonth = YearMonth.from(date)
-        val daysInMonth = yearMonth.lengthOfMonth()
-        val firstOfMonth: LocalDate = selectedDate.withDayOfMonth(1)!!
-        val dayOfWeek = firstOfMonth.dayOfWeek.value
-        for (i in 1..42) {
-            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
-                daysInMonthArray.add("")
-            } else {
-                daysInMonthArray.add((i - dayOfWeek).toString())
-            }
-        }
-        return daysInMonthArray
-    }
-
     private fun setRcvDiary() {
         adapterDiary = mcontext?.let {
             AdapterDiaryItem(true, it, { _, _ ->
@@ -144,7 +127,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
                 val bundle = Bundle()
                 bundle.putString(Constant.EXTRA_DIARY, Gson().toJson(arrDiary[positionDiary]))
                 bundle.putInt(Constant.EXTRA_POSITION_CONTENT, positionContent)
-                gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_readDiaryFrag, bundle)
+                gotoFrag(R.id.calendarFlag, R.id.action_calendarFlag_to_readDiaryFrag, bundle)
             }, { _, _ ->
                 logEvent("MainScr_IconEdit_Clicked")
             }, { _, _ ->
@@ -153,11 +136,6 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
         }
         rcv_diary.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         rcv_diary.adapter = adapterDiary
-    }
-
-    private fun monthYearFromDate(date: LocalDate): String {
-        val formatter = DateTimeFormatter.ofPattern(Constant.FormatdayMMMMYY)
-        return date.format(formatter)
     }
 
     private fun previousMonthAction() {
@@ -189,7 +167,6 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
         val calendar = Calendar.getInstance()
         getDataClick(calendar.get(Calendar.DAY_OF_MONTH).toString())
     }
-
     private fun getDataDiary(keyword: String? = null, dateTime: String? = null) {
         Log.e("TAG", "getDataDiary: $keyword date $dateTime")
         CoroutineScope(Dispatchers.IO).launch {

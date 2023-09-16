@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import com.sutech.diary.model.ImageObj
 import com.sutech.diary.util.ImageUtil
+import com.sutech.diary.util.setOnClick
 import com.sutech.diary.util.show
 import kotlinx.android.synthetic.main.item_image_content_edit.view.*
 import kotlinx.android.synthetic.main.item_image_content_view.view.*
@@ -83,10 +84,10 @@ class AdapterImageContent(
                     itemView.tvImageLeft.visibility = View.GONE
                 }
             }
-            itemView.setOnClickListener {
+            itemView.setOnClick(500) {
                 onClickItemImage(position)
             }
-            itemView.btnDeleteImage.setOnClickListener {
+            itemView.btnDeleteImage.setOnClick(500) {
                 onDeleteItemImage(position)
             }
 
