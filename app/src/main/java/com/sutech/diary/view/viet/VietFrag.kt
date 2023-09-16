@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -18,40 +19,33 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.sutech.diary.adapter.AdapterImageContent
+import com.sutech.diary.adapter.AdapterInputHashtag
 import com.sutech.diary.adapter.CalendarAdapter
 import com.sutech.diary.base.BaseFragment
 import com.sutech.diary.database.DiaryDatabase
 import com.sutech.diary.model.ContentModel
 import com.sutech.diary.model.DiaryModel
+import com.sutech.diary.model.Hashtag
 import com.sutech.diary.model.ImageObj
 import com.sutech.diary.util.*
-import com.sutech.diary.util.AppUtil
-import com.sutech.diary.util.Constant
-import com.sutech.diary.util.DeviceUtil
-import com.sutech.diary.util.DialogUtil
-import com.sutech.diary.util.ImageUtil
-import com.sutech.diary.util.MoodUtil
-import com.sutech.diary.util.setOnClickScaleView
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.fragment_viet_diary.btnAddImage
 import kotlinx.android.synthetic.main.fragment_viet_diary.btnAddMood
-import kotlinx.android.synthetic.main.fragment_viet_diary.btnDate
 import kotlinx.android.synthetic.main.fragment_viet_diary.btnDraw
+import kotlinx.android.synthetic.main.fragment_viet_diary.btnHashtag
 import kotlinx.android.synthetic.main.fragment_viet_diary.btnSaveDiary
 import kotlinx.android.synthetic.main.fragment_viet_diary.btnWriteBack
 import kotlinx.android.synthetic.main.fragment_viet_diary.edtContent
 import kotlinx.android.synthetic.main.fragment_viet_diary.edtTitle
 import kotlinx.android.synthetic.main.fragment_viet_diary.layoutAdsViet
 import kotlinx.android.synthetic.main.fragment_viet_diary.rcvImageDiary
-import kotlinx.android.synthetic.main.fragment_viet_diary.rlCalendar
-import kotlinx.android.synthetic.main.fragment_viet_diary.rlContent
 import kotlinx.android.synthetic.main.fragment_viet_diary.tvDateTime
+import kotlinx.android.synthetic.main.fragment_viet_diary.view_input_hashtag
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
-import kotlin.collections.ArrayList
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -61,13 +55,14 @@ import java.util.Locale
 
 private const val TAG = "VietFrag"
 
-class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDateItemListener {
+class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDateItemListener, InputHashtagView.HashtagInputViewListener {
 
     private var IS_CHOOSE = 0
     private var isOnClick = false
     private var isOnClickUpdateDate = false
     private val arrImage: ArrayList<ImageObj> = ArrayList()
     private lateinit var adapterImage: AdapterImageContent
+    private lateinit var adapterHashtag: AdapterInputHashtag
     private var currentDate = Calendar.getInstance()
     private var diaryModel: DiaryModel? = null
     private var positionContent: Int = -1
@@ -80,11 +75,18 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDa
     private var moodDiary = MoodUtil.getMoodByName(MoodUtil.Mood.SMILING.name)
     var arrDelete: ArrayList<String> = ArrayList()
     private lateinit var dirayDataBase: DiaryDatabase
-    companion object{
-         var addNewsSlectedDate: LocalDate= LocalDate.now()
+
+    companion object {
+        var addNewsSlectedDate: LocalDate = LocalDate.now()
     }
+
+    private val listInputHashtag: MutableList<Hashtag> = mutableListOf()
+
     override fun onResume() {
         super.onResume()
+        if (this::adapterHashtag.isInitialized) {
+            adapterHashtag.submitList(listInputHashtag)
+        }
         if (isOnClick) {
             if (IS_CHOOSE == 1) {
                 if (DeviceUtil.arrImage.isNotEmpty()) {
@@ -123,7 +125,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDa
         setDataBundle()
         initOnClick()
         initRcvImage()
-
     }
 
     private fun confirmBack() {
@@ -246,33 +247,42 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDa
         btnWriteBack?.setOnClickScaleView(1000) {
             confirmBack()
         }
-        rlCalendar?.setOnClickScaleView(1000) {
+        tvDateTime?.setOnClickScaleView(1000) {
             logEvent("WriteDiary_IconCalen_Clicked")
             //TODO Remove
             onClickChooseDate()
 
         }
-        btnDate?.setOnClickScaleView(1000) {
-            logEvent("WriteDiary_IconCalen_Clicked")
-            context?.let {
-                showCalendar(it)
-            }
+        btnHashtag?.setOnClickScaleView(500) {
+            edtTitle.clearFocus()
+            edtContent.clearFocus()
+            val view = InputHashtagView(requireContext())
+            view.setCustomViewListener(this)
+            view_input_hashtag.addView(view)
         }
 
-        edtTitle?.setOnFocusChangeListener { view, b ->
+        edtTitle?.setOnFocusChangeListener { view, isFocus ->
             logEvent("WriteDiary_Title_Clicked")
+            if (isFocus) {
+                edtTitle.isCursorVisible = true
+                edtContent.clearFocus()
+                edtContent.isCursorVisible = false
+            }
         }
-        edtContent?.setOnFocusChangeListener { view, b ->
+        edtContent?.setOnFocusChangeListener { view, isFocus ->
             logEvent("WriteDiary_Write_Clicked")
+            if (isFocus) {
+                edtContent.isCursorVisible = true
+                edtTitle.clearFocus()
+                edtTitle.isCursorVisible = false
+            }
         }
-        rlContent?.setOnClickListener {
-            edtContent.requestFocus()
+        tvDateTime?.setOnClickListener {
             context?.let { ctx ->
                 val inputMethodManager =
                     ctx.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.showSoftInput(edtContent, 0)
             }
-
         }
 
         btnAddImage?.setOnClickScaleView(1000) {
@@ -339,7 +349,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDa
 
 
     private fun onClickChooseDate() {
-        context?.let { ctx -> Locale.setDefault(Locale.US);
+        context?.let { ctx -> Locale.setDefault(Locale.US)
             val dialogSearchDiary = DatePickerDialog(
                 ctx, R.style.DialogDayTheme,
                 { view, year, month, dayOfMonth ->
@@ -531,8 +541,20 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDa
                 }
             }
         }
+    }
 
-
+    private fun getAllHashtagInput(): MutableList<String> {
+        val listHashtagInput = mutableListOf<String>()
+        for (i in 0 until view_input_hashtag.childCount) {
+            val childView: View = view_input_hashtag.getChildAt(i)
+            if (childView is InputHashtagView) {
+                val value = childView.getCurrentHashtagContent()
+                if (value.length > 1) {
+                    listHashtagInput.add(value)
+                }
+            }
+        }
+        return listHashtagInput
     }
 
     private suspend fun insertNewDiary() {
@@ -554,7 +576,8 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDa
                 images = arrImage,
                 createDate = date,
                 dateTimeCreate = dateTime,
-                mood = moodDiary
+                mood = moodDiary,
+                listHashtag = getAllHashtagInput()
             )
         )
         if (addToDay) {
@@ -655,6 +678,10 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDa
 
     override fun onDateItemClick(position: Int, dayText: String?) {
         calendarAdapter?.updatePosition(position)
+    }
+
+    override fun onInputEmptyHashtag(view: InputHashtagView) {
+        view_input_hashtag.removeView(view)
     }
 
 }

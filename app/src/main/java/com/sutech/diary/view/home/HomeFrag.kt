@@ -35,6 +35,7 @@ import kotlinx.android.synthetic.main.layout_item_drawer.cl_use_password
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_change_passcode
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_change_theme
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_feedback
+import kotlinx.android.synthetic.main.layout_item_drawer.ll_hash_tag
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_our_other_app
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_policy
 import kotlinx.android.synthetic.main.layout_item_drawer.ll_share
@@ -348,6 +349,12 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         ll_statistics.setOnClick(500) {
             logEvent("SettingScr_Statistic_Clicked")
             gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_statisticsFrag)
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }
+
+        ll_hash_tag.setOnClick(500) {
+            logEvent("SettingScr_Hashtags_clicked")
+            gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_hashtagsFrag)
             drawer_layout.closeDrawer(GravityCompat.START)
         }
 

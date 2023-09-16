@@ -12,5 +12,6 @@ data class ContentModel(
     var password: String? = null,
     var dateTimeCreate: String = "",
     var dateTimeUpdate: String = "",
-    var mood: MoodObj = MoodUtil.getMoodByName(MoodUtil.Mood.SMILING.name)
+    var mood: MoodObj = MoodUtil.getMoodByName(MoodUtil.Mood.SMILING.name),
+    var listHashtag: List<String> = emptyList()
 )

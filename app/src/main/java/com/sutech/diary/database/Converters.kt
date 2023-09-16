@@ -7,24 +7,7 @@ import com.sutech.diary.model.ContentModel
 import java.lang.reflect.Type
 
 class Converters {
-    //    @TypeConverter
-//    fun fromString(value: String?): CheckList {
-//        return if (value!=null&&value.isNotEmpty()){
-//            Gson().fromJson(value, CheckList::class.java)
-//        }else{
-//            CheckList()
-//        }
-//    }
-//
-//    @TypeConverter
-//    fun fromCheckList(checkList: CheckList?): String {
-//        return if (checkList!=null){
-//
-//            Gson().toJson(checkList)
-//        }else{
-//            ""
-//        }
-//    }
+
     @TypeConverter
     fun fromStringArrCheckList(value: String?): ArrayList<ContentModel>? {
         try {
