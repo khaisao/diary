@@ -207,8 +207,15 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDa
             edtTitle?.setText(contentModel?.title)
             edtContent?.setText(contentModel?.content)
             contentModel?.images?.let {
-//                arrImage.clear()
+                arrImage.clear()
                 arrImage.addAll(it)
+            }
+            for (item in contentModel!!.listHashtag) {
+                val view = InputHashtagView(requireContext())
+                view_input_hashtag.addView(view)
+                view.setRequestHashtagInput(false)
+                view.setEnableHashtagInput(true)
+                view.setTextForHashtag(item)
             }
         }
     }
@@ -258,6 +265,8 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary),CalendarAdapter.OnDa
             edtContent.clearFocus()
             val view = InputHashtagView(requireContext())
             view.setCustomViewListener(this)
+            view.setRequestHashtagInput(true)
+            view.setEnableHashtagInput(true)
             view_input_hashtag.addView(view)
         }
 

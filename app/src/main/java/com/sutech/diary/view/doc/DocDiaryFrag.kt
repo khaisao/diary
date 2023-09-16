@@ -16,6 +16,7 @@ import com.sutech.diary.model.DiaryModel
 import com.sutech.diary.util.*
 import com.sutech.diary.util.AppUtil.openMarket
 import com.sutech.diary.util.AppUtil.sendEmailMore
+import com.sutech.diary.view.viet.InputHashtagView
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.fragment_doc_diary.*
 import kotlinx.coroutines.CoroutineScope
@@ -33,9 +34,9 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
 
     override fun initView() {
         AppUtil.readiary ++
-        context?.let { ctx ->
-            dirayDataBase = DiaryDatabase.getInstance(ctx)
-        }
+
+        dirayDataBase = DiaryDatabase.getInstance(requireContext())
+
         activity?.onBackPressedDispatcher?.addCallback(this, true) {
             backReader()
         }
@@ -43,7 +44,6 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
         showBanner("banner_viet_nhat_ky", layoutAdsDoc)
         setOnClickView()
         getDataBundle()
-        setDataDiary()
         setRcvDiary()
 
         btnRate?.setPreventDoubleClickScaleView(1000) {
@@ -167,11 +167,25 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        setDataDiary()
+    }
+
     @SuppressLint("SetTextI18n")
     private fun setDataDiary() {
         tvDiaryTitle?.text = contentModel?.title
-        tvDiaryCreateAt?.text = getString(R.string.create_at) + contentModel?.dateTimeCreate
+        tvDiaryCreateAt?.text = contentModel?.dateTimeCreate
         tvDiaryContent?.text = contentModel?.content
+        if (contentModel != null) {
+            for (item in contentModel?.listHashtag!!) {
+                val view = InputHashtagView(requireContext())
+                view_hashtag.addView(view)
+                view.setRequestHashtagInput(false)
+                view.setEnableHashtagInput(false)
+                view.setTextForHashtag(item)
+            }
+        }
     }
 
     private fun setRcvDiary() {
