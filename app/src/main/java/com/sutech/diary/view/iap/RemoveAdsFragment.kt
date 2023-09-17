@@ -33,7 +33,7 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
     override fun initView() {
         logEvent("IAPScr_Show")
         tvBuyNow.setPreventDoubleClickScaleView(5000) {
-            logEvent("IAPScr_IconBuynow_Clicked")
+            logEvent("IAPScr_BuyNow_Clicked")
             if (!context?.let { haveNetworkConnection(it) }!!) {
                 Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
                 return@setPreventDoubleClickScaleView
@@ -42,8 +42,7 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
         }
 
         ivBack.setPreventDoubleClickScaleView {
-            logEvent("IAPScr_IconX_Clicked")
-
+            logEvent("IAPScr_ButtonX_Clicked")
             onBackPress(R.id.IAPFragment)
         }
         sdkBilling.listener = object : BillingListener {

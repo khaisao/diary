@@ -39,12 +39,14 @@ class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
 
     override fun initView() {
         showBanner("banner_statistic", ads)
+        logEvent("StatisticsDiary_Show")
         setupView()
         handleEvent()
     }
 
     private fun handleEvent() {
         btnBack.setOnClick(500) {
+            logEvent("StatisticsDiary_IconBack_Clicked")
             onBackToHome(R.id.statisticsFrag)
         }
         btnFilter.setOnClick(500) {
@@ -128,10 +130,22 @@ class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
         popup.setOnMenuItemClickListener { menuItem: MenuItem ->
             lifecycleScope.launch {
                 when (menuItem.itemId) {
-                    R.id.all -> filter.emit(MoodFilter.ALL)
-                    R.id.seven_day -> filter.emit(MoodFilter.SEVEN_DAY)
-                    R.id.thirty_day -> filter.emit(MoodFilter.THIRTY_DAY)
-                    R.id.ninety_day -> filter.emit(MoodFilter.NINETY_DAY)
+                    R.id.all -> {
+                        logEvent("StatisticsDiary_All_Clicked")
+                        filter.emit(MoodFilter.ALL)
+                    }
+                    R.id.seven_day -> {
+                        logEvent("StatisticsDiary_7day_Clicked")
+                        filter.emit(MoodFilter.SEVEN_DAY)
+                    }
+                    R.id.thirty_day -> {
+                        logEvent("StatisticsDiary_30day_Clicked")
+                        filter.emit(MoodFilter.THIRTY_DAY)
+                    }
+                    R.id.ninety_day -> {
+                        logEvent("StatisticsDiary_90day_Clicked")
+                        filter.emit(MoodFilter.NINETY_DAY)
+                    }
                 }
             }
             popup.dismiss()

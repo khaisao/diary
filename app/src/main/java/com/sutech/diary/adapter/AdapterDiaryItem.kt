@@ -16,9 +16,6 @@ import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.item_diary.view.rcvContent
 import kotlinx.android.synthetic.main.item_diary.view.tvDay
 
-
-private const val TAG = "AdapterDiaryItem"
-
 class AdapterDiaryItem(
     private val fromCalender: Boolean,
     private val content: Context,
@@ -38,7 +35,6 @@ class AdapterDiaryItem(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         (holder as ViewHolderDiary).binDataDiary(position, currentList[position])
     }
-
 
     inner class ViewHolderDiary(view: View) : ViewHolder(view) {
         fun binDataDiary(position: Int, diary: DiaryModel) {

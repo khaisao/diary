@@ -129,10 +129,12 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
             true)
 
         popupView.tv_latest_first.setOnClick(500) {
+            logEvent("MainScr_IconArrange_Latest")
             sortListDiaryByDay(false)
             popupWindow.dismiss()
         }
         popupView.tv_oldest_first.setOnClick(500) {
+            logEvent("MainScr_IconArrange_Oldest")
             sortListDiaryByDay(true)
             popupWindow.dismiss()
         }
@@ -228,11 +230,11 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
             }
         }
         btnClearSearch?.setOnClickScaleView {
-            logEvent("Search_IconX_Clicked")
+            logEvent("SearchScr_IconX_Clicked")
             edtSearch?.setText("")
         }
         btnCloseSearch?.setOnClickScaleView {
-            logEvent("Search_IconBack_Clicked")
+            logEvent("SearchScr_IconBack_Clicked")
             closeSearch()
         }
 
@@ -318,7 +320,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         }
 
         ll_update_to_pro?.setOnClick(1500) {
-            logEvent("MainScr_IconIAP_Clicked")
+            logEvent("SettingScr_Upgrade_Clicked")
             gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_IAPFragment)
             drawer_layout.closeDrawer(GravityCompat.START)
         }
@@ -336,9 +338,15 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                 DataStore.setUsePassword(false)
             }
             swPassword?.isChecked = DataStore.getUsePassword()
+            if (swPassword.isChecked) {
+                logEvent("SettingScr_OnPassword_Clicked")
+            } else {
+                logEvent("SettingScr_OffPassword_Clicked")
+            }
         }
 
         ll_our_other_app.setOnClick(500) {
+            logEvent("SettingScr_Ourotherapp_Clicked")
             AppUtil.openBrowser(
                 requireContext(),
                 "https://play.google.com/store/apps/developer?id=Sutech+Mobile"
@@ -347,7 +355,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         }
 
         ll_statistics.setOnClick(500) {
-            logEvent("SettingScr_Statistic_Clicked")
+            logEvent("SettingScr_Statistics_Clicked")
             gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_statisticsFrag)
             drawer_layout.closeDrawer(GravityCompat.START)
         }
@@ -359,6 +367,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         }
 
         btnSort.setOnClick(500) {
+            logEvent("MainScr_IconArrange_Clicked")
             showPopupSort()
         }
 

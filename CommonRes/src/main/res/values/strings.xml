@@ -31,10 +31,11 @@
     <string name="please_input_title">Please input title!</string>
     <string name="please_input_content">Please input content</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
     <string name="re_password_wrong">Re-enter the incorrect password</string>
     <string name="old_password_wrong">Re-enter the incorrect old password</string>
     <string name="the_incorrect_password">The incorrect password</string>
-    <string name="enter_old_password">Enter old password</string>
+    <string name="enter_old_password">Enter current password</string>
     <string name="enter_new_password">Enter new password</string>
     <string name="setting">Setting</string>
     <string name="alert">Alert</string>

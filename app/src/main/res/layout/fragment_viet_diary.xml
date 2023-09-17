@@ -96,13 +96,13 @@
         </LinearLayout>
 
         <ImageView
-            app:layout_constraintEnd_toEndOf="@id/btnSaveDiary"
-            app:layout_constraintBottom_toBottomOf="@id/btn_selectDate"
-            app:layout_constraintTop_toTopOf="@id/btn_selectDate"
             android:id="@+id/btnAddMood"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:contentDescription="@string/mood_button" />
+            android:contentDescription="@string/mood_button"
+            app:layout_constraintBottom_toBottomOf="@id/btn_selectDate"
+            app:layout_constraintEnd_toEndOf="@id/btnSaveDiary"
+            app:layout_constraintTop_toTopOf="@id/btn_selectDate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -174,7 +174,7 @@
             android:id="@+id/rlSearch"
             android:layout_width="0dp"
             android:layout_height="70dp"
-            android:background="@color/white"
+            android:background="@color/color_5DA9FF"
             android:clickable="true"
             android:elevation="1dp"
             android:focusable="true"
@@ -198,30 +198,30 @@
                 android:paddingHorizontal="@dimen/img_padding_large"
                 android:singleLine="true"
                 android:textColor="@color/colorTextBlack"
-                android:textColorHint="#ABA1A1"
+                android:textColorHint="@color/color_254466"
                 android:textSize="@dimen/text_s_16"
                 app:textColorDefault="false" />
 
             <ImageView
                 android:id="@+id/btnCloseSearch"
-                android:layout_width="@dimen/img_s_normal"
-                android:layout_height="@dimen/img_s_normal"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/img_padding_large"
-                android:background="@drawable/bg_radius_4"
-                android:padding="@dimen/img_padding_large"
+                android:background="@drawable/bg_white_radius_20"
+                android:padding="4dp"
                 app:srcCompat="@drawable/ic_back"
                 app:tint="@color/black" />
 
             <ImageView
                 android:id="@+id/btnClearSearch"
-                android:layout_width="@dimen/img_s_normal"
-                android:layout_height="@dimen/img_s_normal"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/img_padding_large"
-                android:background="@drawable/bg_radius_4"
-                android:padding="@dimen/img_padding_large"
+                android:background="@drawable/bg_white_radius_20"
+                android:padding="4dp"
                 app:srcCompat="@drawable/ic_close"
                 app:tint="@color/black" />
         </RelativeLayout>

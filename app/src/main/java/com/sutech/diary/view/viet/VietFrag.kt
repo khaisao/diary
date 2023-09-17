@@ -137,13 +137,10 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
     }
 
     private fun confirmBack() {
-        logEvent("WriteDiary_IconBack_Clicked")
         context?.let { ctx ->
 
-            logEvent("SaveDiary_Show")
             logEvent("DialogSave_Show")
             DialogUtil.showDialogConfirmSave(ctx, {
-                logEvent("SaveDiary_IconSave_Clicked")
                 logEvent("DialogSave_IconSave_Clicked")
                 if (invalidateContent()) {
                     date = SimpleDateFormat(
@@ -183,7 +180,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
                 }
             }, {
                 logEvent("DialogSave_IconDiscard_Clicked")
-                logEvent("SaveDiary_IconDiscard_Clicked")
                 onBackWrite()
             })
         }
@@ -267,15 +263,15 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         tvDateTime.text =
             SimpleDateFormat(Constant.FormatdayDDMMMMYY, Locale.US).format(currentDate.time)
 
-        btnWriteBack?.setOnClickScaleView(1000) {
+        btnWriteBack?.setOnClickScaleView(500) {
             confirmBack()
         }
-        btn_selectDate?.setOnClickScaleView(1000) {
-            logEvent("WriteDiary_IconCalen_Clicked")
+        btn_selectDate?.setOnClickScaleView(500) {
+            logEvent("WriteDairy_Calender_Show")
             showCalendar(requireContext())
-
         }
         btnHashtag?.setOnClickScaleView(500) {
+            logEvent("WriteDiary_Iconhashtag_Clicked")
             edtTitle.clearFocus()
             edtContent.clearFocus()
             val view = InputHashtagView(requireContext())
@@ -286,16 +282,16 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         }
 
         edtTitle?.setOnFocusChangeListener { view, isFocus ->
-            logEvent("WriteDiary_Title_Clicked")
             if (isFocus) {
+                logEvent("WriteDiary_Title_Clicked")
                 edtTitle.isCursorVisible = true
                 edtContent.clearFocus()
                 edtContent.isCursorVisible = false
             }
         }
         edtContent?.setOnFocusChangeListener { view, isFocus ->
-            logEvent("WriteDiary_Write_Clicked")
             if (isFocus) {
+                logEvent("WriteDiary_Write_Clicked")
                 edtContent.isCursorVisible = true
                 edtTitle.clearFocus()
                 edtTitle.isCursorVisible = false
@@ -360,6 +356,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
             }
         }
         btnAddMood?.setOnClick(500) {
+            logEvent("WriteDiary_IconMood_Clicked")
             context?.let { cxt ->
                 val loc = IntArray(2) { value -> value }
                 btnAddMood?.getLocationOnScreen(loc)
@@ -399,6 +396,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
             previousMonthAction(rcvCalendar, tvCurrentTime)
         }
         btnToday.setOnClick(500) {
+            logEvent("WriteDairy_Calender_Today_Clicked")
             selectDate = Calendar.getInstance()
             addNewsSlectedDate = LocalDate.now()
             setMonthView(rcvCalendar, tvCurrentTime)
@@ -407,6 +405,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         }
 
         btnOK.setOnClick(500) {
+            logEvent("WriteDairy_Calender_IconOk_Clicked")
             if (isClick) {
                 isOnClickUpdateDate = true
                 currentDate = selectDate

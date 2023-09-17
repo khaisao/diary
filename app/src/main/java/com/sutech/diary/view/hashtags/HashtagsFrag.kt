@@ -19,12 +19,14 @@ import kotlinx.coroutines.launch
 
 class HashtagsFrag : BaseFragment(R.layout.fragment_hashtags) {
     override fun initView() {
+        logEvent("HashtagsScr_Show")
         setupView()
         handleEvent()
     }
 
     private fun handleEvent() {
         btnBack.setOnClick(500) {
+            logEvent("HashtagsScr_IconBack_Clicked")
             onBackToHome(R.id.hashtagsFrag)
         }
     }
