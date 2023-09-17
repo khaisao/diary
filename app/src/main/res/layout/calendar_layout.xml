@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginTop="12dp"
-                android:background="#80C2C2C2"
+                android:background="#F5F5F5"
                 android:orientation="horizontal">
 
                 <TextView
@@ -81,8 +81,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:text="@string/sun"
+                    android:textColor="#9E9E9E"
+                    android:textSize="14sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/Mon"
-                    android:textColor="@color/transparent_80"
+                    android:textColor="#9E9E9E"
                     android:textSize="14sp" />
 
                 <TextView
@@ -91,7 +99,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/tue"
-                    android:textColor="@color/transparent_80"
+                    android:textColor="#9E9E9E"
                     android:textSize="14sp" />
 
                 <TextView
@@ -100,7 +108,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/wed"
-                    android:textColor="@color/transparent_80"
+                    android:textColor="#9E9E9E"
                     android:textSize="14sp" />
 
                 <TextView
@@ -109,7 +117,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/thu"
-                    android:textColor="@color/transparent_80"
+                    android:textColor="#9E9E9E"
                     android:textSize="14sp" />
 
                 <TextView
@@ -118,7 +126,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/fri"
-                    android:textColor="@color/transparent_80"
+                    android:textColor="#9E9E9E"
                     android:textSize="14sp" />
 
                 <TextView
@@ -127,17 +135,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/sat"
-                    android:textColor="@color/transparent_80"
+                    android:textColor="#9E9E9E"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/sun"
-                    android:textColor="@color/transparent_80"
-                    android:textSize="14sp" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

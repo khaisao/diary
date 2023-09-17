@@ -117,6 +117,16 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:text="@string/sun"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="@string/Mon"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
@@ -172,21 +182,13 @@
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/sun"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcv_calendar"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
+                    android:background="#FEFEF4"
                     android:layout_marginHorizontal="8dp"
                     android:layout_marginTop="8dp"
                     tools:listitem="@layout/calendar_cell" />
