@@ -49,4 +49,5 @@
     <string name="latest_first">Latest First</string>
     <string name="oldest_first">Oldest First</string>
     <string name="diary">diary</string>
+    <string name="there_are_no_hashtag_in_your_diary">There are no hashtag in your diary</string>
 </resources>

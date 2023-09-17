@@ -1,6 +1,7 @@
 package com.sutech.diary.view.hashtags
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sutech.diary.adapter.AdapterHashtag
@@ -11,6 +12,8 @@ import com.sutech.diary.util.HashtagUtil
 import com.sutech.diary.util.setOnClick
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.fragment_hashtags.btnBack
+import kotlinx.android.synthetic.main.fragment_hashtags.empty_image
+import kotlinx.android.synthetic.main.fragment_hashtags.empty_title
 import kotlinx.android.synthetic.main.fragment_hashtags.hashtagsRV
 import kotlinx.coroutines.launch
 
@@ -28,7 +31,10 @@ class HashtagsFrag : BaseFragment(R.layout.fragment_hashtags) {
 
     private fun setupView() {
         lifecycleScope.launch {
-            val htQuantity = HashtagUtil.getHashtagQuantities(requireContext())
+            val htQuantity = HashtagUtil.getHashtagQuantities(requireContext()).also {
+                empty_image.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
+                empty_title.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
+            }
             val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             hashtagsRV.adapter = AdapterHashtag(object : AdapterHashtag.HashtagOnclickListener {
                 override fun onHashtagClick(hashtag: String) {
