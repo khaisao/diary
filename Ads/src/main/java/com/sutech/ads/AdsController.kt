@@ -319,7 +319,7 @@ class AdsController private constructor(
         }
     }
 
-    public fun loadAndShow(
+    fun loadAndShow(
         spaceName: String,
         isKeepAds: Boolean = false,
         loadingText: String? = null,

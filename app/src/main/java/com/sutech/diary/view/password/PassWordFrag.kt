@@ -62,10 +62,10 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
             val type = bundle.getInt(TYPE_PASSWORD, -1)
             val comeFromSecurity = bundle.getBoolean(COME_FROM_SECURITY, false)
             if (type != -1) {
-                if (type == 3) {
-                    isTypePassword = 3
+                isTypePassword = if (type == 3) {
+                    3
                 } else {
-                    isTypePassword = if (DataStore.getPassword().isNullOrEmpty() || comeFromSecurity) {
+                    if (DataStore.getPassword().isNullOrEmpty() || comeFromSecurity) {
                         0
                     } else {
                         1
