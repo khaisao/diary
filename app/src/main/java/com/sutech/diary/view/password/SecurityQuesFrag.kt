@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.Log
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.sutech.diary.base.BaseFragment
 import com.sutech.diary.database.DataStore
 import com.sutech.diary.util.Constant
@@ -28,6 +29,7 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
     private var typeSecurityScreen = 0
 
     override fun initView() {
+        logEvent("SecurityQuestion_Show")
         getDataBundle()
         setUpUi()
         setClick()
@@ -60,7 +62,9 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
         })
         if (typeSecurityScreen == TYPE_INPUT_NEW_SECURITY) {
             tv_ques_des.text = getString(R.string.security_question_des)
+            Glide.with(requireContext()).load(R.drawable.ic_cancel).into(tvCancel)
         } else {
+            Glide.with(requireContext()).load(R.drawable.ic_back).into(tvCancel)
             edt_ques.setText(DataStore.getQues())
             tv_ques_des.text = getString(R.string.enter_a_security_question)
         }
@@ -76,9 +80,16 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
 
     private fun setClick() {
         tvCancel.setOnClickListener {
+            if (typeSecurityScreen == TYPE_INPUT_NEW_SECURITY) {
+                logEvent("SecurityQuestion_IconX_Clicked")
+            } else {
+                logEvent("SecurityQuestion_IconBack_Clicked")
+            }
             findNavController().popBackStack()
         }
+
         tv_confirm_security.setOnClickListener {
+            logEvent("SecurityQuestion_Confirm_Clicked")
             val ques = edt_ques.text.toString()
             val ans = edt_ans.text.toString()
             if (typeSecurityScreen == TYPE_INPUT_NEW_SECURITY) {

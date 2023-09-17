@@ -9,8 +9,15 @@ import nv.module.brushdraw.data.BaseRx
 import nv.module.brushdraw.ui.customview.HandWriteCVCallback
 import nv.module.brushdraw.ui.customview.HandWriteCanvasView
 
-class BrushUtils(private val context: Context,private val saveView:(bitmap:Bitmap)->Unit,private val onBack:()->Unit) {
-   private var canvasView: HandWriteCanvasView?=null
+class BrushUtils(
+    private val context: Context,
+    private val saveView: (bitmap: Bitmap) -> Unit,
+    private val onBack: () -> Unit,
+    private val onUndo: () -> Unit,
+    private val onRedo: () -> Unit,
+    private val onDone: () -> Unit,
+) {
+    private var canvasView: HandWriteCanvasView? = null
     fun createBrush(
         btnUndo: ImageView,
         btnRedo: ImageView,
@@ -28,11 +35,11 @@ class BrushUtils(private val context: Context,private val saveView:(bitmap:Bitma
         this.canvasView = canvasView
     }
 
-    fun setColorBrush(color:Int){
+    fun setColorBrush(color: Int) {
         canvasView?.setColor(color)
     }
 
-    fun setBackground(color:Int){
+    fun setBackground(color: Int) {
         canvasView?.setBackgroundColor(color)
     }
 
@@ -44,6 +51,7 @@ class BrushUtils(private val context: Context,private val saveView:(bitmap:Bitma
         canvasView: HandWriteCanvasView
     ) {
         btnSave.setOnClickListener {
+            onDone()
             BaseRx().observableCreate<Bitmap>({
                 canvasView.isDrawingCacheEnabled = true
                 val bitmap = Bitmap.createBitmap(canvasView.drawingCache)
@@ -61,10 +69,12 @@ class BrushUtils(private val context: Context,private val saveView:(bitmap:Bitma
         }
 
         btnUndo.setOnClickListener {
+            onUndo()
             canvasView.undo()
         }
 
         btnRedo.setOnClickListener {
+            onRedo()
             canvasView.reDo()
         }
 

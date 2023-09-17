@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.sutech.common.PassCodeView
 import com.sutech.diary.base.BaseFragment
 import com.sutech.diary.database.DataStore
@@ -43,15 +44,17 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
             }
         } else if (isTypePassword == 1) {
             tvPasscode.text = getString(R.string.enter_old_password)
-            logEvent("OldPassword_Show")
+            logEvent("EnterCuPassword_Show")
 
         } else if (isTypePassword == 0) {
             logEvent("SetpassScr_Show")
             tvPasscode.text = getString(R.string.set_password)
         }
-        Log.d("asgawagwawg", "initView: $isTypePassword")
         if (isTypePassword != 3) {
             ll_forgot_password.isVisible = false
+            Glide.with(requireContext()).load(R.drawable.ic_back).into(tvCancel)
+        } else {
+            Glide.with(requireContext()).load(R.drawable.ic_cancel).into(tvCancel)
         }
         setClick()
     }
@@ -72,6 +75,9 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                     }
                 }
             }
+        }
+        if(isTypePassword == 3){
+            logEvent("UnlockPass_Show")
         }
     }
 
@@ -126,20 +132,28 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
 
         tvCancel.setOnClickListener {
             if (tvPasscode.text.toString() == getString(R.string.enter_new_password)) {
-                logEvent("NewPassword_IconCancel_Clicked")
+                logEvent("EnterNewPassword_IconBack_Clicked")
             } else if (tvPasscode.text.toString() == getString(R.string.enter_old_password)) {
-                logEvent("OldPassword_Cancel_Clicked")
-            } else if (tvPasscode.text.toString() == getString(R.string.set_password) || tvPasscode.text.toString() == getString(
-                    R.string.confirm_password
-                )
+                logEvent("OldPassword_Back_Clicked")
+            } else if (tvPasscode.text.toString() == getString(R.string.set_password)
+            ) {
+                logEvent("SetpassScr_IconBack_Clicked")
+                DataStore.setUsePassword(false)
+            } else if (tvPasscode.text.toString() == getString(R.string.confirm_password)
             ) {
                 DataStore.setUsePassword(false)
-                logEvent("ConfirmpassScr_IconSkip_Clicked")
+                logEvent("ConfirmPassword_IconBack_Clicked")
+            } else if (tvPasscode.text.toString() == getString(
+                    R.string.confirm_new_password
+                )) {
+                logEvent("ConfirmNewScr_IconBack_Clicked")
+            } else if(tvPasscode.text.toString() == getString(
+                    R.string.enter_pass_word
+                )){
+                logEvent("UnlockPass_IconBack_Clicked")
             } else {
                 logEvent("SetpassScr_IconSkip_Clicked")
             }
-
-
             if (isTypePassword == 2 || isTypePassword == 3) {
                 activity?.finish()
             } else {
@@ -154,6 +168,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
         }
 
         ll_forgot_password.setOnClickListener {
+            logEvent("UnlockPass_Forgotpassword")
             val ques = DataStore.getQues()
             val ans = DataStore.getAns()
             val bundle = Bundle()
@@ -174,7 +189,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                             passwordBefore = passCode
                             passCodeView.clearPassCode()
                             tvPasscode.text = getString(R.string.confirm_password)
-                            logEvent("ConfirmpassScr_Show")
+                            logEvent("ConfirmPassword_Show")
                         } else {
                             passwordAfter = passCode
                             if (passwordAfter == passwordBefore) {
@@ -196,7 +211,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                             if (DataStore.checkPassword(passCode)) {
                                 oldPassword = passCode
                                 tvPasscode.text = getString(R.string.enter_new_password)
-                                logEvent("NewPassword_Show")
+                                logEvent("EnterNewPassword_Show")
                             } else {
                                 tvWrongPass.text = getString(R.string.old_password_wrong)
                                 passCodeWrong()
@@ -205,8 +220,8 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                         } else if (passwordBefore.isEmpty()) {
                             passwordBefore = passCode
                             passCodeView.clearPassCode()
-                            tvPasscode.text = getString(R.string.confirm_password)
-                            logEvent("ConfirmScr_Show")
+                            tvPasscode.text = getString(R.string.confirm_new_password)
+                            logEvent("ConfirmNewScr_Show")
                         } else {
                             passwordAfter = passCode
                             passCodeView.clearPassCode()

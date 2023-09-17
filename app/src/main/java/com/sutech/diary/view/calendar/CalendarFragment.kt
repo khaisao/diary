@@ -92,6 +92,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
 
     private fun initOnClick() {
         btn_back.setOnClick(500) {
+            logEvent("CalendarScr_IconX_Clicked")
             onBackPress(R.id.calendarFlag)
         }
         btn_backMonth.setOnClick(500) {
@@ -101,6 +102,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
             nextMonthAction()
         }
         tv_today.setOnClick(500) {
+            logEvent("CalendarScr_Today_Clicked")
             selectedDate = LocalDate.now()
             setMonthView()
             val calendar = Calendar.getInstance()
@@ -122,16 +124,14 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
     private fun setRcvDiary() {
         adapterDiary = mcontext?.let {
             AdapterDiaryItem(true, it, { _, _ ->
-                logEvent("MainScr_IconDots_Clicked")
             }, { positionDiary, positionContent ->
+                logEvent("CalendarScr_Diary_Clicked")
                 val bundle = Bundle()
                 bundle.putString(Constant.EXTRA_DIARY, Gson().toJson(arrDiary[positionDiary]))
                 bundle.putInt(Constant.EXTRA_POSITION_CONTENT, positionContent)
                 gotoFrag(R.id.calendarFlag, R.id.action_calendarFlag_to_readDiaryFrag, bundle)
             }, { _, _ ->
-                logEvent("MainScr_IconEdit_Clicked")
             }, { _, _ ->
-                logEvent("MainScr_IconDelete_Clicked")
             })
         }
         rcv_diary.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
