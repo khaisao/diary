@@ -19,12 +19,12 @@
         android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/Default"
         tools:ignore="AllowBackup,UnusedAttribute">
 
         <activity
             android:name="com.sutech.diary.view.MainActivity"
-            android:theme="@style/AppTheme"
+            android:theme="@style/Default"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:exported="true"

@@ -1,13 +1,16 @@
 package com.sutech.diary.base
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
+import androidx.preference.PreferenceManager
 import com.facebook.FacebookSdk
 import com.facebook.ads.AudienceNetworkAds
 import com.google.android.gms.ads.MobileAds
 import com.sutech.diary.database.DataStore
 import com.sutech.common.ColorUtil
 import com.sutech.common.TypeFaceUtil
+import com.sutech.journal.diary.diarywriting.lockdiary.R
 
 
 class AppController : Application() {
@@ -27,13 +30,13 @@ class AppController : Application() {
         FacebookSdk.sdkInitialize(applicationContext)
         TypeFaceUtil.instant?.initTypeFace(this)
         if (DataStore.getTheme() != -1) {
-            setThemeApp(DataStore.getTheme())
+            setThemeApp(DataStore.getTheme(), applicationContext)
         } else {
-            setThemeApp(0)
+            setThemeApp(0,applicationContext)
         }
     }
 
-    fun setThemeApp(position: Int) {
+    fun setThemeApp(position: Int, context: Context) {
         Log.e("TAG", "setThemeApp: $position")
         if (position != -1 && position != -2) {
             themeId = position
@@ -41,93 +44,21 @@ class AppController : Application() {
             themeId = oldThemeId
         }
         Log.e("TAG", "setThemeApp:themeId $themeId")
-        when (themeId) {
-            0 -> {
-//                light theme
-                setTextColor()
-            }
-            1 -> {
-//               dark theme
-                setTextColor(
-                    "#F2F2F2",
-                    "#febd00",
-                    "#F2F2F2",
-                    "#163DFF",
-                    "#000000",
-                    "#F2F2F2"
-                )
-            }
-            2 -> {
-                setTextColor(
-                    "#F2F2F2",
-                    "#febd00",
-                    "#F2F2F2",
-                    "#163DFF",
-                    "#304FFE",
-                    "#000000"
-                )
-            }
-            3 -> {
-                setTextColor(
-                    "#F2F2F2",
-                    "#febd00",
-                    "#F2F2F2",
-                    "#163DFF",
-                    "#D50000",
-                    "#febd00"
-                )
-            }
-            4 -> {
-                setTextColor(
-                    "#F2F2F2",
-                    "#febd00",
-                    "#F2F2F2",
-                    "#163DFF",
-                    "#00C853",
-                    "#febd00"
-                )
-            }
-            5 -> {
-                setTextColor(
-                    "#F2F2F2",
-                    "#febd00",
-                    "#F2F2F2",
-                    "#163DFF",
-                    "#AA00FF",
-                    "#000000"
-                )
-            }
-            6 -> {
-                setTextColor(
-                    "#000000",
-                    "#febd00",
-                    "#F2F2F2",
-                    "#163DFF",
-                    "#FFAB00",
-                    "#000000"
-                )
-            }
-            7 -> {
-                setTextColor(
-                    "#000000",
-                    "#febd00",
-                    "#F2F2F2",
-                    "#163DFF",
-                    "#FF6D00",
-                    "#000000"
-                )
-            }
-            8 -> {
-                setTextColor(
-                    "#000000",
-                    "#febd00",
-                    "#000000",
-                    "#163DFF",
-                    "#F67FB5",
-                    "#F2F2F2"
-                )
-            }
-        }
+        PreferenceManager
+            .getDefaultSharedPreferences(context)
+            .edit()
+            .putInt("ActivityTheme", when (themeId) {
+                0 -> R.style.Default
+                1 -> R.style.Theme1
+                2 -> R.style.Theme2
+                3 -> R.style.Theme3
+                4 -> R.style.Theme4
+                5 -> R.style.Theme5
+                6 -> R.style.Theme6
+                7 -> R.style.Theme7
+                else -> R.style.Default
+            })
+            .apply();
     }
 
     fun setTextColor(

@@ -1,16 +1,19 @@
 package com.sutech.diary.view.theme
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.sutech.journal.diary.diarywriting.lockdiary.R
 import com.sutech.diary.model.ThemeObj
 import com.sutech.diary.util.setPreventDoubleClickItem
+import com.sutech.journal.diary.diarywriting.lockdiary.R
 import com.youth.banner.adapter.BannerAdapter
-import kotlinx.android.synthetic.main.item_theme.view.*
-import kotlinx.android.synthetic.main.toolbar_main.view.*
+import kotlinx.android.synthetic.main.item_theme.view.tvContentTheme
+import kotlinx.android.synthetic.main.item_theme.view.tvContentTheme2
+import kotlinx.android.synthetic.main.item_theme.view.tvDay
+import kotlinx.android.synthetic.main.item_theme.view.tvDay2
+import kotlinx.android.synthetic.main.item_theme.view.tvTitleTheme
+import kotlinx.android.synthetic.main.item_theme.view.tvTitleTheme2
 
 class BannerThemeAdapter(
     private val imageUrls: List<ThemeObj>,
@@ -35,15 +38,13 @@ class BannerThemeAdapter(
 
 
         fun binData(data: ThemeObj, position: Int) {
-            itemView.bgItemTheme.setBackgroundColor(Color.parseColor(data.backgroundColor))
-
-
-            itemView.tvDay.setTextColor(Color.parseColor(data.textColor))
-            itemView.tvTitleTheme.setTextColor(Color.parseColor(data.textColor))
-            itemView.tvContentTheme.setTextColor(Color.parseColor(data.textColor))
-            itemView.tvDay2.setTextColor(Color.parseColor(data.textColor))
-            itemView.tvTitleTheme2.setTextColor(Color.parseColor(data.textColor))
-            itemView.tvContentTheme2.setTextColor(Color.parseColor(data.textColor))
+            itemView.setBackgroundResource(data.imageResource)
+            itemView.tvDay.setTextColor(data.textColor)
+            itemView.tvTitleTheme.setTextColor(data.textColor)
+            itemView.tvContentTheme.setTextColor(data.textColor)
+            itemView.tvDay2.setTextColor(data.textColor)
+            itemView.tvTitleTheme2.setTextColor(data.textColor)
+            itemView.tvContentTheme2.setTextColor(data.textColor)
             itemView.setPreventDoubleClickItem {
               onClickItem(position)
             }

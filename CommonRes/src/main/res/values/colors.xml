@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="background">#FFFFFF</color>
+    <color name="onBackground">#000000</color>
+    <color name="darkTextColor">#000000</color>
+    <color name="subDarkTextColor">#80000000</color>
+    <color name="whiteTextColor">#FFFFFF</color>
+    <color name="subWhiteTextColor">#80FFFFFF</color>
+    <color name="primary">#4278FE</color>
+    <color name="confirmButtonBackground">#4355FF</color>
+    <color name="chartColor">#2484DD</color>
+    <color name="saveButtonBackground">#4992DF</color>
+    <color name="scrimColor">#33000000</color>
+    <color name="processBarColor">#4978D4</color>
+    <color name="placeholderColor">#666666</color>
+    <color name="defaultTopBarColor">#5EA9FF</color>
+    <color name="theme1TopBarColor">#002843</color>
+    <color name="theme2TopBarColor">#5C3271</color>
+    <color name="theme3TopBarColor">#330560</color>
+    <color name="theme4TopBarColor">#838588</color>
+    <color name="theme5TopBarColor">#FFC29B</color>
+    <color name="theme6TopBarColor">#FAC3A0</color>
+    <color name="theme7TopBarColor">#F9ADDA</color>
+
     <color name="colorPrimary">#FFC1DEFF</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#000000</color>
