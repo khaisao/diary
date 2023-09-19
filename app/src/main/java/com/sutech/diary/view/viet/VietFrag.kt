@@ -361,7 +361,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
                 val loc = IntArray(2) { value -> value }
                 btnAddMood?.getLocationOnScreen(loc)
                 val x = loc[0] - btnAddMood?.measuredWidth!! * 7
-                val y = loc[1]
+                val y = loc[1] - 20
                 DialogUtil.showDialogMood(cxt, x, y) { mood ->
                     moodDiary = mood
                     btnAddMood?.setImageResource(mood.imageResource)
