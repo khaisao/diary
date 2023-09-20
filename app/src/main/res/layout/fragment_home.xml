@@ -99,14 +99,14 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_menu_home" />
 
-        <com.sutech.common.text.TextViewMedium
+        <com.sutech.common.text.TextViewRegular
             android:id="@+id/tbTitleMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/space_screen_small"
             android:text="@string/app_name"
-            android:textColor="#121010"
+            android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/text_s_24"
             android:fontFamily="@font/roboto_medium"
             app:layout_constraintBottom_toBottomOf="@id/toolbarMain"
@@ -197,7 +197,7 @@
                 android:maxLines="1"
                 android:paddingHorizontal="@dimen/img_padding_large"
                 android:singleLine="true"
-                android:textColor="@color/colorTextBlack"
+                android:textColor="@color/colorTextPrimary"
                 android:textColorHint="@color/color_254466"
                 android:textSize="@dimen/text_s_16"
                 app:textColorDefault="false" />
@@ -301,7 +301,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_screen_small"
             android:text="@string/not_found_diary"
-            android:textColor="@color/colorTextBlack"
+            android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/text_s_14"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
@@ -326,7 +326,6 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:layout_gravity="start|top"
-
         android:fitsSystemWindows="true">
 
         <LinearLayout
@@ -335,9 +334,11 @@
             android:orientation="vertical">
 
             <ImageView
+                android:layout_gravity="center_horizontal"
                 android:id="@+id/iv_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_width="128dp"
+                android:layout_height="136dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/drawer_header"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -349,13 +350,12 @@
                     android:id="@+id/layout_item_drawer"
                     layout="@layout/layout_item_drawer"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
 
             </ScrollView>
 
-
         </LinearLayout>
+
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

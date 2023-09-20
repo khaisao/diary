@@ -12,12 +12,11 @@
         android:layout_height="wrap_content"
         android:text="7 Tháng 12,2017"
         android:layout_marginHorizontal="18dp"
-        android:textColor="#000000"
+        android:textColor="@color/colorTextPrimary"
         android:fontFamily="@font/roboto_medium"
         android:textSize="@dimen/text_s_16"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvContent"
@@ -28,6 +27,5 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDay"
         android:clipToPadding="true"
         android:paddingBottom="@dimen/space_screen_small"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

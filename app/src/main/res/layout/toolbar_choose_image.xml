@@ -33,7 +33,8 @@
         android:layout_toStartOf="@id/btnDone"
         android:text="@string/choose_image"
         android:textSize="@dimen/text_s_22"
-        android:textColor="@color/colorTextBlack" />
+        android:textColor="@color/colorTextPrimary"
+        />
     <com.sutech.common.IconView
         android:id="@+id/btnDone"
         android:layout_width="@dimen/img_s_normal"

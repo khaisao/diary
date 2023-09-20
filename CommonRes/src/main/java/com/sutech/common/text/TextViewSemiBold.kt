@@ -40,7 +40,7 @@ class TextViewSemiBold : TextView {
             0,
             0
         )
-        val textColorDefault = ta.getBoolean(R.styleable.text_style_textColorDefault, true)
+        val textColorDefault = ta.getBoolean(R.styleable.text_style_textColorDefault, false)
         if (textColorDefault) {
             this.setTextColor(ColorUtil.instant!!.colorText)
         }

@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutAdsDoc">
 
-        <com.sutech.common.IconView
+        <ImageView
             android:id="@+id/btnWriteBack"
             android:layout_width="32dp"
             android:layout_height="32dp"
@@ -45,7 +45,7 @@
             android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back" />
+            app:srcCompat="@drawable/ic_perv_page"  />
 
         <com.sutech.common.IconView
             android:id="@+id/btnEditReaDia"
@@ -87,7 +87,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="Create At: 11/11/2020"
-        android:textColor="@color/colorTextGrey"
+        android:textColor="@color/colorTextPrimary"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tbRead" />
@@ -111,7 +111,7 @@
                 android:layout_marginHorizontal="@dimen/space_screen_small"
                 android:layout_marginTop="@dimen/space_screen_small"
                 android:text="@string/app_name"
-                android:textColor="@color/colorTextBlack"
+                android:textColor="@color/colorTextPrimary"
                 android:textSize="@dimen/text_s_24" />
 
             <com.sutech.common.text.TextViewRegular
@@ -122,8 +122,9 @@
                 android:layout_marginTop="@dimen/space_screen_small"
                 android:minHeight="200dp"
                 android:text="Hôm nay là 1 ngày Tuyệt vòi của tôi"
-                android:textColor="@color/colorTextBlack"
-                android:textSize="@dimen/text_s_18" />
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="@dimen/text_s_18"
+                app:textColorDefault="false"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvDiaryImage"
