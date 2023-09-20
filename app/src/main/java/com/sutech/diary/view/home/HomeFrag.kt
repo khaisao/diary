@@ -127,8 +127,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
             popupView,
             ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT,
-            true
-        )
+            true)
 
         popupView.tv_latest_first.setOnClick(500) {
             logEvent("MainScr_IconArrange_Latest")
