@@ -127,7 +127,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         AppUtil.needUpdateDiary = false
         btnAddMood?.setImageResource(moodDiary.imageResource)
         logEvent("WriteDiary_Show")
-        showBanner("banner_read_nhat_ky", layoutAdsViet)
+        showAdsWithLayout("banner_viet_nhat_ky", layoutAdsViet)
         initOnBackPress()
         getDataBundle()
         setDataBundle()

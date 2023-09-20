@@ -19,6 +19,16 @@
       "id": "ca-app-pub-2094788208346877/4220915680"
     },
     {
+      "spaceName": "inter_statics",
+      "adsType": "interstitial",
+      "id": "ca-app-pub-2094788208346877/7623347950"
+    },
+    {
+      "spaceName": "inter_hashtags",
+      "adsType": "interstitial",
+      "id": "ca-app-pub-2094788208346877/8413685446"
+    },
+    {
       "spaceName": "banner_home",
       "adsType": "banner_adaptive",
       "id": "ca-app-pub-2094788208346877/4020770989"
@@ -29,14 +39,29 @@
       "id": "ca-app-pub-2094788208346877/2974486465"
     },
     {
-      "spaceName": "banner_password",
-      "adsType": "banner_adaptive",
-      "id": "ca-app-pub-2094788208346877/9943768231"
+      "spaceName": "native_password",
+      "adsType": "native",
+      "id": "ca-app-pub-2094788208346877/3352930459"
+    },
+    {
+      "spaceName": "native_statics_detail",
+      "adsType": "native",
+      "id": "ca-app-pub-2094788208346877/9533565117"
     },
     {
       "spaceName": "banner_read_nhat_ky",
       "adsType": "banner_adaptive",
       "id": "ca-app-pub-2094788208346877/7968589006"
+    },
+    {
+      "spaceName": "banner_calendar",
+      "adsType": "banner_adaptive",
+      "id": "ca-app-pub-2094788208346877/4772741769"
+    },
+    {
+      "spaceName": "open_app",
+      "adsType": "open_app",
+      "id": "ca-app-pub-2094788208346877/6077331608"
     }
   ]
 }

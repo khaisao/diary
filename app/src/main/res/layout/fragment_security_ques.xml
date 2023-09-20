@@ -101,20 +101,4 @@
         app:layout_constraintTop_toBottomOf="@id/edt_ans"
         app:textColorDefault="false" />
 
-    <LinearLayout
-        android:id="@+id/layoutAdsPassword"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <TextView
-            android:id="@+id/viewGoneAdGallery"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Loading ad..."
-            android:textColor="@color/black" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

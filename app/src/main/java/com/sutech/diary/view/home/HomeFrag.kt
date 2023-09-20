@@ -75,7 +75,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         context?.let { ctx ->
             diaryDataBase = DiaryDatabase.getInstance(ctx)
         }
-        showBanner("banner_home", layoutAdsHome)
+        showAdsWithLayout("banner_home", layoutAdsHome)
         initOnClick()
         setRcvDiary()
         setDateTime()
@@ -127,7 +127,8 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
             popupView,
             ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT,
-            true)
+            true
+        )
 
         popupView.tv_latest_first.setOnClick(500) {
             logEvent("MainScr_IconArrange_Latest")
@@ -352,7 +353,13 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
 
         ll_statistics.setOnClick(500) {
             logEvent("SettingScr_Statistics_Clicked")
-            gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_statisticsFrag)
+            showAdsInter("inter_statics", 12000, {
+                gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_statisticsFrag)
+
+            }, {
+                gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_statisticsFrag)
+
+            })
             drawer_layout.closeDrawer(GravityCompat.START)
         }
 
@@ -368,11 +375,11 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         }
 
         context?.let { ctx ->
-        if (AppUtil.isIAP||!AppUtil.isNetworkAvailable(ctx)) {
-            btnIap?.gone()
-        }else{
-            btnIap?.show()
-        }
+            if (AppUtil.isIAP || !AppUtil.isNetworkAvailable(ctx)) {
+                btnIap?.gone()
+            } else {
+                btnIap?.show()
+            }
         }
         btnIap?.setOnClickScaleView {
             logEvent("MainScr_IconIAP_Clicked")
@@ -386,6 +393,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         edtSearch?.setText("")
         rcvData.isVisible = true
     }
+
     private fun setRcvDiary() {
         context?.let {
             adapterDiary =
@@ -472,8 +480,6 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
     }
 
 
-
-
     private fun showRate() {
         logEvent("DialogEnjoy_Show")
         if (Constant.showRate && !DataStore.checkRated() && showRateToday == 1) {
@@ -489,15 +495,19 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                                 1 -> {
                                     logEvent("DialogEnjoy_1star_Clicked")
                                 }
+
                                 2 -> {
                                     logEvent("DialogEnjoy_2star_Clicked")
                                 }
+
                                 3 -> {
                                     logEvent("DialogEnjoy_3star_Clicked")
                                 }
+
                                 4 -> {
                                     logEvent("DialogEnjoy_4star_Clicked")
                                 }
+
                                 5 -> {
                                     logEvent("DialogEnjoy_5star_Clicked")
                                 }
@@ -509,7 +519,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                                 DataStore.setRated(true)
                                 logEvent("DialogEnjoy_Googleplay_Clicked")
                                 AppUtil.openMarket(it, it.packageName)
-                            }  else if (rate in 2..4) {
+                            } else if (rate in 2..4) {
                                 DataStore.setRated(true)
                                 logEvent("DialogEnjoy_Mailtous_Clicked")
                                 AppUtil.sendEmailMore(
@@ -518,7 +528,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                                     "Feedback to My Diary",
                                     ""
                                 )
-                            }else if (rate in 1..2) {
+                            } else if (rate in 1..2) {
                                 DataStore.setRated(true)
                                 logEvent("DialogEnjoy_Feedback_Clicked")
                                 AppUtil.sendEmailMore(
@@ -527,7 +537,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
                                     "Feedback to My Diary",
                                     ""
                                 )
-                            }else{
+                            } else {
                                 logEvent("DialogEnjoy_Remindlater_Clicked")
 
                             }

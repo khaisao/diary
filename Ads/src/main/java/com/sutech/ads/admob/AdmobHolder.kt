@@ -20,7 +20,7 @@ private const val TAG = "AdsController"
 
 class AdmobHolder {
     private var hashMap: HashMap<String, AdmobAds> = HashMap()
-    public fun loadAndShow(
+    fun loadAndShow(
         activity: Activity,
         isKeepAds: Boolean,
         adsChild: AdsChild,
