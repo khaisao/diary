@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="@string/there_are_no_hashtag_in_your_diary"
-            android:textColor="@color/black"
+            android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/text_s_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/btnBack"
                 android:text="@string/hashtags"
-                android:textColor="@color/colorTextTitle"
+                android:textColor="@color/colorTextPrimary"
                 android:textSize="@dimen/text_s_20" />
         </RelativeLayout>
 

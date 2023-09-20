@@ -31,7 +31,7 @@
             android:layout_marginStart="12dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/title_calendar"
-            android:textColor="@color/black"
+            android:textColor="@color/colorTextPrimary"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -79,7 +79,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/colorTextPrimary"
                         android:textSize="20sp" />
 
                     <ImageView
@@ -100,7 +100,7 @@
                         android:gravity="center"
                         android:padding="8dp"
                         android:text="@string/txt_today"
-                        android:textColor="@color/white"
+                        android:textColor="@color/colorTextPrimary"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -201,11 +201,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="18dp"
             android:fontFamily="@font/roboto_medium"
-            android:textColor="#000000"
+            android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/text_s_16"
             android:paddingTop="20dp"
             android:text="@string/app_name"
-
             app:layout_constraintStart_toStartOf="parent" />
 
         <RelativeLayout
@@ -233,7 +232,7 @@
             android:gravity="center"
             android:visibility="gone"
             android:text="@string/not_found_diary"
-            android:textColor="@color/colorTextBlack"
+            android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/text_s_14"
             android:textStyle="normal"/>
 

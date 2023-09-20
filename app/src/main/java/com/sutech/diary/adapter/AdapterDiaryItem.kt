@@ -29,7 +29,6 @@ class AdapterDiaryItem(
         return ViewHolderDiary(inflater.inflate(R.layout.item_diary, parent, false))
     }
 
-
     private lateinit var adapterContent: AdapterContent
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
