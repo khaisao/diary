@@ -219,7 +219,6 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
             ivNotFoundDiary?.gone()
             tvNotFoundDiary?.gone()
             icNotFoundDiarySad?.gone()
-            rcvData.isVisible = true
         }
     }
 

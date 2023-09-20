@@ -1,7 +1,6 @@
 package com.sutech.diary.view.password
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
