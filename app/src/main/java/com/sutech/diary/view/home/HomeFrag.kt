@@ -186,7 +186,6 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun updateDataDiary(it: MutableList<DiaryModel>) {
-        rcvData.isVisible = true
         arrDiary.clear()
         arrDiary.addAll(it)
         adapterDiary?.submitList(arrDiary)

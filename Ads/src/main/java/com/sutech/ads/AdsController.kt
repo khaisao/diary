@@ -363,11 +363,8 @@ class AdsController private constructor(
             } else {
                 showToastDebug(contextUse, "no data check priority file json")
                 adCallback?.onAdFailToLoad("no data check priority file json")
-
             }
-
         }
-
     }
 
     private fun loadAdsPriority(
