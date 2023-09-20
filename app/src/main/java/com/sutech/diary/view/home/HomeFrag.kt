@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.PopupWindow
 import androidx.activity.addCallback
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -185,6 +186,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun updateDataDiary(it: MutableList<DiaryModel>) {
+        rcvData.isVisible = true
         arrDiary.clear()
         arrDiary.addAll(it)
         adapterDiary?.submitList(arrDiary)
@@ -212,6 +214,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
             ivNotFoundDiary?.show()
             tvNotFoundDiary?.show()
             icNotFoundDiarySad?.show()
+            rcvData.isVisible = false
         } else {
             ivNotFoundDiary?.gone()
             tvNotFoundDiary?.gone()
@@ -388,6 +391,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         rlSearch?.gone()
         rlSearch?.hideKeyboard()
         edtSearch?.setText("")
+        rcvData.isVisible = true
     }
     private fun setRcvDiary() {
         context?.let {
