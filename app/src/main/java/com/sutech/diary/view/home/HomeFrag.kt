@@ -239,7 +239,6 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         }
         btnCloseSearch?.setOnClickScaleView {
             logEvent("SearchScr_IconBack_Clicked")
-            edtSearch?.setText("")
             closeSearch()
         }
 
@@ -365,7 +364,15 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
 
         ll_hash_tag.setOnClick(500) {
             logEvent("SettingScr_Hashtags_clicked")
-            gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_hashtagsFrag)
+            showAdsInter("inter_hashtags", 12000, {
+                gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_hashtagsFrag)
+
+
+            }, {
+                gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_hashtagsFrag)
+
+
+            })
             drawer_layout.closeDrawer(GravityCompat.START)
         }
 

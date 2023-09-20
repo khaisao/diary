@@ -46,8 +46,6 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
             tvPasscode.text = getString(R.string.enter_old_password)
             logEvent("EnterCuPassword_Show")
 
-
-
         } else if (isTypePassword == 0) {
             logEvent("SetpassScr_Show")
             tvPasscode.text = getString(R.string.set_password)
@@ -80,8 +78,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                 }
             }
         }
-        Log.d("asgawgawg", "getDataBundle: $isTypePassword")
-        if (isTypePassword == 3) {
+        if(isTypePassword == 3){
             logEvent("UnlockPass_Show")
         }
     }
