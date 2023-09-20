@@ -89,7 +89,7 @@ class SplashFrag : BaseFragment(R.layout.fragment_splash), SplashAppOpenListener
         context?.let { ctx ->
             diaryDataBase = DiaryDatabase.getInstance(ctx)
         }
-        ImageUtil.setImage(imgLogo, R.drawable.logo_diary)
+        ImageUtil.setImage(imgLogo, R.drawable.drawer_header)
         imgLogo?.setPreventDoubleClickItem {
             logEvent("AppStartup_IconApp_Clicked")
         }

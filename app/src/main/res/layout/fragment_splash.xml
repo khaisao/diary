@@ -15,25 +15,14 @@
 
     <ImageView
         android:id="@+id/imgLogo"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:minWidth="250dp"
         android:layout_marginTop="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <com.sutech.common.IconView
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:layout_marginTop="@dimen/space_screen_small"
-        android:src="@drawable/ic_my_diary"
-        app:layout_constraintStart_toStartOf="@id/imgLogo"
-        app:layout_constraintEnd_toEndOf="@id/imgLogo"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
 
     <com.sutech.common.text.TextViewRegular
         android:layout_width="match_parent"
