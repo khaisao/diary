@@ -5,8 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_main"
-    android:backgroundTint="@null"
+    android:background="?attr/backgroundImage"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +20,7 @@
             android:id="@+id/toolbarMain"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:background="@color/color_5EA9FF"
+            android:background="?attr/topAppBarColor"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Group
@@ -174,7 +173,7 @@
             android:id="@+id/rlSearch"
             android:layout_width="0dp"
             android:layout_height="70dp"
-            android:background="@color/color_5DA9FF"
+            android:background="?attr/topAppBarColor"
             android:clickable="true"
             android:elevation="1dp"
             android:focusable="true"
@@ -229,8 +228,6 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/bg_main"
-            android:backgroundTint="@null"
             app:layout_constraintBottom_toTopOf="@id/layoutAdsHome"
             app:layout_constraintTop_toBottomOf="@+id/bgFilter">
 

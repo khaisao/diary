@@ -8,14 +8,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_c1deff"
+        android:background="?attr/backgroundImage"
         android:paddingBottom="@dimen/margin_24">
 
         <RelativeLayout
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_toolbar"
+            android:background="?attr/topAppBarColor"
             android:paddingVertical="@dimen/margin_16"
             android:paddingStart="@dimen/margin_16"
             android:paddingEnd="0dp"

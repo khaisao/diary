@@ -1,23 +1,24 @@
 package com.sutech.diary.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.sutech.ads.AdsController
 import com.sutech.ads.utils.Constant
+import com.sutech.diary.util.Constant.isOpening
 import com.sutech.journal.diary.diarywriting.lockdiary.BuildConfig
 import com.sutech.journal.diary.diarywriting.lockdiary.R
-import com.sutech.diary.database.DataStore
-import com.sutech.diary.util.AppUtil.checkInter
-import com.sutech.diary.util.Constant.isOpening
 
 
 class MainActivity : AppCompatActivity() {
     var fistOpen = false
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+        val theme = PreferenceManager.getDefaultSharedPreferences(this).getInt("ActivityTheme", R.style.Default)
+        // Set this Activity's theme to the saved theme
+        // Set this Activity's theme to the saved theme
+        setTheme(theme)
         super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_main)
         Constant.isShowToastDebug= BuildConfig.DEBUG

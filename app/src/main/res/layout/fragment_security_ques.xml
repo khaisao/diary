@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_c1deff">
+    android:background="?attr/backgroundImage">
 
     <ImageView
         android:id="@+id/tvCancel"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:text="@string/security_question"
-        android:textColor="@color/black"
+        android:textColor="?attr/textColor"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/security_question_des"
-        android:textColor="@color/color_333333"
+        android:textColor="?attr/subtitleTextColor"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

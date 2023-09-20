@@ -1,5 +1,6 @@
 package com.sutech.diary.view.theme
 
+import androidx.core.content.res.ResourcesCompat
 import com.test.dialognew.setPreventDoubleClick
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import com.sutech.diary.base.AppController
@@ -15,116 +16,29 @@ fun ChooseThemeFrag.initOnClick() {
     }
     btnSaveTheme?.setPreventDoubleClick(500){
         vpChooseTheme?.let {
-            context?.let {
-                    ctx->
+            context?.let { ctx ->
                 val currentPosition = it.currentItem
-                AppController.getInstance().setThemeApp(currentPosition-1)
-                DataStore.saveTheme(currentPosition-1)
-                onBackPress(R.id.themeFrag)
+                AppController.getInstance().setThemeApp(currentPosition - 1, requireContext())
+                DataStore.saveTheme(currentPosition - 1)
+                val intent = this.activity?.intent
+                this.activity?.finish()
+                startActivity(intent)
             }
         }
     }
 }
+
 fun ChooseThemeFrag.initSlider() {
-    listTheme.add(
-        ThemeObj(
-            textColor = "#000000",
-            colorSelected = "#000000",
-            colorEditTex = "#252525",
-            colorTextSecond = "#000000",
-            backgroundColor = "#F2F2F2",
-            iconColor = "#252525"
-        )
-    )
-
-    listTheme.add(
-        ThemeObj(
-            textColor = "#F2F2F2",
-            colorSelected = "#febd00",
-            colorEditTex = "#F2F2F2",
-            colorTextSecond = "#163DFF",
-            backgroundColor = "#000000",
-            iconColor = "#F2F2F2"
-        )
-    )
-
-
-    listTheme.add(
-        ThemeObj(
-            textColor = "#F2F2F2",
-            colorSelected = "#febd00",
-            colorEditTex = "#F2F2F2",
-            colorTextSecond = "#163DFF",
-            backgroundColor = "#304FFE",
-            iconColor = "#000000"
-        )
-    )
-
-    listTheme.add(
-        ThemeObj(
-            textColor = "#F2F2F2",
-            colorSelected = "#febd00",
-            colorEditTex = "#F2F2F2",
-            colorTextSecond = "#163DFF",
-            backgroundColor = "#D50000",
-            iconColor = "#febd00"
-        )
-    )
-
-    listTheme.add(
-        ThemeObj(
-            textColor = "#F2F2F2",
-            colorSelected = "#febd00",
-            colorEditTex = "#F2F2F2",
-            colorTextSecond = "#163DFF",
-            backgroundColor = "#00C853",
-            iconColor = "#febd00"
-        )
-    )
-
-    listTheme.add(
-        ThemeObj(
-            textColor = "#F2F2F2",
-            colorSelected = "#febd00",
-            colorEditTex = "#F2F2F2",
-            colorTextSecond = "#163DFF",
-            backgroundColor = "#AA00FF",
-            iconColor = "#000000"
-        )
-    )
-
-    listTheme.add(
-        ThemeObj(
-            textColor = "#000000",
-            colorSelected = "#febd00",
-            colorEditTex = "#F2F2F2",
-            colorTextSecond = "#163DFF",
-            backgroundColor = "#FFAB00",
-            iconColor = "#000000"
-        )
-    )
-
-    listTheme.add(
-        ThemeObj(
-            textColor = "#000000",
-            colorSelected = "#febd00",
-            colorEditTex = "#F2F2F2",
-            colorTextSecond = "#163DFF",
-            backgroundColor = "#FF6D00",
-            iconColor = "#000000"
-        )
-    )
-
-    listTheme.add(
-        ThemeObj(
-            textColor = "#000000",
-            colorSelected = "#febd00",
-            colorEditTex = "#000000",
-            colorTextSecond = "#163DFF",
-            backgroundColor = "#F67FB5",
-            iconColor = "#F2F2F2"
-        )
-    )
+    listTheme.addAll(listOf(
+        ThemeObj(textColor = ResourcesCompat.getColor(this.resources, R.color.darkTextColor, null), imageResource = R.drawable.default_background),
+        ThemeObj(textColor = ResourcesCompat.getColor(this.resources, R.color.whiteTextColor, null), imageResource = R.drawable.theme_1_background),
+        ThemeObj(textColor = ResourcesCompat.getColor(this.resources, R.color.whiteTextColor, null), imageResource = R.drawable.theme_2_background),
+        ThemeObj(textColor = ResourcesCompat.getColor(this.resources, R.color.whiteTextColor, null), imageResource = R.drawable.theme_3_background),
+        ThemeObj(textColor = ResourcesCompat.getColor(this.resources, R.color.darkTextColor, null), imageResource = R.drawable.theme_4_background),
+        ThemeObj(textColor = ResourcesCompat.getColor(this.resources, R.color.darkTextColor, null), imageResource = R.drawable.theme_5_background),
+        ThemeObj(textColor = ResourcesCompat.getColor(this.resources, R.color.darkTextColor, null), imageResource = R.drawable.theme_6_background),
+        ThemeObj(textColor = ResourcesCompat.getColor(this.resources, R.color.darkTextColor, null), imageResource = R.drawable.theme_7_background),
+    ))
 
     vpChooseTheme?.let {
 

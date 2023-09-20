@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Default" parent="Theme.AppCompat.NoActionBar">
+        <item name="textColor">@color/darkTextColor</item>
+        <item name="subtitleTextColor">@color/subDarkTextColor</item>
+        <item name="topAppBarColor">@color/defaultTopBarColor</item>
+        <item name="android:statusBarColor">@color/defaultTopBarColor</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="backgroundImage">@drawable/default_background</item>
+    </style>
+
+    <style name="Theme1" parent="Theme.AppCompat.NoActionBar">
+        <item name="textColor">@color/whiteTextColor</item>
+        <item name="subtitleTextColor">@color/subWhiteTextColor</item>
+        <item name="topAppBarColor">@color/theme1TopBarColor</item>
+        <item name="android:statusBarColor">@color/theme1TopBarColor</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="backgroundImage">@drawable/theme_1_background</item>
+    </style>
+
+    <style name="Theme2" parent="Theme.AppCompat.NoActionBar">
+        <item name="textColor">@color/whiteTextColor</item>
+        <item name="subtitleTextColor">@color/subWhiteTextColor</item>
+        <item name="topAppBarColor">@color/theme2TopBarColor</item>
+        <item name="android:statusBarColor">@color/theme2TopBarColor</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="backgroundImage">@drawable/theme_2_background</item>
+    </style>
+
+    <style name="Theme3" parent="Theme.AppCompat.NoActionBar">
+        <item name="textColor">@color/whiteTextColor</item>
+        <item name="subtitleTextColor">@color/subWhiteTextColor</item>
+        <item name="topAppBarColor">@color/theme3TopBarColor</item>
+        <item name="android:statusBarColor">@color/theme3TopBarColor</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="backgroundImage">@drawable/theme_3_background</item>
+    </style>
+
+    <style name="Theme4" parent="Theme.AppCompat.NoActionBar">
+        <item name="textColor">@color/darkTextColor</item>
+        <item name="subtitleTextColor">@color/subDarkTextColor</item>
+        <item name="topAppBarColor">@color/theme4TopBarColor</item>
+        <item name="android:statusBarColor">@color/theme4TopBarColor</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="backgroundImage">@drawable/theme_4_background</item>
+    </style>
+
+    <style name="Theme5" parent="Theme.AppCompat.NoActionBar">
+        <item name="textColor">@color/darkTextColor</item>
+        <item name="subtitleTextColor">@color/subDarkTextColor</item>
+        <item name="topAppBarColor">@color/theme5TopBarColor</item>
+        <item name="android:statusBarColor">@color/theme5TopBarColor</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="backgroundImage">@drawable/theme_5_background</item>
+    </style>
+
+    <style name="Theme6" parent="Theme.AppCompat.NoActionBar">
+        <item name="textColor">@color/darkTextColor</item>
+        <item name="subtitleTextColor">@color/subDarkTextColor</item>
+        <item name="topAppBarColor">@color/theme6TopBarColor</item>
+        <item name="android:statusBarColor">@color/theme6TopBarColor</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="backgroundImage">@drawable/theme_6_background</item>
+    </style>
+
+    <style name="Theme7" parent="Theme.AppCompat.NoActionBar">
+        <item name="textColor">@color/darkTextColor</item>
+        <item name="subtitleTextColor">@color/subDarkTextColor</item>
+        <item name="topAppBarColor">@color/theme7TopBarColor</item>
+        <item name="android:statusBarColor">@color/theme7TopBarColor</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="backgroundImage">@drawable/theme_7_background</item>
+    </style>
+</resources>
