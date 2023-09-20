@@ -146,7 +146,7 @@ abstract class BaseFragment(val layout: Int) : Fragment() {
 
     }
 
-    fun showBanner(
+    fun showAdsWithLayout(
         spaceName: String,
         viewGroup: ViewGroup
     ) {

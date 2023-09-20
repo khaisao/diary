@@ -41,7 +41,7 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
             backReader()
         }
         logEvent("ViewDiary_Show")
-        showBanner("banner_viet_nhat_ky", layoutAdsDoc)
+        showAdsWithLayout("banner_read_nhat_ky", layoutAdsDoc)
         setOnClickView()
         getDataBundle()
         setRcvDiary()

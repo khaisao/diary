@@ -23,10 +23,10 @@ import com.sutech.diary.util.MoodFilter
 import com.sutech.diary.util.MoodUtil
 import com.sutech.diary.util.setOnClick
 import com.sutech.journal.diary.diarywriting.lockdiary.R
-import kotlinx.android.synthetic.main.fragment_statistics.ads
 import kotlinx.android.synthetic.main.fragment_statistics.btnBack
 import kotlinx.android.synthetic.main.fragment_statistics.btnFilter
 import kotlinx.android.synthetic.main.fragment_statistics.chart
+import kotlinx.android.synthetic.main.fragment_statistics.layoutAdsStatics
 import kotlinx.android.synthetic.main.fragment_statistics.statistic_filter_text
 import kotlinx.android.synthetic.main.fragment_statistics.trendRV
 import kotlinx.coroutines.async
@@ -38,7 +38,7 @@ class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
     private val filter: MutableStateFlow<MoodFilter> = MutableStateFlow(MoodFilter.ALL)
 
     override fun initView() {
-        showBanner("banner_statistic", ads)
+        showAdsWithLayout("native_statics_detail", layoutAdsStatics)
         logEvent("StatisticsDiary_Show")
         setupView()
         handleEvent()

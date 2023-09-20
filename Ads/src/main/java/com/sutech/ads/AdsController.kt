@@ -250,7 +250,7 @@ class AdsController private constructor(
     }
 
 
-    public fun show(
+    fun show(
         spaceName: String,
         reloadLoadSpaceName: String? = null,
         textLoading: String? = null,
