@@ -1,11 +1,12 @@
 package com.sutech.diary.view.statictics
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.view.MenuItem
-import android.view.View
-import androidx.annotation.MenuRes
-import androidx.appcompat.widget.PopupMenu
+import android.view.LayoutInflater
+import android.widget.PopupWindow
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -36,6 +37,7 @@ import kotlinx.coroutines.launch
 
 class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
     private val filter: MutableStateFlow<MoodFilter> = MutableStateFlow(MoodFilter.ALL)
+    private lateinit var myPopupWindow: PopupWindow
 
     override fun initView() {
         showBanner("banner_statistic", ads)
@@ -50,19 +52,55 @@ class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
             onBackToHome(R.id.statisticsFrag)
         }
         btnFilter.setOnClick(500) {
-            showMenu(it, R.menu.menu_item_mood_filter)
+            myPopupWindow.showAsDropDown(it, 20, 0);
         }
     }
 
     private fun setupView() {
         setupRV()
         setupChart()
+        setupPopup()
         lifecycleScope.launch {
             filter.collect { filter ->
                 statistic_filter_text.text = resources.getString(filter.stringRes)
                 setData()
             }
         }
+    }
+
+    private fun setupPopup() {
+        val view = (requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.item_popup, null)
+
+        view.findViewById<TextView>(R.id.last_7_days).setOnClick(500) {
+            lifecycleScope.launch {
+                logEvent("StatisticsDiary_7day_Clicked")
+                filter.emit(MoodFilter.SEVEN_DAY)
+                myPopupWindow.dismiss()
+            }
+        }
+        view.findViewById<TextView>(R.id.last_30_days).setOnClick(500) {
+            lifecycleScope.launch {
+                logEvent("StatisticsDiary_30day_Clicked")
+                filter.emit(MoodFilter.THIRTY_DAY)
+                myPopupWindow.dismiss()
+            }
+        }
+        view.findViewById<TextView>(R.id.last_90_days).setOnClick(500) {
+            lifecycleScope.launch {
+                logEvent("StatisticsDiary_90day_Clicked")
+                filter.emit(MoodFilter.NINETY_DAY)
+                myPopupWindow.dismiss()
+            }
+        }
+        view.findViewById<TextView>(R.id.all).setOnClick(500) {
+            lifecycleScope.launch {
+                logEvent("StatisticsDiary_All_Clicked")
+                filter.emit(MoodFilter.ALL)
+                myPopupWindow.dismiss()
+            }
+        }
+
+        myPopupWindow = PopupWindow(view, 300, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
     }
 
     private fun setupChart() {
@@ -118,39 +156,9 @@ class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
     private fun setupRV() {
         val spanCount = 2
         trendRV.adapter = AdapterTrend().also {
-            it.submitList(MoodUtil.moods)
+            it.submitList(listOf(MoodUtil.moods[1], MoodUtil.moods[8], MoodUtil.moods[0], MoodUtil.moods[9], MoodUtil.moods[2], MoodUtil.moods[6], MoodUtil.moods[4], MoodUtil.moods[5], MoodUtil.moods[3], MoodUtil.moods[7]))
         }
         trendRV.addItemDecoration(GridSpacingItemDecoration(spanCount, 50, false))
         trendRV.layoutManager = GridLayoutManager(requireContext(), spanCount)
-    }
-
-    private fun showMenu(v: View, @MenuRes menuRes: Int) {
-        val popup = PopupMenu(requireContext(), v)
-        popup.menuInflater.inflate(menuRes, popup.menu)
-        popup.setOnMenuItemClickListener { menuItem: MenuItem ->
-            lifecycleScope.launch {
-                when (menuItem.itemId) {
-                    R.id.all -> {
-                        logEvent("StatisticsDiary_All_Clicked")
-                        filter.emit(MoodFilter.ALL)
-                    }
-                    R.id.seven_day -> {
-                        logEvent("StatisticsDiary_7day_Clicked")
-                        filter.emit(MoodFilter.SEVEN_DAY)
-                    }
-                    R.id.thirty_day -> {
-                        logEvent("StatisticsDiary_30day_Clicked")
-                        filter.emit(MoodFilter.THIRTY_DAY)
-                    }
-                    R.id.ninety_day -> {
-                        logEvent("StatisticsDiary_90day_Clicked")
-                        filter.emit(MoodFilter.NINETY_DAY)
-                    }
-                }
-            }
-            popup.dismiss()
-            true
-        }
-        popup.show()
     }
 }
