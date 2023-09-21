@@ -205,6 +205,10 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
 
             diaryModel = Gson().fromJson(stringArrDiary, DiaryModel::class.java)
             contentModel = diaryModel?.listContent?.get(positionContent)
+            contentModel?.let {
+                moodDiary = it.mood
+                btnAddMood.setImageResource(it.mood.imageResource)
+            }
             isUpdate = true
         } else {
             isUpdate = false
