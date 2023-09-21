@@ -63,13 +63,11 @@ private const val TAG = "VietFrag"
 
 class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnDateItemListener,
     InputHashtagView.HashtagInputViewListener {
-
     private var IS_CHOOSE = 0
     private var isOnClick = false
     private var isOnClickUpdateDate = false
     private val arrImage: ArrayList<ImageObj> = ArrayList()
     private lateinit var adapterImage: AdapterImageContent
-    private var selectDate = Calendar.getInstance()
     private lateinit var adapterHashtag: AdapterInputHashtag
     private var diaryModel: DiaryModel? = null
     private var positionContent: Int = -1
@@ -81,10 +79,12 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
     private var moodDiary = MoodUtil.getMoodByName(MoodUtil.Mood.SMILING.name)
     private var arrDelete: ArrayList<String> = ArrayList()
     private lateinit var dirayDataBase: DiaryDatabase
-    private var currentDate: Calendar = Calendar.getInstance()
-    private var isClick = false
+    private var day = 0
+    private var month = 0
+    private var year = 0
 
     companion object {
+        var currentDate: Calendar = Calendar.getInstance()
         var addNewsSlectedDate: LocalDate = LocalDate.now()
     }
 
@@ -120,6 +120,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
     }
 
     override fun initView() {
+        currentDate = Calendar.getInstance()
         context?.let { ctx ->
             dirayDataBase = DiaryDatabase.getInstance(ctx)
         }
@@ -158,12 +159,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
                         )
                     }
                     context?.let { ctx ->
-//                    AdsUtil.loadInterstitialAndShow(
-//                        ctx,
-//                        getString(R.string.interstitial_save_diary),
-//                        12000
-//                    ) {
-//                        Log.e(TAG, "loadInterstitialAndShow: $it")
                         CoroutineScope(Dispatchers.IO).launch {
                             moveImageToInternal()
                             removeFileInternal()
@@ -174,7 +169,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
                                 updateDiary()
                             }
                         }
-//                    }
 
                     }
                 }
@@ -331,8 +325,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         btnSaveDiary?.setOnClickScaleView(2000) {
             logEvent("WriteDiary_IconOK_Clicked")
             if (invalidateContent()) {
-                date =
-                    SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(currentDate.time)
+                date = SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(currentDate.time)
                 dateTime = SimpleDateFormat(
                     Constant.FormatdayEEDDMMYY,
                     Locale.US
@@ -370,6 +363,9 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
 
     private fun showCalendar(context: Context) {
         addNewsSlectedDate = LocalDate.now()
+        day = currentDate.get(Calendar.DAY_OF_MONTH)
+        month = currentDate.get(Calendar.MONTH)
+        year = currentDate.get(Calendar.YEAR)
         val customDialog = Dialog(context)
         customDialog.setContentView(R.layout.calendar_layout)
         customDialog.setCanceledOnTouchOutside(true)
@@ -395,26 +391,25 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         }
         btnToday.setOnClick(500) {
             logEvent("WriteDairy_Calender_Today_Clicked")
-            selectDate = Calendar.getInstance()
+            day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+            month = Calendar.getInstance().get(Calendar.MONTH)
+            year = Calendar.getInstance().get(Calendar.YEAR)
             addNewsSlectedDate = LocalDate.now()
             setMonthView(rcvCalendar, tvCurrentTime)
-            calendarAdapter?.updatePosition(Common.daysInMonthArray(addNewsSlectedDate).indexOf(addNewsSlectedDate.dayOfMonth.toString()))
-            isClick = true
+            calendarAdapter?.updatePosition(
+                Common.daysInMonthArray(addNewsSlectedDate)
+                    .indexOf(addNewsSlectedDate.dayOfMonth.toString())
+            )
         }
-
-        btnOK.setOnClick(500) {
+        btnOK.setOnClickListener {
             logEvent("WriteDairy_Calender_IconOk_Clicked")
-            if (isClick) {
-                isOnClickUpdateDate = true
-                currentDate = selectDate
-                isClick = false
-                tvDateTime.text = SimpleDateFormat(Constant.FormatdayDDMMMMYY, Locale.US).format(currentDate.time)
-            }
+            isOnClickUpdateDate = true
+                currentDate.set(Calendar.YEAR, year)
+                currentDate.set(Calendar.MONTH, month)
+                currentDate.set(Calendar.DAY_OF_MONTH, day)
+                tvDateTime.text =
+                    SimpleDateFormat(Constant.FormatdayDDMMMMYY, Locale.US).format(currentDate.time)
             customDialog.dismiss()
-        }
-
-        customDialog.setOnCancelListener {
-            isClick = false
         }
         customDialog.show()
     }
@@ -530,9 +525,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         contentModel?.listHashtag = getAllHashtagInput()
         contentModel?.dateTimeUpdate =
             SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(Date())
-        Log.d("stjtjrjtsr", "updateDiary: ")
         if (isOnClickUpdateDate) {
-            Log.d("stjtjrjtsr", "isOnClickUpdateDate: ")
             contentModel?.dateTimeCreate = dateTime
             var diarySearch = dirayDataBase.getDiaryDao().getDiaryByDateTime(date)
             var addToDay = true
@@ -564,7 +557,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         }
 
         if (diaryModel!!.listContent!!.isNotEmpty()) {
-            Log.d("stjtjrjtsr", "diaryModel!!.listContent!!.isNotEmpty(): ")
             dirayDataBase.getDiaryDao().updateDiary(diaryModel!!).let {
                 withContext(Dispatchers.Main) {
                     context?.let {
@@ -661,10 +653,9 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
     override fun onDateItemClick(position: Int, dayText: String?) {
         calendarAdapter?.updatePosition(position)
         if (dayText?.isNotEmpty() == true) {
-            isClick = true
-            selectDate.set(Calendar.YEAR, addNewsSlectedDate.year)
-            selectDate.set(Calendar.MONTH, addNewsSlectedDate.monthValue - 1)
-            selectDate.set(Calendar.DAY_OF_MONTH, dayText.toInt())
+            day = dayText.toInt()
+            month = addNewsSlectedDate.monthValue - 1
+            year = addNewsSlectedDate.year
         }
     }
 

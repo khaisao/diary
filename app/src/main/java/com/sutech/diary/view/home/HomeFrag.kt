@@ -353,10 +353,8 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
             logEvent("SettingScr_Statistics_Clicked")
             showAdsInter("inter_statics", 12000, {
                 gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_statisticsFrag)
-
             }, {
                 gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_statisticsFrag)
-
             })
             drawer_layout.closeDrawer(GravityCompat.START)
         }
@@ -365,12 +363,8 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
             logEvent("SettingScr_Hashtags_clicked")
             showAdsInter("inter_hashtags", 12000, {
                 gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_hashtagsFrag)
-
-
             }, {
                 gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_hashtagsFrag)
-
-
             })
             drawer_layout.closeDrawer(GravityCompat.START)
         }

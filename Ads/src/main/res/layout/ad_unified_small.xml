@@ -30,7 +30,7 @@
                     android:id="@+id/ad_media"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="250dp"
-                    android:layout_height="80dp"
+                    android:layout_height="70dp"
                     android:layout_marginTop="5dp" />
                 <LinearLayout
                     android:visibility="gone"
@@ -125,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:orientation="horizontal"
-                       >
+                        >
 
                         <TextView
                             android:id="@+id/ad_price"
@@ -139,6 +139,7 @@
                             android:id="@+id/ad_store"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingStart="5dp"
                             android:visibility="gone"
                             android:paddingEnd="5dp"
                             android:textSize="12sp" />
