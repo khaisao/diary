@@ -267,7 +267,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         SimpleDateFormat(Constant.FormatdayEEDDMMYY, Locale.US).format(currentDate.time)
 
     private fun initOnClick() {
-
         btnWriteBack?.setOnClickScaleView(500) {
             confirmBack()
         }
