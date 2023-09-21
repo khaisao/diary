@@ -212,9 +212,12 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
     }
 
     private fun setDataBundle() {
+        tvDateTime.text =
+            SimpleDateFormat(Constant.FormatdayDDMMMMYY, Locale.US).format(currentDate.time)
         if (contentModel != null) {
             edtTitle?.setText(contentModel?.title)
             edtContent?.setText(contentModel?.content)
+            tvDateTime.text = contentModel!!.dateTimeCreate
             contentModel?.images?.let {
                 arrImage.clear()
                 arrImage.addAll(it)
@@ -260,8 +263,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         SimpleDateFormat(Constant.FormatdayEEDDMMYY, Locale.US).format(currentDate.time)
 
     private fun initOnClick() {
-        tvDateTime.text =
-            SimpleDateFormat(Constant.FormatdayDDMMMMYY, Locale.US).format(currentDate.time)
 
         btnWriteBack?.setOnClickScaleView(500) {
             confirmBack()
@@ -327,31 +328,25 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         btnSaveDiary?.setOnClickScaleView(2000) {
             logEvent("WriteDiary_IconOK_Clicked")
             if (invalidateContent()) {
-
                 date =
                     SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(currentDate.time)
                 dateTime = SimpleDateFormat(
                     Constant.FormatdayEEDDMMYY,
                     Locale.US
                 ).format(currentDate.time)
-                context?.let {
-                    DialogUtil.showDialogLoading(
-                        it,
-                        getString(R.string.save_diary_load)
-                    )
-                }
-                context?.let {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        moveImageToInternal()
-                        removeFileInternal()
-                        DialogUtil.cancelDialogLoading()
-                        if (!isUpdate) {
-                            insertNewDiary()
-                        } else {
-                            updateDiary()
-                        }
+                DialogUtil.showDialogLoading(
+                    requireContext(),
+                    getString(R.string.save_diary_load)
+                )
+                CoroutineScope(Dispatchers.IO).launch {
+                    moveImageToInternal()
+                    removeFileInternal()
+                    DialogUtil.cancelDialogLoading()
+                    if (!isUpdate) {
+                        insertNewDiary()
+                    } else {
+                        updateDiary()
                     }
-
                 }
             }
         }
@@ -446,84 +441,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         setMonthView(rcvCalendar, tvCurrentTime)
     }
 
-    private suspend fun updateDiary() {
-        contentModel?.title = titleDiary
-        contentModel?.content = contentDiary
-        contentModel?.images = arrImage
-        contentModel?.dateTimeUpdate =
-            SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(Date())
-
-        if (isOnClickUpdateDate) {
-            contentModel?.dateTimeCreate = dateTime
-            var diarySearch = dirayDataBase.getDiaryDao().getDiaryByDateTime(date)
-            var addToDay = true
-            if (diarySearch == null) {
-                diarySearch = DiaryModel(dateTime = date)
-                addToDay = false
-            }
-
-            if (diarySearch.listContent == null) {
-                diarySearch.listContent = ArrayList()
-            }
-
-            diarySearch.listContent?.add(0, contentModel!!)
-
-            if (addToDay) {
-                dirayDataBase.getDiaryDao().updateDiary(diarySearch).let {
-                    withContext(Dispatchers.Main) {
-                    }
-                }
-            } else {
-                dirayDataBase.getDiaryDao().insertDiary(diarySearch).let {
-                    withContext(Dispatchers.Main) {
-                    }
-                }
-            }
-            diaryModel?.listContent?.removeAt(positionContent)
-        } else {
-            diaryModel?.listContent?.set(positionContent, contentModel!!)
-        }
-
-
-        if (diaryModel!!.listContent!!.isNotEmpty()) {
-            dirayDataBase.getDiaryDao().updateDiary(diaryModel!!).let {
-                withContext(Dispatchers.Main) {
-                    context?.let {
-                        AppUtil.showToast(it, R.string.update_diary_successful)
-                        if (Constant.showRateToday == 0) {
-                            Constant.showRateToday = 1
-                            onBackToHome(R.id.writeFrag)
-                        } else {
-                            showAdsInter("save_diary", 12000, {
-                                onBackToHome(R.id.writeFrag)
-                            }, {
-                                onBackToHome(R.id.writeFrag)
-                            })
-                        }
-                    }
-                }
-            }
-        } else {
-            dirayDataBase.getDiaryDao().deleteDiary(diaryModel!!.id).let {
-                withContext(Dispatchers.Main) {
-                    context?.let {
-                        AppUtil.showToast(it, R.string.update_diary_successful)
-                        if (Constant.showRateToday == 0) {
-                            Constant.showRateToday = 1
-                            onBackToHome(R.id.writeFrag)
-                        } else {
-                            showAdsInter("save_diary", 12000, {
-                                onBackToHome(R.id.writeFrag)
-                            }, {
-                                onBackToHome(R.id.writeFrag)
-                            })
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     private fun getAllHashtagInput(): MutableList<String> {
         val listHashtagInput = mutableListOf<String>()
         for (i in 0 until view_input_hashtag.childCount) {
@@ -586,6 +503,85 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
                     context?.let {
                         AppUtil.needUpdateDiary = true
                         AppUtil.showToast(it, R.string.create_diary_successful)
+                        if (Constant.showRateToday == 0) {
+                            Constant.showRateToday = 1
+                            onBackToHome(R.id.writeFrag)
+                        } else {
+                            showAdsInter("save_diary", 12000, {
+                                onBackToHome(R.id.writeFrag)
+                            }, {
+                                onBackToHome(R.id.writeFrag)
+                            })
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private suspend fun updateDiary() {
+        contentModel?.title = titleDiary
+        contentModel?.content = contentDiary
+        contentModel?.images = arrImage
+        contentModel?.dateTimeUpdate =
+            SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(Date())
+        Log.d("stjtjrjtsr", "updateDiary: ")
+        if (isOnClickUpdateDate) {
+            Log.d("stjtjrjtsr", "isOnClickUpdateDate: ")
+            contentModel?.dateTimeCreate = dateTime
+            var diarySearch = dirayDataBase.getDiaryDao().getDiaryByDateTime(date)
+            var addToDay = true
+            if (diarySearch == null) {
+                diarySearch = DiaryModel(dateTime = date)
+                addToDay = false
+            }
+
+            if (diarySearch.listContent == null) {
+                diarySearch.listContent = ArrayList()
+            }
+
+            diarySearch.listContent?.add(0, contentModel!!)
+
+            if (addToDay) {
+                dirayDataBase.getDiaryDao().updateDiary(diarySearch).let {
+                    withContext(Dispatchers.Main) {
+                    }
+                }
+            } else {
+                dirayDataBase.getDiaryDao().insertDiary(diarySearch).let {
+                    withContext(Dispatchers.Main) {
+                    }
+                }
+            }
+            diaryModel?.listContent?.removeAt(positionContent)
+        } else {
+            diaryModel?.listContent?.set(positionContent, contentModel!!)
+        }
+
+        if (diaryModel!!.listContent!!.isNotEmpty()) {
+            Log.d("stjtjrjtsr", "diaryModel!!.listContent!!.isNotEmpty(): ")
+            dirayDataBase.getDiaryDao().updateDiary(diaryModel!!).let {
+                withContext(Dispatchers.Main) {
+                    context?.let {
+                        AppUtil.showToast(it, R.string.update_diary_successful)
+                        if (Constant.showRateToday == 0) {
+                            Constant.showRateToday = 1
+                            onBackToHome(R.id.writeFrag)
+                        } else {
+                            showAdsInter("save_diary", 12000, {
+                                onBackToHome(R.id.writeFrag)
+                            }, {
+                                onBackToHome(R.id.writeFrag)
+                            })
+                        }
+                    }
+                }
+            }
+        } else {
+            dirayDataBase.getDiaryDao().deleteDiary(diaryModel!!.id).let {
+                withContext(Dispatchers.Main) {
+                    context?.let {
+                        AppUtil.showToast(it, R.string.update_diary_successful)
                         if (Constant.showRateToday == 0) {
                             Constant.showRateToday = 1
                             onBackToHome(R.id.writeFrag)

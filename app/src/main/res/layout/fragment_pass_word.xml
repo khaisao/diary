@@ -30,7 +30,7 @@
         android:gravity="center"
         android:text="@string/enter_pass_word"
         android:textColor="@color/colorTextPrimary"
-        android:textSize="@dimen/text_s_24"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -275,12 +275,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_btn_input">
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_forgot_password"
-            app:tint="@color/colorTextPrimary" />
-
         <com.sutech.common.text.TextViewRegular
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -288,6 +282,7 @@
             android:text="@string/forgot_password"
             android:textColor="@color/colorTextPrimary"
             android:textSize="18sp" />
+
     </LinearLayout>
 
     <ImageView

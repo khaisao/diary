@@ -18,13 +18,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.sutech.common.text.TextViewLight
+    <com.sutech.common.text.TextViewRegular
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:text="@string/security_question"
-        android:textColor="?attr/textColor"
+        android:textColor="@color/colorTextPrimary"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/security_question_des"
-        android:textColor="?attr/subtitleTextColor"
+        android:textColor="@color/colorTextPrimary"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

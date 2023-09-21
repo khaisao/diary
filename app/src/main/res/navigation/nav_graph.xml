@@ -109,11 +109,14 @@
         android:name="com.sutech.diary.view.password.SecurityQuesFrag"
         android:label="SecurityQuesFrag" >
         <action
+            android:id="@+id/action_securityQuesFrag_self"
+            app:destination="@id/securityQuesFrag" />
+        <action
             android:id="@+id/action_securityQuesFrag_to_passWordFrag"
             app:destination="@id/passWordFrag" />
         <action
-            android:id="@+id/action_securityQuesFrag_self"
-            app:destination="@id/securityQuesFrag" />
+            android:id="@+id/action_securityQuesFrag_to_mainFrag"
+            app:destination="@id/mainFrag" />
     </fragment>
     <fragment
         android:id="@+id/calendarFlag"
