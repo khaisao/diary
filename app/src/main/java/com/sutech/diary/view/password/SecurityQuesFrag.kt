@@ -27,6 +27,7 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
     }
 
     private var typeSecurityScreen = 0
+    private var isComeFromChangePassword = false
 
     override fun initView() {
         logEvent("SecurityQuestion_Show")
@@ -66,6 +67,12 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
         } else {
             Glide.with(requireContext()).load(R.drawable.ic_back).into(tvCancel)
             edt_ques.setText(DataStore.getQues())
+            edt_ques.apply {
+                isFocusable = false
+                isEnabled = false
+                isCursorVisible = false
+                keyListener = null
+            }
             tv_ques_des.text = getString(R.string.enter_a_security_question)
         }
     }
@@ -75,6 +82,7 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
         if (bundle != null) {
             val type = bundle.getInt(Constant.TYPE_SECURITY, 0)
             typeSecurityScreen = type
+            isComeFromChangePassword = bundle.getBoolean(Constant.GO_TO_SECURITY_FROM_CHANGE_PASSWORD, false)
         }
     }
 
@@ -101,7 +109,7 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
                     bundle.putBoolean(Constant.COME_FROM_SECURITY, true)
                     gotoFrag(
                         R.id.securityQuesFrag,
-                        R.id.action_securityQuesFrag_to_passWordFrag,
+                        R.id.action_securityQuesFrag_to_mainFrag,
                         bundle
                     )
                 }
@@ -110,11 +118,20 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
                     val bundle = Bundle()
                     bundle.putInt(Constant.TYPE_PASSWORD, 0)
                     bundle.putBoolean(Constant.COME_FROM_SECURITY, true)
-                    gotoFrag(
-                        R.id.securityQuesFrag,
-                        R.id.action_securityQuesFrag_to_passWordFrag,
-                        bundle
-                    )
+                    if (isComeFromChangePassword) {
+                        gotoFrag(
+                            R.id.securityQuesFrag,
+                            R.id.action_securityQuesFrag_to_passWordFrag,
+                            bundle
+                        )
+                    } else {
+                        gotoFrag(
+                            R.id.securityQuesFrag,
+                            R.id.action_securityQuesFrag_to_mainFrag,
+                            bundle
+                        )
+                    }
+
                 } else {
                     tv_wrong_security_ans.isVisible = true
                 }

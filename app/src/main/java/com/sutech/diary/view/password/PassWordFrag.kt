@@ -76,7 +76,8 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                 }
             }
         }
-        if(isTypePassword == 3){
+        Log.d("asgawgawg", "getDataBundle: $isTypePassword")
+        if (isTypePassword == 3) {
             logEvent("UnlockPass_Show")
         }
     }
@@ -168,16 +169,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
         }
 
         ll_forgot_password.setOnClickListener {
-            logEvent("UnlockPass_Forgotpassword")
-            val ques = DataStore.getQues()
-            val ans = DataStore.getAns()
-            val bundle = Bundle()
-            if (ques.isNullOrBlank() || ans.isNullOrBlank()) {
-                bundle.putInt(Constant.TYPE_SECURITY, TYPE_INPUT_NEW_SECURITY)
-            } else {
-                bundle.putInt(Constant.TYPE_SECURITY, TYPE_INPUT_SECURITY_TO_CHANGE_PASSWORD)
-            }
-            gotoFrag(R.id.passWordFrag, R.id.action_passWordFrag_to_securityQuesFrag, bundle)
+            goToSecurityScreen()
         }
 
         passCodeView.setOnDoneListener(object : PassCodeView.PassCodeViewListener {
@@ -195,10 +187,16 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                             if (passwordAfter == passwordBefore) {
                                 DataStore.savePassword(passCode)
                                 DataStore.setUsePassword(true)
-                                gotoFrag(
-                                    R.id.passWordFrag,
-                                    R.id.action_passWordFrag_to_mainFrag
-                                )
+                                if (!DataStore.getAns().isNullOrEmpty() && !DataStore.getQues()
+                                        .isNullOrEmpty()
+                                ) {
+                                    gotoFrag(
+                                        R.id.passWordFrag,
+                                        R.id.action_passWordFrag_to_mainFrag
+                                    )
+                                } else {
+                                    goToSecurityScreen()
+                                }
                             } else {
                                 tvWrongPass.text = getString(R.string.re_password_wrong)
                                 passCodeWrong()
@@ -262,6 +260,21 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
 
         })
     }
+
+    private fun goToSecurityScreen(){
+        logEvent("UnlockPass_Forgotpassword")
+        val ques = DataStore.getQues()
+        val ans = DataStore.getAns()
+        val bundle = Bundle()
+        if (ques.isNullOrBlank() || ans.isNullOrBlank()) {
+            bundle.putInt(Constant.TYPE_SECURITY, TYPE_INPUT_NEW_SECURITY)
+        } else {
+            bundle.putInt(Constant.TYPE_SECURITY, TYPE_INPUT_SECURITY_TO_CHANGE_PASSWORD)
+        }
+        bundle.putBoolean(Constant.GO_TO_SECURITY_FROM_CHANGE_PASSWORD,true)
+        gotoFrag(R.id.passWordFrag, R.id.action_passWordFrag_to_securityQuesFrag, bundle)
+    }
+
 
     private fun passCodeWrong() {
         tvWrongPass.show()
