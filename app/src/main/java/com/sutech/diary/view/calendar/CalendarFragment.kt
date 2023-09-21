@@ -43,7 +43,8 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
 
-class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapter.OnDateItemListener {
+class CalendarFragment : BaseFragment(R.layout.fragment_calendar),
+    CalendarAdapter.OnDateItemListener {
     private var adapterDiary: AdapterDiaryItem? = null
     private var calendarAdapter: CalendarAdapter? = null
     private val arrDiary: MutableList<DiaryModel> = ArrayList()
@@ -51,6 +52,10 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
     private var mcontext: Context? = null
 
     companion object {
+        var day = LocalDate.now().dayOfMonth
+        var month = LocalDate.now().monthValue
+        var year = LocalDate.now().year
+
         var selectedDate: LocalDate = LocalDate.now()
         fun checkListDiary(date: LocalDate, context: Context): ArrayList<Int> {
             val diaryDataBase2 = DiaryDatabase.getInstance(context)
@@ -86,6 +91,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
         super.onAttach(context)
         mcontext = context
     }
+
     override fun onDestroy() {
         super.onDestroy()
         mcontext = null
@@ -111,16 +117,18 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
             calendarAdapter!!.notifyDataSetChanged()
         }
     }
+
     private fun setMonthView() {
         tv_curenTime.text = Common.monthYearFromDate(selectedDate)
         val daysInMonth = Common.daysInMonthArray(selectedDate)
-        calendarAdapter = CalendarAdapter(false,daysInMonth, this, mcontext!!)
+        calendarAdapter = CalendarAdapter(false, daysInMonth, this, mcontext!!)
         rcv_calendar.layoutManager = GridLayoutManager(mcontext, 7)
         rcv_calendar.adapter = calendarAdapter
         Handler(Looper.getMainLooper()).postDelayed({
             calendarAdapter!!.notifyDataSetChanged()
         }, 1000)
     }
+
     private fun setRcvDiary() {
         adapterDiary = mcontext?.let {
             AdapterDiaryItem(true, it, { _, _ ->
@@ -143,6 +151,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
         setMonthView()
         mcontext?.let { checkListDiary(selectedDate, it) }
     }
+
     private fun nextMonthAction() {
         selectedDate = selectedDate.plusMonths(1)
         setMonthView()
@@ -160,6 +169,10 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
 
         selectedDate = LocalDate.now()
 
+        day = LocalDate.now().dayOfMonth
+        month = LocalDate.now().monthValue
+        year = LocalDate.now().year
+
         setMonthView()
 
         setRcvDiary()
@@ -169,6 +182,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
         val calendar = Calendar.getInstance()
         getDataClick(calendar.get(Calendar.DAY_OF_MONTH).toString())
     }
+
     private fun getDataDiary(keyword: String? = null, dateTime: String? = null) {
         Log.e("TAG", "getDataDiary: $keyword date $dateTime")
         CoroutineScope(Dispatchers.IO).launch {
@@ -231,8 +245,14 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
         calendarAdapter?.updatePosition(position)
 
     }
-    private fun getDataClick(dayText: String?){
+
+    private fun getDataClick(dayText: String?) {
         if (dayText != "") {
+            if (dayText != null) {
+                day = dayText.toInt()
+            }
+            month = selectedDate.monthValue
+            year = selectedDate.year
             var dayTime = dayText
             if (dayText != null) {
                 dayTime = if (dayText.toInt() in 1..9) {
@@ -244,7 +264,8 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
             val formatter = DateTimeFormatter.ofPattern(Constant.FormatdayMMYY)
             getDataDiary(dateTime = "$dayTime-${selectedDate.format(formatter)}")
             tvTimeDay.text = mcontext?.let {
-                Common.getDay("$dayTime-${selectedDate.format(formatter)}",
+                Common.getDay(
+                    "$dayTime-${selectedDate.format(formatter)}",
                     it
                 )
             } + " " + "$dayTime-${selectedDate.format(formatter)}"

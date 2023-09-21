@@ -79,13 +79,14 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
     private var moodDiary = MoodUtil.getMoodByName(MoodUtil.Mood.SMILING.name)
     private var arrDelete: ArrayList<String> = ArrayList()
     private lateinit var dirayDataBase: DiaryDatabase
-    private var day = 0
-    private var month = 0
-    private var year = 0
+
 
     companion object {
         var currentDate: Calendar = Calendar.getInstance()
         var addNewsSlectedDate: LocalDate = LocalDate.now()
+        var day = 0
+        var month = 0
+        var year = 0
     }
 
     private val listInputHashtag: MutableList<Hashtag> = mutableListOf()
@@ -325,7 +326,8 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         btnSaveDiary?.setOnClickScaleView(2000) {
             logEvent("WriteDiary_IconOK_Clicked")
             if (invalidateContent()) {
-                date = SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(currentDate.time)
+                date =
+                    SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(currentDate.time)
                 dateTime = SimpleDateFormat(
                     Constant.FormatdayEEDDMMYY,
                     Locale.US
@@ -404,11 +406,11 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         btnOK.setOnClickListener {
             logEvent("WriteDairy_Calender_IconOk_Clicked")
             isOnClickUpdateDate = true
-                currentDate.set(Calendar.YEAR, year)
-                currentDate.set(Calendar.MONTH, month)
-                currentDate.set(Calendar.DAY_OF_MONTH, day)
-                tvDateTime.text =
-                    SimpleDateFormat(Constant.FormatdayDDMMMMYY, Locale.US).format(currentDate.time)
+            currentDate.set(Calendar.YEAR, year)
+            currentDate.set(Calendar.MONTH, month)
+            currentDate.set(Calendar.DAY_OF_MONTH, day)
+            tvDateTime.text =
+                SimpleDateFormat(Constant.FormatdayDDMMMMYY, Locale.US).format(currentDate.time)
             customDialog.dismiss()
         }
         customDialog.show()
