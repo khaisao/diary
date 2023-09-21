@@ -6,7 +6,6 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import android.content.Context
-import com.sutech.diary.view.calendar.CalendarFragment
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -40,7 +39,7 @@ class Common {
             val daysInMonthArray = ArrayList<String>()
             val yearMonth = YearMonth.from(date)
             val daysInMonth = yearMonth.lengthOfMonth()
-            val firstOfMonth: LocalDate = CalendarFragment.selectedDate.withDayOfMonth(1)!!
+            val firstOfMonth: LocalDate = date.withDayOfMonth(1)!!
             val dayOfWeek = firstOfMonth.dayOfWeek.value
             for (i in 1..42) {
                 if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {

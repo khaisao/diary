@@ -145,8 +145,6 @@ class AdmobInterstitial : AdmobAds() {
         textLoading?.let {
             AdDialog.getInstance().showLoadingWithMessage(activity, textLoading)
         }
-//        Log.d(TAG, "load: " + textLoading)
-//        Utils.showToastDebug(activity, "Admob Interstitial id: ${adsChild.adsId}")
         if (!preload) {
             lifecycle?.addObserver(lifecycleObserver)
             handler.removeCallbacks(timeOutCallBack)
@@ -202,10 +200,6 @@ class AdmobInterstitial : AdmobAds() {
                             mInterstitialAd = null
                             stateLoadAd = StateLoadAd.HAS_BEEN_OPENED
                             AdDialog.getInstance().hideLoading()
-//                            Utils.showToastDebug(
-//                                activity,
-//                                "Admob Interstitial id: ${adsChild.adsId}"
-//                            )
                             callback?.onAdShow(
                                 AdDef.NETWORK.GOOGLE,
                                 AdDef.ADS_TYPE.INTERSTITIAL
