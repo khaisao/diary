@@ -2,7 +2,6 @@ package com.sutech.diary.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sutech.diary.database.DiaryDatabase
 import com.sutech.diary.view.calendar.CalendarFragment.Companion.checkListDiary
 import com.sutech.diary.view.calendar.CalendarFragment.Companion.selectedDate
+import com.sutech.diary.view.viet.VietFrag
 import com.sutech.diary.view.viet.VietFrag.Companion.addNewsSlectedDate
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import java.time.LocalDate
+import java.util.Calendar
 
 
 class CalendarAdapter(
@@ -62,7 +63,7 @@ class CalendarAdapter(
         }
 
         if (!fromAddnew) {
-            if (selected == position && daysOfMonth[position] != "" && isStart) {
+            if (selected == position && daysOfMonth[position] != "") {
                 holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_selected)
                 holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.secondary))
             } else {
@@ -130,6 +131,18 @@ class CalendarAdapter(
                             ContextCompat.getColor(
                                 context,
                                 R.color.transparent_20
+                            )
+                        )
+                    }
+                    if (daysOfMonth[position].toInt() == VietFrag.currentDate.get(Calendar.DAY_OF_MONTH) && addNewsSlectedDate.monthValue - 1 == VietFrag.currentDate.get(
+                            Calendar.MONTH
+                        ) && !isStart
+                    ) {
+                        holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday)
+                        holder.dayOfMonth.setTextColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.white
                             )
                         )
                     }

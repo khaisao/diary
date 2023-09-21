@@ -326,8 +326,6 @@ class AdmobNative : AdmobAds() {
                     }
                 }
 
-
-
             }
             return true
         } else {

@@ -92,7 +92,7 @@ abstract class BaseFragment(val layout: Int) : Fragment() {
 
     }
 
-    fun isNetworkConnected(): Boolean {
+    private fun isNetworkConnected(): Boolean {
         val cm =
             requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
         return cm!!.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
