@@ -126,6 +126,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         addNewsSlectedDate = LocalDate.now()
         AppUtil.needUpdateDiary = false
         btnAddMood?.setImageResource(moodDiary.imageResource)
+        tvDateTime.text = SimpleDateFormat(Constant.FormatdayDDMMMMYY, Locale.US).format(currentDate.time)
         logEvent("WriteDiary_Show")
         showBanner("banner_read_nhat_ky", layoutAdsViet)
         initOnBackPress()
@@ -207,6 +208,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
             contentModel = diaryModel?.listContent?.get(positionContent)
             contentModel?.let {
                 moodDiary = it.mood
+                tvDateTime.text = SimpleDateFormat("EEEE dd-MM-yyyy", Locale.US).parse(it.dateTimeCreate)?.let { it1 -> SimpleDateFormat(Constant.FormatdayDDMMMMYY, Locale.US).format(it1) }
                 btnAddMood.setImageResource(it.mood.imageResource)
             }
             isUpdate = true
@@ -264,9 +266,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         SimpleDateFormat(Constant.FormatdayEEDDMMYY, Locale.US).format(currentDate.time)
 
     private fun initOnClick() {
-        tvDateTime.text =
-            SimpleDateFormat(Constant.FormatdayDDMMMMYY, Locale.US).format(currentDate.time)
-
         btnWriteBack?.setOnClickScaleView(500) {
             confirmBack()
         }
