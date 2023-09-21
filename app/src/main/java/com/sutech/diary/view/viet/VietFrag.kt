@@ -205,6 +205,10 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
 
             diaryModel = Gson().fromJson(stringArrDiary, DiaryModel::class.java)
             contentModel = diaryModel?.listContent?.get(positionContent)
+            contentModel?.let {
+                moodDiary = it.mood
+                btnAddMood.setImageResource(it.mood.imageResource)
+            }
             isUpdate = true
         } else {
             isUpdate = false
@@ -263,7 +267,6 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         SimpleDateFormat(Constant.FormatdayEEDDMMYY, Locale.US).format(currentDate.time)
 
     private fun initOnClick() {
-
         btnWriteBack?.setOnClickScaleView(500) {
             confirmBack()
         }
@@ -523,6 +526,8 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         contentModel?.title = titleDiary
         contentModel?.content = contentDiary
         contentModel?.images = arrImage
+        contentModel?.mood = moodDiary
+        contentModel?.listHashtag = getAllHashtagInput()
         contentModel?.dateTimeUpdate =
             SimpleDateFormat(Constant.FormatdayDDMMYY, Locale.US).format(Date())
         Log.d("stjtjrjtsr", "updateDiary: ")
