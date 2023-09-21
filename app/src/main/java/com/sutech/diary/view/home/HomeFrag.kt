@@ -298,7 +298,15 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
 
         ll_change_theme?.setOnClick(100) {
             logEvent("SettingScr_Changetheme_Clicked")
-            gotoFrag(R.id.mainFrag,R.id.action_mainFrag_to_themeFrag)
+            gotoFrag(R.id.mainFrag, R.id.action_mainFrag_to_themeFrag)
+//            if (AppController.getInstance().themeId == 0) {
+//                DataStore.saveTheme(1)
+//                AppController.getInstance().setThemeApp(1)
+//            } else {
+//                AppController.getInstance().setThemeApp(0)
+//                DataStore.saveTheme(0)
+//            }
+//            setSwDarkTheme()
             drawer_layout.closeDrawer(GravityCompat.START)
         }
 
