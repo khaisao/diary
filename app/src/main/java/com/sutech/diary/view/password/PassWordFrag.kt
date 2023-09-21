@@ -1,7 +1,7 @@
 package com.sutech.diary.view.password
 
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -26,7 +26,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
     var oldPassword = ""
 
     /**
-     * $param 0: create
+     * $param 0: create`
      * $param 1: update
      * $param 2: check
      * $param 3: check splash
@@ -35,7 +35,6 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
 
     override fun initView() {
         getDataBundle()
-        showBanner("banner_password", layoutAdsPassword)
         if (isTypePassword == -1) {
             if (DataStore.getPassword().isNullOrBlank()) {
                 gotoFrag(R.id.passWordFrag, R.id.action_passWordFrag_to_mainFrag)
@@ -54,6 +53,8 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
             ll_forgot_password.isVisible = false
             Glide.with(requireContext()).load(R.drawable.ic_back).into(tvCancel)
         } else {
+            layoutAdsPassword.visibility = View.VISIBLE
+            showAdsWithLayout("native_password", layoutAdsPassword)
             Glide.with(requireContext()).load(R.drawable.ic_cancel).into(tvCancel)
         }
         setClick()
@@ -76,8 +77,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                 }
             }
         }
-        Log.d("asgawgawg", "getDataBundle: $isTypePassword")
-        if (isTypePassword == 3) {
+        if(isTypePassword == 3){
             logEvent("UnlockPass_Show")
         }
     }

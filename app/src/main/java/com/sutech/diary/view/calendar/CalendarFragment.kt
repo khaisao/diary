@@ -25,6 +25,7 @@ import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.fragment_calendar.btn_back
 import kotlinx.android.synthetic.main.fragment_calendar.btn_backMonth
 import kotlinx.android.synthetic.main.fragment_calendar.btn_nextMonth
+import kotlinx.android.synthetic.main.fragment_calendar.layoutAdsCalendar
 import kotlinx.android.synthetic.main.fragment_calendar.rcv_calendar
 import kotlinx.android.synthetic.main.fragment_calendar.rcv_diary
 import kotlinx.android.synthetic.main.fragment_calendar.tvTimeDay
@@ -118,7 +119,6 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
         rcv_calendar.adapter = calendarAdapter
         Handler(Looper.getMainLooper()).postDelayed({
             calendarAdapter!!.notifyDataSetChanged()
-
         }, 1000)
     }
     private fun setRcvDiary() {
@@ -151,6 +151,8 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
 
     override fun initView() {
         logEvent("CalendarScr_Show")
+        showAdsWithLayout("banner_calendar", layoutAdsCalendar)
+
         if (mcontext != null) {
             diaryDataBase = DiaryDatabase.getInstance(mcontext!!)
         }

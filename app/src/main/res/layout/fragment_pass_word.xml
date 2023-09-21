@@ -8,8 +8,10 @@
     <LinearLayout
         android:id="@+id/layoutAdsPassword"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="34dp"
+        android:layout_height="wrap_content"
+        android:minHeight="90dp"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
         android:background="@color/white"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/tvCancel">
@@ -35,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutAdsPassword"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <com.sutech.common.text.TextViewRegular
         android:id="@+id/tv_password_des"
@@ -263,6 +265,7 @@
                 android:visibility="visible"
                 app:srcCompat="@drawable/ic_delete_number_password" />
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

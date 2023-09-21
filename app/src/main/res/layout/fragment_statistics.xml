@@ -76,9 +76,10 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/ads"
+            android:id="@+id/layoutAdsStatics"
             android:layout_width="match_parent"
-            android:layout_height="196dp"
+            android:layout_height="wrap_content"
+            android:minHeight="200dp"
             android:layout_marginHorizontal="@dimen/margin_16"
             android:layout_marginVertical="@dimen/margin_16"
             android:background="@color/white"
@@ -105,7 +106,7 @@
             android:background="@drawable/bg_radius_10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ads">
+            app:layout_constraintTop_toBottomOf="@id/layoutAdsStatics">
 
             <LinearLayout
                 android:id="@+id/statistic_top_bar"
