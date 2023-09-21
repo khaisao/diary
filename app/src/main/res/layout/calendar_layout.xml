@@ -75,7 +75,14 @@
                 android:layout_marginTop="12dp"
                 android:background="#80C2C2C2"
                 android:orientation="horizontal">
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/sun"
+                    android:textColor="@color/transparent_80"
+                    android:textSize="14sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -130,14 +137,7 @@
                     android:textColor="@color/transparent_80"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/sun"
-                    android:textColor="@color/transparent_80"
-                    android:textSize="14sp" />
+
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

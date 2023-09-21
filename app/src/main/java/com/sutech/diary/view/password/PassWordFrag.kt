@@ -2,6 +2,7 @@ package com.sutech.diary.view.password
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -18,7 +19,6 @@ import com.sutech.diary.view.password.SecurityQuesFrag.Companion.TYPE_INPUT_SECU
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import com.test.dialognew.setPreventDoubleClick
 import kotlinx.android.synthetic.main.fragment_pass_word.*
-import kotlinx.android.synthetic.main.fragment_statistics.layoutAdsStatics
 
 class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
 
@@ -27,7 +27,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
     var oldPassword = ""
 
     /**
-     * $param 0: create
+     * $param 0: create`
      * $param 1: update
      * $param 2: check
      * $param 3: check splash
@@ -36,7 +36,6 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
 
     override fun initView() {
         getDataBundle()
-        showAdsWithLayout("native_password", layoutAdsStatics)
         if (isTypePassword == -1) {
             if (DataStore.getPassword().isNullOrBlank()) {
                 gotoFrag(R.id.passWordFrag, R.id.action_passWordFrag_to_mainFrag)
@@ -47,6 +46,8 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
             tvPasscode.text = getString(R.string.enter_old_password)
             logEvent("EnterCuPassword_Show")
 
+
+
         } else if (isTypePassword == 0) {
             logEvent("SetpassScr_Show")
             tvPasscode.text = getString(R.string.set_password)
@@ -55,6 +56,8 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
             ll_forgot_password.isVisible = false
             Glide.with(requireContext()).load(R.drawable.ic_back).into(tvCancel)
         } else {
+            layoutAdsPassword.visibility = View.VISIBLE
+            showAdsWithLayout("native_password", layoutAdsPassword)
             Glide.with(requireContext()).load(R.drawable.ic_cancel).into(tvCancel)
         }
         setClick()

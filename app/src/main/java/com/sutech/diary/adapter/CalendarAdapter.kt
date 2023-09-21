@@ -2,6 +2,7 @@ package com.sutech.diary.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +49,7 @@ class CalendarAdapter(
         val view: View = inflater.inflate(R.layout.calendar_cell, parent, false)
         val layoutParams = view.layoutParams
         layoutParams.height = (parent.height * 0.166666666).toInt()
-        return CalendarViewHolder(view, onItemListener)
+        return CalendarViewHolder(view, onItemListener, fromAddnew, daysOfMonth)
     }
 
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
@@ -68,12 +69,34 @@ class CalendarAdapter(
                 holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_select)
                 holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.black))
             }
-
             if (daysOfMonth[position] == currentDateStr && selectedDate == LocalDate.now()) {
                 holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday)
                 holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.white))
                 holder.dot.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white))
             }
+
+            if (daysOfMonth[position] != "") {
+                if (daysOfMonth[position].toInt() > currentDateStr.toInt() && selectedDate == LocalDate.now()) {
+                    holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_select)
+                    holder.dayOfMonth.setTextColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.transparent_20
+                        )
+                    )
+                }
+
+                if (selectedDate >= LocalDate.now().plusMonths(1)) {
+                    holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_select)
+                    holder.dayOfMonth.setTextColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.transparent_20
+                        )
+                    )
+                }
+            }
+
 
         } else {
             if (selected == position && daysOfMonth[position] != "") {
@@ -84,7 +107,32 @@ class CalendarAdapter(
                 holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.black))
                 if (daysOfMonth[position] == currentDateStr && addNewsSlectedDate == LocalDate.now()) {
                     holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_select)
-                    holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.secondary))
+                    holder.dayOfMonth.setTextColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.secondary
+                        )
+                    )
+                }
+                if (daysOfMonth[position] != "") {
+                    if (daysOfMonth[position].toInt() > currentDateStr.toInt() && addNewsSlectedDate == LocalDate.now()) {
+                        holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_select)
+                        holder.dayOfMonth.setTextColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.transparent_20
+                            )
+                        )
+                    }
+                    if (addNewsSlectedDate >= LocalDate.now().plusMonths(1)) {
+                        holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_select)
+                        holder.dayOfMonth.setTextColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.transparent_20
+                            )
+                        )
+                    }
                 }
             }
         }
@@ -95,6 +143,7 @@ class CalendarAdapter(
     override fun getItemCount(): Int {
         return daysOfMonth.size
     }
+
     interface OnDateItemListener {
         fun onDateItemClick(position: Int, dayText: String?)
     }

@@ -119,7 +119,6 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar), CalendarAdapt
         rcv_calendar.adapter = calendarAdapter
         Handler(Looper.getMainLooper()).postDelayed({
             calendarAdapter!!.notifyDataSetChanged()
-
         }, 1000)
     }
     private fun setRcvDiary() {
