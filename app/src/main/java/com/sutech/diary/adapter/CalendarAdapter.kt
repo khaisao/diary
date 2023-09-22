@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.sutech.diary.database.DiaryDatabase
+import com.sutech.diary.view.calendar.CalendarFragment
 import com.sutech.diary.view.calendar.CalendarFragment.Companion.checkListDiary
 import com.sutech.diary.view.calendar.CalendarFragment.Companion.selectedDate
 import com.sutech.diary.view.viet.VietFrag
 import com.sutech.diary.view.viet.VietFrag.Companion.addNewsSlectedDate
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import java.time.LocalDate
-import java.util.Calendar
 
 
 class CalendarAdapter(
@@ -63,7 +63,7 @@ class CalendarAdapter(
         }
 
         if (!fromAddnew) {
-            if (selected == position && daysOfMonth[position] != "") {
+            if (daysOfMonth[position] == CalendarFragment.day.toString() && selectedDate.monthValue == CalendarFragment.month && selectedDate.year == CalendarFragment.year) {
                 holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_selected)
                 holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.secondary))
             } else {
@@ -100,7 +100,7 @@ class CalendarAdapter(
 
 
         } else {
-            if (selected == position && daysOfMonth[position] != "") {
+            if (daysOfMonth[position] == VietFrag.day.toString() && addNewsSlectedDate.monthValue - 1 == VietFrag.month && addNewsSlectedDate.year  == VietFrag.year) {
                 holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday)
                 holder.dayOfMonth.setTextColor(ContextCompat.getColor(context, R.color.white))
             } else {
@@ -116,6 +116,7 @@ class CalendarAdapter(
                     )
                 }
                 if (daysOfMonth[position] != "") {
+
                     if (daysOfMonth[position].toInt() > currentDateStr.toInt() && addNewsSlectedDate == LocalDate.now()) {
                         holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday_select)
                         holder.dayOfMonth.setTextColor(
@@ -131,18 +132,6 @@ class CalendarAdapter(
                             ContextCompat.getColor(
                                 context,
                                 R.color.transparent_20
-                            )
-                        )
-                    }
-                    if (daysOfMonth[position].toInt() == VietFrag.currentDate.get(Calendar.DAY_OF_MONTH) && addNewsSlectedDate.monthValue - 1 == VietFrag.currentDate.get(
-                            Calendar.MONTH
-                        ) && !isStart
-                    ) {
-                        holder.lnCellDay.setBackgroundResource(R.drawable.bg_currenday)
-                        holder.dayOfMonth.setTextColor(
-                            ContextCompat.getColor(
-                                context,
-                                R.color.white
                             )
                         )
                     }
