@@ -1,26 +1,36 @@
 {
   "project_info": {
-    "project_number": "137717152464",
-    "project_id": "diary-5ad36",
-    "storage_bucket": "diary-5ad36.appspot.com"
+    "project_number": "554041048107",
+    "project_id": "my-diary-3513a",
+    "storage_bucket": "my-diary-3513a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:137717152464:android:daa60f4826ca5f64377cd5",
+        "mobilesdk_app_id": "1:554041048107:android:e200e120200a7fa66d7e6e",
         "android_client_info": {
           "package_name": "com.sutech.journal.diary.diarywriting.lockdiary"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "554041048107-0etfv2njupslov72dupcnnk5c07crpmk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyAgUKT9SVUDUZTdl3SIcEKBpzu9lHj8W3I"
+          "current_key": "AIzaSyBA362w30MrRyibF0hKfyJXqvkw5N0nNl4"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554041048107-0etfv2njupslov72dupcnnk5c07crpmk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
