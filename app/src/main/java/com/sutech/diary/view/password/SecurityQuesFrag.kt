@@ -11,9 +11,9 @@ import com.sutech.diary.database.DataStore
 import com.sutech.diary.util.Constant
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.fragment_security_ques.edt_ans
-import kotlinx.android.synthetic.main.fragment_security_ques.edt_ques
 import kotlinx.android.synthetic.main.fragment_security_ques.tvCancel
 import kotlinx.android.synthetic.main.fragment_security_ques.tv_confirm_security
+import kotlinx.android.synthetic.main.fragment_security_ques.tv_ques
 import kotlinx.android.synthetic.main.fragment_security_ques.tv_ques_des
 import kotlinx.android.synthetic.main.fragment_security_ques.tv_wrong_security_ans
 
@@ -35,18 +35,6 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
     }
 
     private fun setUpUi() {
-        edt_ques.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                tv_wrong_security_ans.isVisible = false
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-            }
-
-        })
         edt_ans.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -64,13 +52,6 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
             Glide.with(requireContext()).load(R.drawable.ic_cancel).into(tvCancel)
         } else {
             Glide.with(requireContext()).load(R.drawable.ic_back).into(tvCancel)
-            edt_ques.setText(DataStore.getQues())
-            edt_ques.apply {
-                isFocusable = false
-                isEnabled = false
-                isCursorVisible = false
-                keyListener = null
-            }
             tv_ques_des.text = getString(R.string.enter_a_security_question)
         }
     }
@@ -96,11 +77,9 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
 
         tv_confirm_security.setOnClickListener {
             logEvent("SecurityQuestion_Confirm_Clicked")
-            val ques = edt_ques.text.toString()
             val ans = edt_ans.text.toString()
             if (typeSecurityScreen == TYPE_INPUT_NEW_SECURITY) {
-                if (ques.isNotBlank() && ans.isNotBlank()) {
-                    DataStore.saveQues(ques)
+                if (ans.isNotBlank()) {
                     DataStore.saveAns(ans)
                     val bundle = Bundle()
                     bundle.putInt(Constant.TYPE_PASSWORD, 0)

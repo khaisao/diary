@@ -50,4 +50,5 @@
     <string name="oldest_first">Oldest First</string>
     <string name="diary">diary</string>
     <string name="there_are_no_hashtag_in_your_diary">There are no hashtag in your diary</string>
+    <string name="the_answer_is_not_correct">The answer is not correct</string>
 </resources>
