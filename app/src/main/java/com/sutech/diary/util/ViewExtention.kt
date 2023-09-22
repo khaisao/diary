@@ -1,6 +1,7 @@
 package com.sutech.diary.util
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.Rect
 import android.os.SystemClock
@@ -8,6 +9,7 @@ import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 
 fun View.shake() {
@@ -189,4 +191,15 @@ fun View.inVisible() {
 
 fun View.inv() {
     visibility = View.INVISIBLE
+}
+
+fun View.showSoftKeyboard() {
+    this.requestFocus()
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+}
+
+fun View.closeKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(this.windowToken, 0)
 }

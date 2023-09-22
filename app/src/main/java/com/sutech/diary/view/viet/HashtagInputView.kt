@@ -7,6 +7,8 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.sutech.diary.util.closeKeyboard
+import com.sutech.diary.util.showSoftKeyboard
 import com.sutech.journal.diary.diarywriting.lockdiary.databinding.ItemHashtagInputBinding
 
 class InputHashtagView : ConstraintLayout {
@@ -57,6 +59,7 @@ class InputHashtagView : ConstraintLayout {
         binding.edtHashtag.setOnFocusChangeListener { view, isFocus ->
             if(!isFocus && (binding.edtHashtag.text?.length ?: 1) == 1){
                 hashtagViewInputListener?.onInputEmptyHashtag(this)
+                binding.edtHashtag.closeKeyboard()
             }
         }
 
@@ -65,6 +68,7 @@ class InputHashtagView : ConstraintLayout {
     fun setRequestHashtagInput(isRequest: Boolean) {
         if (isRequest) {
             binding.edtHashtag.requestFocus()
+            binding.edtHashtag.showSoftKeyboard()
         } else {
             binding.edtHashtag.clearFocus()
         }
