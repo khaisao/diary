@@ -249,7 +249,6 @@
             </RelativeLayout>
         </androidx.core.widget.NestedScrollView>
 
-
         <ImageView
             android:id="@+id/btnVietNhatKy"
             android:layout_width="@dimen/img_s_large"
