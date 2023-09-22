@@ -13,6 +13,7 @@ import android.widget.PopupWindow
 import androidx.activity.addCallback
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -108,15 +109,10 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
 
     override fun onResume() {
         super.onResume()
-        context?.let {
-            Log.e("TAG", "onResume: home ${AppUtil.needUpdateDiary}")
-            if (AppUtil.needUpdateDiary) {
-                DialogUtil.showDialogLoading(it, getString(R.string.loading))
-                getDataDiary()
-                AppUtil.needUpdateDiary = false
-                setDateTime(Calendar.getInstance())
-            }
-        }
+        DialogUtil.showDialogLoading(requireContext(), getString(R.string.loading))
+        getDataDiary()
+        AppUtil.needUpdateDiary = false
+        setDateTime(Calendar.getInstance())
     }
 
     private fun showPopupSort() {
@@ -156,7 +152,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun getDataDiary(keyword: String? = null, dateTime: String? = null) {
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             if (keyword.isNullOrBlank() && dateTime.isNullOrBlank()) {
                 diaryDataBase?.getDiaryDao()?.getAllDiary()?.let {
                     withContext(Dispatchers.Main) {
@@ -176,9 +172,9 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
             } else if (!keyword.isNullOrBlank()) {
                 diaryDataBase?.getDiaryDao()?.searchDiaryByTitle("%$keyword%")?.let {
                     withContext(Dispatchers.Main) {
+                        DialogUtil.cancelDialogLoading()
                         showNotFoundDiary(it.isEmpty())
                         updateDataDiary(it)
-                        DialogUtil.cancelDialogLoading()
                     }
                 }
             }
