@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
@@ -8,7 +7,7 @@
     <fragment
         android:id="@+id/mainFrag"
         android:name="com.sutech.diary.view.home.HomeFrag"
-        android:label="MainFrag" >
+        android:label="MainFrag">
         <action
             android:id="@+id/action_mainFrag_to_writeFrag"
             app:destination="@id/writeFrag" />
@@ -39,7 +38,7 @@
     <fragment
         android:id="@+id/writeFrag"
         android:name="com.sutech.diary.view.viet.VietFrag"
-        android:label="WriteFrag" >
+        android:label="WriteFrag">
         <action
             android:id="@+id/action_writeFrag_to_viewImageFrag"
             app:destination="@id/viewImageFrag" />
@@ -53,18 +52,23 @@
     <fragment
         android:id="@+id/passWordFrag"
         android:name="com.sutech.diary.view.password.PassWordFrag"
-        android:label="passWordFrag" >
+        android:label="passWordFrag">
         <action
             android:id="@+id/action_passWordFrag_to_mainFrag"
             app:destination="@id/mainFrag" />
         <action
             android:id="@+id/action_passWordFrag_to_securityQuesFrag"
             app:destination="@id/securityQuesFrag" />
+        <action
+            android:id="@+id/action_passWordFrag_to_securityQuesFrag2"
+            app:destination="@id/securityQuesFrag"
+            app:popUpTo="@id/passWordFrag"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/readDiaryFrag"
         android:name="com.sutech.diary.view.doc.DocDiaryFrag"
-        android:label="ReadDiaryFrag" >
+        android:label="ReadDiaryFrag">
         <action
             android:id="@+id/action_readDiaryFrag_to_writeFrag"
             app:destination="@id/writeFrag" />
@@ -80,7 +84,7 @@
     <fragment
         android:id="@+id/splashFrag"
         android:name="com.sutech.diary.view.splash.SplashFrag"
-        android:label="SplashFrag" >
+        android:label="SplashFrag">
         <action
             android:id="@+id/action_splashFrag_to_passWordFrag"
             app:destination="@id/passWordFrag" />
@@ -107,7 +111,7 @@
     <fragment
         android:id="@+id/securityQuesFrag"
         android:name="com.sutech.diary.view.password.SecurityQuesFrag"
-        android:label="SecurityQuesFrag" >
+        android:label="SecurityQuesFrag">
         <action
             android:id="@+id/action_securityQuesFrag_self"
             app:destination="@id/securityQuesFrag" />
@@ -122,7 +126,7 @@
         android:id="@+id/calendarFlag"
         android:name="com.sutech.diary.view.calendar.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" >
+        tools:layout="@layout/fragment_calendar">
         <action
             android:id="@+id/action_calendarFlag_to_readDiaryFrag"
             app:destination="@id/readDiaryFrag" />

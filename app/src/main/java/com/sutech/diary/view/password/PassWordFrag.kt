@@ -195,7 +195,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                                         R.id.action_passWordFrag_to_mainFrag
                                     )
                                 } else {
-                                    goToSecurityScreen()
+                                    goToSecurityAndClearPasswordScreenInBackStack()
                                 }
                             } else {
                                 tvWrongPass.text = getString(R.string.re_password_wrong)
@@ -273,6 +273,19 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
         }
         bundle.putBoolean(Constant.GO_TO_SECURITY_FROM_CHANGE_PASSWORD,true)
         gotoFrag(R.id.passWordFrag, R.id.action_passWordFrag_to_securityQuesFrag, bundle)
+    }
+
+    private fun goToSecurityAndClearPasswordScreenInBackStack(){
+        val ques = DataStore.getQues()
+        val ans = DataStore.getAns()
+        val bundle = Bundle()
+        if (ques.isNullOrBlank() || ans.isNullOrBlank()) {
+            bundle.putInt(Constant.TYPE_SECURITY, TYPE_INPUT_NEW_SECURITY)
+        } else {
+            bundle.putInt(Constant.TYPE_SECURITY, TYPE_INPUT_SECURITY_TO_CHANGE_PASSWORD)
+        }
+        bundle.putBoolean(Constant.GO_TO_SECURITY_FROM_CHANGE_PASSWORD,true)
+        gotoFrag(R.id.passWordFrag, R.id.action_passWordFrag_to_securityQuesFrag2, bundle)
     }
 
 
