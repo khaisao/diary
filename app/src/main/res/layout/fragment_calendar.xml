@@ -80,7 +80,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="center"
-                        android:textColor="@color/colorTextPrimary"
+                        android:textColor="?attr/textColor"
                         android:textSize="20sp" />
 
                     <ImageView
@@ -101,7 +101,7 @@
                         android:gravity="center"
                         android:padding="8dp"
                         android:text="@string/txt_today"
-                        android:textColor="@color/colorTextPrimary"
+                        android:textColor="?attr/textColor"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -202,7 +202,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="18dp"
             android:fontFamily="@font/roboto_medium"
-            android:textColor="@color/colorTextPrimary"
+            android:textColor="?attr/textColor"
             android:textSize="@dimen/text_s_16"
             android:paddingTop="20dp"
             android:text="@string/app_name"
@@ -234,7 +234,7 @@
             android:gravity="center"
             android:visibility="gone"
             android:text="@string/not_found_diary"
-            android:textColor="@color/colorTextPrimary"
+            android:textColor="?attr/textColor"
             android:textSize="@dimen/text_s_14"
             android:textStyle="normal"/>
 

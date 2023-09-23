@@ -72,7 +72,6 @@
         android:hint="@string/hint_ans"
         android:paddingHorizontal="16dp"
         android:textColor="@color/black"
-        android:inputType="textPassword"
         android:textColorHint="@color/color_666666"
         app:layout_constraintTop_toBottomOf="@id/tv_ques" />
 
