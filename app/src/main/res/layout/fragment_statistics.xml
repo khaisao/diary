@@ -39,7 +39,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/btnBack"
                 android:text="@string/statistics"
-                android:textColor="@color/colorTextPrimary"
+                android:textColor="?attr/textColor"
                 android:textSize="@dimen/text_s_20" />
         </RelativeLayout>
 
