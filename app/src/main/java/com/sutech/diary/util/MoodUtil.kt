@@ -55,11 +55,8 @@ object MoodUtil {
         }
     }
 
-    suspend fun calTrendOnTenScale(context: Context, id: Int, filter: MoodFilter): Float {
+    suspend fun getNumberOfMood(context: Context, id: Int, filter: MoodFilter): Float {
         return withContext(Dispatchers.IO) {
-            val allMoodsNumber: Int
-            val selectedMoodNumber: Int
-
             DiaryDatabase.getInstance(context).getDiaryDao().getAllDiary().filter {
                 val parser = SimpleDateFormat("dd-MM-yyyy", Locale.US)
                 val date = parser.parse(it.dateTime)
@@ -79,13 +76,7 @@ object MoodUtil {
                 } else {
                     it
                 }
-            }.also {
-                allMoodsNumber = it.size
-            }.filter { moodObj -> moodObj.id == id }.also {
-                selectedMoodNumber = it.size
-            }
-
-            return@withContext selectedMoodNumber.toFloat() / allMoodsNumber * 10
+            }.filter { moodObj -> moodObj.id == id }.size.toFloat()
         }
     }
 

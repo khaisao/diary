@@ -136,7 +136,7 @@ class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
         lifecycleScope.launch {
             val yVals1 = MoodUtil.moods.mapIndexed { index, moodObj ->
                 lifecycleScope.async {
-                    BarEntry(index.toFloat(), MoodUtil.calTrendOnTenScale(requireContext(), moodObj.id, filter = filter.value))
+                    BarEntry(index.toFloat(), MoodUtil.getNumberOfMood(requireContext(), moodObj.id, filter = filter.value))
                 }.await()
             }
 
