@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         tools:text="7 Tháng 12,2017"
         android:layout_marginHorizontal="18dp"
-        android:textColor="@color/colorTextPrimary"
+        android:textColor="?attr/textColor"
         android:fontFamily="@font/roboto_medium"
         android:textSize="@dimen/text_s_16"
         app:layout_constraintTop_toTopOf="parent"

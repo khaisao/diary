@@ -86,6 +86,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
     private var moodDiary = MoodUtil.getMoodByName(MoodUtil.Mood.SMILING.name)
     private var arrDelete: ArrayList<String> = ArrayList()
     private lateinit var dirayDataBase: DiaryDatabase
+    private var isShowDialogMoodFirstTime = false
 
 
     companion object {
@@ -360,7 +361,10 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
 
         lifecycleScope.launch {
             delay(150)
-            showDialogChooseMood(0.5F)
+            if (!isShowDialogMoodFirstTime) {
+                showDialogChooseMood(0.5F)
+                isShowDialogMoodFirstTime = true
+            }
         }
     }
 

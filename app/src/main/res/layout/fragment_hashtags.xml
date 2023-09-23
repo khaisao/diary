@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/topAppBar"
-            app:tint="@color/colorTextPrimary" />
+            app:tint="?attr/textColor" />
 
         <TextView
             android:id="@+id/empty_title"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="@string/there_are_no_hashtag_in_your_diary"
-            android:textColor="@color/colorTextPrimary"
+            android:textColor="?attr/textColor"
             android:textSize="@dimen/text_s_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/btnBack"
                 android:text="@string/hashtags"
-                android:textColor="@color/colorTextPrimary"
+                android:textColor="?attr/textColor"
                 android:textSize="@dimen/text_s_20" />
         </RelativeLayout>
 

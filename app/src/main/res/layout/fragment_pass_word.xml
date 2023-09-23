@@ -41,7 +41,7 @@
                 android:gravity="center"
                 android:layout_marginTop="16dp"
                 android:text="@string/enter_pass_word"
-                android:textColor="@color/colorTextPrimary"
+                android:textColor="?attr/textColor"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Please enter your password"
-                android:textColor="@color/color_80000000"
+                android:textColor="#606F7F"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -293,7 +293,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/forgot_password"
-                    android:textColor="@color/colorTextPrimary"
+                    android:textColor="?attr/textColor"
                     android:textSize="18sp" />
 
             </LinearLayout>

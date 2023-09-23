@@ -10,7 +10,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.sutech.common.IconView
+    <ImageView
         android:id="@+id/tbBack"
         android:layout_width="@dimen/img_s_normal"
         android:layout_height="@dimen/img_s_normal"
@@ -21,7 +21,8 @@
         android:minWidth="@dimen/img_s_large"
         android:padding="@dimen/img_padding"
         android:scaleType="centerInside"
-        app:srcCompat="@drawable/ic_back" />
+        app:srcCompat="@drawable/ic_back"
+        app:tint="?attr/textColor" />
 
     <com.sutech.common.text.TextViewArt
         android:id="@+id/tvTbTitle"
@@ -33,7 +34,7 @@
         android:layout_toStartOf="@id/btnDone"
         android:text="@string/choose_image"
         android:textSize="@dimen/text_s_22"
-        android:textColor="@color/colorTextPrimary"
+        android:textColor="?attr/textColor"
         />
     <com.sutech.common.IconView
         android:id="@+id/btnDone"
@@ -47,6 +48,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/img_padding"
         android:scaleType="centerInside"
+        android:tint="?attr/textColor"
         app:srcCompat="@drawable/ic_done" />
 
 </RelativeLayout>

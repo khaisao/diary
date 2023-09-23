@@ -165,32 +165,24 @@ object AppUtil {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
     }
 
-    @SuppressLint("QueryPermissionsNeeded")
-    fun sendEmailMore(
-        context: Context,
-        addresses: Array<String>,
-        subject: String,
-        body: String
-    ) {
-
+    fun sendEmailMore(context: Context, addresses: Array<String>, subject: String, body: String) {
         disableExposure()
-        val emailSelectorIntent = Intent(Intent.ACTION_SENDTO)
-        emailSelectorIntent.data = Uri.parse("mailto:")
 
-        val intent = Intent(Intent.ACTION_SEND_MULTIPLE)
-        intent.putExtra(Intent.EXTRA_EMAIL, addresses)
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject)
-        intent.putExtra(
+        val emailIntent = Intent(Intent.ACTION_SENDTO)
+        emailIntent.data = Uri.parse("mailto:")
+
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, addresses)
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        emailIntent.putExtra(
             Intent.EXTRA_TEXT, body + "\n\n\n" +
                     "DEVICE INFORMATION (Device information is useful for application improvement and development)"
                     + "\n\n" + getDeviceInfo()
         )
-        intent.selector = emailSelectorIntent
 
         try {
-            context.startActivity(intent)
+            context.startActivity(emailIntent)
         } catch (e: Exception) {
-            Toast.makeText(context, "you need install gmail", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "No email app installed", Toast.LENGTH_SHORT).show()
         }
     }
 

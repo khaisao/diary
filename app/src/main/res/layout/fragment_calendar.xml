@@ -31,7 +31,7 @@
             android:layout_marginStart="12dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/title_calendar"
-            android:textColor="@color/colorTextPrimary"
+            android:textColor="?attr/textColor"
             android:textSize="20sp" />
     </LinearLayout>
 
