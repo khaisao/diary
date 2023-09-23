@@ -46,17 +46,18 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         app:textColorDefault="false" />
 
-    <EditText
-        android:id="@+id/edt_ques"
+    <TextView
+        android:id="@+id/tv_ques"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginHorizontal="16dp"
+        android:gravity="center_vertical"
         android:layout_marginTop="48dp"
+        android:textSize="16sp"
+        android:text="What is your favorite color?"
         android:background="@drawable/bg_radius_50"
-        android:hint="@string/hint_ques"
         android:paddingHorizontal="16dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/color_666666"
         app:layout_constraintTop_toBottomOf="@id/tv_ques_des" />
 
     <EditText
@@ -71,7 +72,7 @@
         android:textColor="@color/black"
         android:inputType="textPassword"
         android:textColorHint="@color/color_666666"
-        app:layout_constraintTop_toBottomOf="@id/edt_ques" />
+        app:layout_constraintTop_toBottomOf="@id/tv_ques" />
 
     <com.sutech.common.text.TextViewLight
         android:id="@+id/tv_wrong_security_ans"
@@ -79,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:layout_marginTop="5dp"
-        android:text="@string/the_incorrect_password"
+        android:text="@string/the_answer_is_not_correct"
         android:textColor="#BD1206"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@id/edt_ans"
