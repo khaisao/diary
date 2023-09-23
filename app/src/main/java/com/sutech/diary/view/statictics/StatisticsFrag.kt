@@ -139,6 +139,21 @@ class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
                     BarEntry(index.toFloat(), MoodUtil.calTrendOnTenScale(requireContext(), moodObj.id, filter = filter.value))
                 }.await()
             }
+
+            var maxValue = 10f
+            for (entry in yVals1) {
+                if (entry.y > maxValue) {
+                    maxValue = entry.y
+                }
+            }
+
+            for (entry in yVals1) {
+                if (entry.y == maxValue) {
+                    maxValue += 5f
+                    break
+                }
+            }
+
             val set = BarDataSet(yVals1, "")
             set.color = ResourcesCompat.getColor(resources, R.color.color_chart, null)
             val dataSets = listOf(set)
@@ -147,6 +162,8 @@ class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
             data.setDrawValues(false)
             chart.data = data
             chart.setScaleEnabled(false)
+            val leftAxis = chart.axisLeft
+            leftAxis.axisMaximum = maxValue
             chart.renderer = BarChartCustomRenderer(chart, chart.animator, chart.viewPortHandler, ArrayList(bitmaps), requireContext())
             chart.setExtraOffsets(0f, 0f, 0f, 25f)
             chart.invalidate()

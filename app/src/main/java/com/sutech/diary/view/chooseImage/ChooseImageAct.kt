@@ -1,11 +1,5 @@
 package com.sutech.diary.view.chooseImage
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.os.Build
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sutech.diary.base.BaseFragment
@@ -42,37 +36,11 @@ class ChooseImageAct :  BaseFragment(R.layout.activity_choose_image) {
             }
         }
         setRcvImage()
-        requestStoragePermission()
-
     }
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGrandted ->
-            if (isGrandted) {
-                getAllImage()
-            } else {
-                Toast.makeText(
-                    context,
-                    "You must grant a write storage permission to use this functionality",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-
-    private fun requestStoragePermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        } else {
-            if (ContextCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                getAllImage()
-            }
-        }
+    override fun onResume() {
+        super.onResume()
+        getAllImage()
     }
 
     private fun setRcvImage() {

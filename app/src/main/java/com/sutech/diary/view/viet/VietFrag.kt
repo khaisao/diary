@@ -1,8 +1,10 @@
 package com.sutech.diary.view.viet
 
+import android.Manifest
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Paint
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,7 +15,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -52,6 +57,7 @@ import kotlinx.android.synthetic.main.fragment_viet_diary.tvDateTime
 import kotlinx.android.synthetic.main.fragment_viet_diary.view_input_hashtag
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
@@ -309,9 +315,7 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         btnAddImage?.setOnClickScaleView(1000) {
             logEvent("WriteDiary_IconPhoto_Clicked")
             context?.let { ctx ->
-                IS_CHOOSE = 1
-                gotoFrag(R.id.writeFrag, R.id.action_writeFrag_to_chooseImageAct)
-                isOnClick = true
+                requestStoragePermission()
             }
         }
 
@@ -351,17 +355,46 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         }
         btnAddMood?.setOnClick(500) {
             logEvent("WriteDiary_IconMood_Clicked")
-            context?.let { cxt ->
-                val loc = IntArray(2) { value -> value }
-                btnAddMood?.getLocationOnScreen(loc)
-                val x = loc[0] - btnAddMood?.measuredWidth!! * 7
-                val y = loc[1] - 20
-                DialogUtil.showDialogMood(cxt, x, y) { mood ->
-                    moodDiary = mood
-                    btnAddMood?.setImageResource(mood.imageResource)
-                }
+            showDialogChooseMood(0F)
+        }
+
+        lifecycleScope.launch {
+            delay(150)
+            showDialogChooseMood(0.5F)
+        }
+    }
+
+    private fun showDialogChooseMood(dimAmount: Float) {
+        val loc = IntArray(2) { value -> value }
+        btnAddMood?.getLocationOnScreen(loc)
+        val x = loc[0] - btnAddMood?.measuredWidth!! * 7
+        val y = loc[1]
+        DialogUtil.showDialogMood(requireContext(), x, y, dimAmount) { mood ->
+            moodDiary = mood
+            btnAddMood?.setImageResource(mood.imageResource)
+        }
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGrandted ->
+            if (isGrandted) {
+                IS_CHOOSE = 1
+                gotoFrag(R.id.writeFrag, R.id.action_writeFrag_to_chooseImageAct)
+                isOnClick = true
+            } else {
+                Toast.makeText(
+                    context,
+                    "You must grant a write storage permission to use this functionality",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
+
+    private fun requestStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+        } else
+            requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
     private fun showCalendar(context: Context) {
