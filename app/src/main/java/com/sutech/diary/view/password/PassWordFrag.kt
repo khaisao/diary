@@ -1,6 +1,7 @@
 package com.sutech.diary.view.password
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
@@ -56,6 +57,11 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
             layoutAdsPassword.visibility = View.VISIBLE
             showAdsWithLayout("native_password", layoutAdsPassword)
             Glide.with(requireContext()).load(R.drawable.ic_cancel).into(tvCancel)
+        }
+        if (isTypePassword == 2) {
+            layoutAdsPassword.isVisible = true
+            showAdsWithLayout("native_password", layoutAdsPassword)
+            ll_forgot_password.isVisible = true
         }
         setClick()
     }
@@ -187,8 +193,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                             if (passwordAfter == passwordBefore) {
                                 DataStore.savePassword(passCode)
                                 DataStore.setUsePassword(true)
-                                if (!DataStore.getAns().isNullOrEmpty() && !DataStore.getQues()
-                                        .isNullOrEmpty()
+                                if (!DataStore.getAns().isNullOrEmpty()
                                 ) {
                                     gotoFrag(
                                         R.id.passWordFrag,

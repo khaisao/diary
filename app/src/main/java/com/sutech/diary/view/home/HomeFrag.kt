@@ -80,7 +80,6 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         initOnClick()
         setRcvDiary()
         setDateTime()
-        showRate()
         Log.e("TAG", "onCreatedView: ???????")
         edtSearch?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -483,90 +482,4 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
         }
     }
 
-
-    private fun showRate() {
-        logEvent("DialogEnjoy_Show")
-        if (Constant.showRate && !DataStore.checkRated() && showRateToday == 1) {
-            showRateToday = 2
-            context?.let {
-                Constant.showRate = false
-                DialogLib.getInstance().showDialogRate(
-                    it,
-                    lifecycle = lifecycle,
-                    dialogNewInterface1 = object : DialogNewInterface {
-                        override fun onClickStar(rate: Int) {
-                            when (rate) {
-                                1 -> {
-                                    logEvent("DialogEnjoy_1star_Clicked")
-                                }
-
-                                2 -> {
-                                    logEvent("DialogEnjoy_2star_Clicked")
-                                }
-
-                                3 -> {
-                                    logEvent("DialogEnjoy_3star_Clicked")
-                                }
-
-                                4 -> {
-                                    logEvent("DialogEnjoy_4star_Clicked")
-                                }
-
-                                5 -> {
-                                    logEvent("DialogEnjoy_5star_Clicked")
-                                }
-                            }
-                        }
-
-                        override fun onRate(rate: Int) {
-                            if (rate > 4) {
-                                DataStore.setRated(true)
-                                logEvent("DialogEnjoy_Googleplay_Clicked")
-                                AppUtil.openMarket(it, it.packageName)
-                            } else if (rate in 2..4) {
-                                DataStore.setRated(true)
-                                logEvent("DialogEnjoy_Mailtous_Clicked")
-                                AppUtil.sendEmailMore(
-                                    it,
-                                    arrayOf("Sutechmobile@gmail.com"),
-                                    "Feedback to My Diary",
-                                    ""
-                                )
-                            } else if (rate in 1..2) {
-                                DataStore.setRated(true)
-                                logEvent("DialogEnjoy_Feedback_Clicked")
-                                AppUtil.sendEmailMore(
-                                    it,
-                                    arrayOf("Sutechmobile@gmail.com"),
-                                    "Feedback to My Diary",
-                                    ""
-                                )
-                            } else {
-                                logEvent("DialogEnjoy_Remindlater_Clicked")
-
-                            }
-                        }
-
-                        override fun onFB(choice: Int) {
-
-                        }
-
-                        override fun onCancel() {
-                            logEvent("DialogEnjoy_IconX_Clicked")
-
-                        }
-
-                        override fun onCancelFb() {
-                        }
-                    },
-                    rateCallback1 = object :
-                        RateCallback {
-                        override fun onFBShow() {
-                            DataStore.setRated(true)
-                        }
-                    }
-                )
-            }
-        }
-    }
 }

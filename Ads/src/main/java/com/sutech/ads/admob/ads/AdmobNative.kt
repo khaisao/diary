@@ -307,7 +307,7 @@ class AdmobNative : AdmobAds() {
 
                 }
             } else {
-                if(adsChild.spaceName!="native_password"){
+                if (adsChild.spaceName != "native_password") {
                     val adView = LayoutInflater.from(activity)
                         .inflate(R.layout.ad_unified, null) as NativeAdView
                     currentUnifiedNativeAd?.let {
