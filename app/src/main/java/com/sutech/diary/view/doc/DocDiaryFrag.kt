@@ -33,7 +33,7 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
 
 
     override fun initView() {
-        AppUtil.readiary ++
+        AppUtil.readiary++
 
         dirayDataBase = DiaryDatabase.getInstance(requireContext())
 
@@ -53,12 +53,15 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
                     4, 3 -> {
                         logEvent("ViewDiary_Mailtous_Clicked")
                     }
+
                     5 -> {
                         logEvent("ViewDiary_Googleplay_Clicked")
                     }
+
                     2, 1 -> {
                         logEvent("ViewDiary_Mailtous_Clicked")
                     }
+
                     else -> {
                         logEvent("ViewDiary_Remindlater_Clicked")
                     }
@@ -110,22 +113,7 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
 
     private fun backReader() {
         context?.let {
-            logEvent("ViewDiary_IconBack_Clicked")
-            if (diaryModel?.listContent != null) {
-                diaryModel?.listContent?.let { d ->
-                    if (d.size > 0 && d[0].title != getString(R.string.app_name)&&AppUtil.readiary!=1) {
-                        showAdsInter("back_diary", 12000, {
-                            onBackPress(R.id.readDiaryFrag)
-                        }, {
-                            onBackPress(R.id.readDiaryFrag)
-                        })
-                    }else{
-                        onBackPress(R.id.readDiaryFrag)
-                    }
-                }
-            } else {
-                onBackPress(R.id.readDiaryFrag)
-            }
+            onBackPress(R.id.readDiaryFrag)
         }
     }
 
@@ -220,7 +208,7 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
     }
 
 
-/*---------- rate -------*/
+    /*---------- rate -------*/
 
     private var numRate = 0
     private fun showRate() {

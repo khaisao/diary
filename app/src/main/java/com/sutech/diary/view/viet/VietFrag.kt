@@ -17,6 +17,7 @@ import androidx.activity.addCallback
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
+import com.sutech.diary.DiaryApplication
 import com.sutech.diary.adapter.AdapterImageContent
 import com.sutech.diary.adapter.AdapterInputHashtag
 import com.sutech.diary.adapter.CalendarAdapter
@@ -488,11 +489,17 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
                             Constant.showRateToday = 1
                             onBackToHome(R.id.writeFrag)
                         } else {
-                            showAdsInter("save_diary", 12000, {
+                            DiaryApplication.interCount++
+                            if (DiaryApplication.interCount % 2 == 0) {
+                                showAdsInter("save_diary", 12000, {
+                                    onBackToHome(R.id.writeFrag)
+                                }, {
+                                    onBackToHome(R.id.writeFrag)
+                                })
+                            }
+                            else{
                                 onBackToHome(R.id.writeFrag)
-                            }, {
-                                onBackToHome(R.id.writeFrag)
-                            })
+                            }
                         }
                     }
                 }
@@ -507,11 +514,17 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
                             Constant.showRateToday = 1
                             onBackToHome(R.id.writeFrag)
                         } else {
-                            showAdsInter("save_diary", 12000, {
+                            DiaryApplication.interCount++
+                            if (DiaryApplication.interCount % 2 == 0) {
+                                showAdsInter("save_diary", 12000, {
+                                    onBackToHome(R.id.writeFrag)
+                                }, {
+                                    onBackToHome(R.id.writeFrag)
+                                })
+                            }
+                            else{
                                 onBackToHome(R.id.writeFrag)
-                            }, {
-                                onBackToHome(R.id.writeFrag)
-                            })
+                            }
                         }
                     }
                 }
@@ -567,11 +580,17 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
                             Constant.showRateToday = 1
                             onBackToHome(R.id.writeFrag)
                         } else {
-                            showAdsInter("save_diary", 12000, {
+                            DiaryApplication.interCount++
+                            if (DiaryApplication.interCount % 2 == 0) {
+                                showAdsInter("save_diary", 12000, {
+                                    onBackToHome(R.id.writeFrag)
+                                }, {
+                                    onBackToHome(R.id.writeFrag)
+                                })
+                            }
+                            else{
                                 onBackToHome(R.id.writeFrag)
-                            }, {
-                                onBackToHome(R.id.writeFrag)
-                            })
+                            }
                         }
                     }
                 }
@@ -585,11 +604,17 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
                             Constant.showRateToday = 1
                             onBackToHome(R.id.writeFrag)
                         } else {
-                            showAdsInter("save_diary", 12000, {
+                            DiaryApplication.interCount++
+                            if (DiaryApplication.interCount % 2 == 0) {
+                                showAdsInter("save_diary", 12000, {
+                                    onBackToHome(R.id.writeFrag)
+                                }, {
+                                    onBackToHome(R.id.writeFrag)
+                                })
+                            }
+                            else{
                                 onBackToHome(R.id.writeFrag)
-                            }, {
-                                onBackToHome(R.id.writeFrag)
-                            })
+                            }
                         }
                     }
                 }

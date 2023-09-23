@@ -144,14 +144,12 @@ class FanNative : FanAds() {
                 adCallback?.onAdClick()
                 // Native ad clicked
                 Log.d(TAG, "onAdClicked: ")
-                Utils.showToastDebug(activity,"id native: ${adsChild.adsId}")
 
 
             }
 
             override fun onLoggingImpression(ad: Ad) {
                 // Native ad impression
-                Log.d(TAG, "onLoggingImpression: ")
             }
         }
 
