@@ -56,8 +56,10 @@
         android:textSize="16sp"
         android:text="What is your favorite color?"
         android:background="@drawable/bg_radius_50"
+        android:hint="@string/hint_ques"
         android:paddingHorizontal="16dp"
         android:textColor="@color/black"
+        android:textColorHint="@color/color_666666"
         app:layout_constraintTop_toBottomOf="@id/tv_ques_des" />
 
     <EditText
