@@ -34,7 +34,6 @@ class FanNative : FanAds() {
         adChoicesContainer.removeAllViews()
         adChoicesContainer.addView(adOptionsView, 0)
 
-        // Create native UI using the ad metadata.
         val viewGroup = nativeAdLayout.findViewById<ViewGroup>(R.id.ad_media)
         var nativeAdMedia: MediaView ? = null
         var nativeAdIcon: MediaView? = null

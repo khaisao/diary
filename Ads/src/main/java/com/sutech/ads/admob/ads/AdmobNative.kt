@@ -8,16 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.RatingBar
 import android.widget.TextView
 import androidx.lifecycle.Lifecycle
-import com.google.android.gms.ads.*
+import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.VideoOptions
 import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
-
 import com.google.android.gms.ads.nativead.NativeAdOptions
 import com.google.android.gms.ads.nativead.NativeAdView
-
 import com.sutech.ads.AdCallback
 import com.sutech.ads.PreloadCallback
 import com.sutech.ads.R
@@ -26,7 +28,7 @@ import com.sutech.ads.utils.AdDef
 import com.sutech.ads.utils.Constant
 import com.sutech.ads.utils.StateLoadAd
 import com.sutech.ads.utils.Utils
-import java.util.*
+import java.util.Date
 
 class AdmobNative : AdmobAds() {
     var currentUnifiedNativeAd: NativeAd? = null
@@ -89,6 +91,7 @@ class AdmobNative : AdmobAds() {
         adView.starRatingView = adView.findViewById(R.id.ad_stars)
         adView.storeView = adView.findViewById(R.id.ad_store)
         adView.advertiserView = adView.findViewById(R.id.ad_advertiser)
+        adView.adChoicesView = adView.findViewById(R.id.ad_choices_container)
 
         // The headline and media content are guaranteed to be in every UnifiedNativeAd.
         (adView.headlineView as TextView).text = nativeAd.headline
@@ -96,14 +99,6 @@ class AdmobNative : AdmobAds() {
             adView.mediaView!!.setMediaContent(nativeAd.mediaContent!!)
         }
 
-        // These assets aren't guaranteed to be in every UnifiedNativeAd, so it's important to
-        // check before trying to display them.
-//        if (nativeAd.body == null) {
-//            adView.bodyView!!.visibility = View.INVISIBLE
-//        } else {
-//            adView.bodyView!!.visibility = View.VISIBLE
-//            (adView.bodyView as TextView).text = nativeAd.body
-//        }
         if (adView.callToActionView != null) {
             if (adView.callToActionView != null) {
                 if (nativeAd.callToAction == null) {
@@ -128,30 +123,14 @@ class AdmobNative : AdmobAds() {
                 adView.iconView!!.visibility = View.VISIBLE
             }
         }
-//        if (adView.priceView != null) {
-//            if (nativeAd.price == null) {
-//                adView.priceView!!.visibility = View.INVISIBLE
-//            } else {
-//                adView.priceView!!.visibility = View.VISIBLE
-//                (adView.priceView as TextView).text = nativeAd.price
-//            }
-//        }
-//        if (adView.storeView != null) {
-//            if (nativeAd.store == null) {
-//                adView.storeView!!.visibility = View.INVISIBLE
-//            } else {
-//                adView.storeView!!.visibility = View.VISIBLE
-//                (adView.storeView as TextView).text = nativeAd.store
-//            }
-//        }
-//        if (adView.starRatingView != null) {
-//            if (nativeAd.starRating == null) {
-//                adView.starRatingView!!.visibility = View.INVISIBLE
-//            } else {
-//                (adView.starRatingView as RatingBar).rating = nativeAd.starRating!!.toFloat()
-//                adView.starRatingView!!.visibility = View.VISIBLE
-//            }
-//        }
+        if (adView.adChoicesView != null) {
+            if (nativeAd.adChoicesInfo == null) {
+                adView.adChoicesView!!.visibility = View.INVISIBLE
+            } else {
+                adView.adChoicesView!!.visibility = View.VISIBLE
+                (adView.priceView as TextView).text = nativeAd.price
+            }
+        }
         if (adView.advertiserView != null) {
             if (nativeAd.advertiser == null) {
                 adView.advertiserView!!.visibility = View.INVISIBLE
@@ -162,17 +141,6 @@ class AdmobNative : AdmobAds() {
         }
 
         adView.setNativeAd(nativeAd)
-//        val vc = nativeAd.videoController
-//
-//        if (vc.hasVideoContent()) {
-//            vc.videoLifecycleCallbacks = object : VideoLifecycleCallbacks() {
-//                override fun onVideoEnd() {
-//                    super.onVideoEnd()
-//                }
-//            }
-//        } else {
-//        }
-
     }
 
 
@@ -187,7 +155,7 @@ class AdmobNative : AdmobAds() {
         adCallback: AdCallback?
     ) {
         load(activity, adsChild, adCallback, loadSuccess = {
-            show(activity, adsChild, loadingText, layout, layoutAds, lifecycle,adCallback)
+            show(activity, adsChild, loadingText, layout, layoutAds, lifecycle, adCallback)
         })
     }
 
@@ -315,8 +283,7 @@ class AdmobNative : AdmobAds() {
                         layout.removeAllViews()
                         layout.addView(adView)
                     }
-                }
-                else{
+                } else {
                     val adView = LayoutInflater.from(activity)
                         .inflate(R.layout.ad_unified_small, null) as NativeAdView
                     currentUnifiedNativeAd?.let {
