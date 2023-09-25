@@ -1,12 +1,20 @@
 package com.sutech.diary.view.password
 
+import android.content.Context
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
+import android.util.TypedValue
+import android.view.Display
 import android.view.View
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.sutech.common.PassCodeView
 import com.sutech.diary.base.BaseFragment
 import com.sutech.diary.database.DataStore
@@ -18,7 +26,25 @@ import com.sutech.diary.view.password.SecurityQuesFrag.Companion.TYPE_INPUT_NEW_
 import com.sutech.diary.view.password.SecurityQuesFrag.Companion.TYPE_INPUT_SECURITY_TO_CHANGE_PASSWORD
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import com.test.dialognew.setPreventDoubleClick
-import kotlinx.android.synthetic.main.fragment_pass_word.*
+import kotlinx.android.synthetic.main.fragment_pass_word.btn0
+import kotlinx.android.synthetic.main.fragment_pass_word.btn1
+import kotlinx.android.synthetic.main.fragment_pass_word.btn2
+import kotlinx.android.synthetic.main.fragment_pass_word.btn3
+import kotlinx.android.synthetic.main.fragment_pass_word.btn4
+import kotlinx.android.synthetic.main.fragment_pass_word.btn5
+import kotlinx.android.synthetic.main.fragment_pass_word.btn6
+import kotlinx.android.synthetic.main.fragment_pass_word.btn7
+import kotlinx.android.synthetic.main.fragment_pass_word.btn8
+import kotlinx.android.synthetic.main.fragment_pass_word.btn9
+import kotlinx.android.synthetic.main.fragment_pass_word.btnDelete
+import kotlinx.android.synthetic.main.fragment_pass_word.btnReset
+import kotlinx.android.synthetic.main.fragment_pass_word.layoutAdsPassword
+import kotlinx.android.synthetic.main.fragment_pass_word.ll_forgot_password
+import kotlinx.android.synthetic.main.fragment_pass_word.passCodeView
+import kotlinx.android.synthetic.main.fragment_pass_word.tvCancel
+import kotlinx.android.synthetic.main.fragment_pass_word.tvPasscode
+import kotlinx.android.synthetic.main.fragment_pass_word.tvWrongPass
+
 
 class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
 
@@ -33,6 +59,9 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
      * $param 3: check splash
      */
     var isTypePassword = -1
+    var isFirstTimeShowBanner = false
+
+    private var adView: AdView? = null
 
     override fun initView() {
         getDataBundle()
@@ -55,17 +84,42 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
             Glide.with(requireContext()).load(R.drawable.ic_back).into(tvCancel)
         } else {
             layoutAdsPassword.visibility = View.VISIBLE
-            showAdsWithLayout("native_password", layoutAdsPassword)
+//            showAdsWithLayout("native_password", layoutAdsPassword)
             Glide.with(requireContext()).load(R.drawable.ic_cancel).into(tvCancel)
         }
         if (isTypePassword == 2) {
             layoutAdsPassword.isVisible = true
-            showAdsWithLayout("native_password", layoutAdsPassword)
             ll_forgot_password.isVisible = true
         }
         setClick()
+        MobileAds.initialize(requireContext(),
+            { })
+        adView = AdView(requireContext())
+        adView!!.adUnitId = "ca-app-pub-3940256099942544/6300978111"
+        layoutAdsPassword!!.addView(adView)
+        layoutAdsPassword.viewTreeObserver.addOnGlobalLayoutListener {
+            if(!isFirstTimeShowBanner){
+                val height = layoutAdsPassword.height
+                val adRequest: AdRequest = AdRequest.Builder().build()
+                val adSize: AdSize = getAdSize(height)
+                adView!!.setAdSize(adSize)
+                adView!!.loadAd(adRequest)
+                isFirstTimeShowBanner = true
+            }
+        }
     }
 
+    private fun getAdSize(height:Int): AdSize {
+        // Step 2 - Determine the screen width (less decorations) to use for the ad width.
+        val display: Display = requireActivity().windowManager.getDefaultDisplay()
+        val outMetrics = DisplayMetrics()
+        display.getMetrics(outMetrics)
+        val widthPixels = outMetrics.widthPixels.toFloat()
+        val density = outMetrics.density
+        val adWidth = (widthPixels / density).toInt()
+        Log.d("asgagwawgawgwag", "getAdSize: $height")
+        return AdSize.getInlineAdaptiveBannerAdSize(adWidth, height)
+    }
     private fun getDataBundle() {
         val bundle = arguments
         if (bundle != null) {

@@ -8,298 +8,286 @@
     <LinearLayout
         android:id="@+id/layoutAdsPassword"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:visibility="invisible"
+        android:gravity="top"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/cl_password"
         android:layout_marginTop="16dp"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:backgroundTint="#33DEE4FA"
-        app:layout_constraintTop_toBottomOf="@id/tvCancel">
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/tvCancel"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/viewGoneAdGallery"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Loading ad..."
-            android:textColor="@color/black" />
     </LinearLayout>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/layoutAdsPassword"
+        android:id="@+id/cl_password"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="45dp"
         app:layout_constraintBottom_toBottomOf="parent">
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <com.sutech.common.text.TextViewRegular
+            android:id="@+id/tvPasscode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/enter_pass_word"
+            android:textColor="?attr/textColor"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.sutech.common.text.TextViewRegular
+            android:id="@+id/tv_password_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Please enter your password"
+            android:textColor="#606F7F"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPasscode" />
+
+        <com.sutech.common.text.TextViewMedium
+            android:id="@+id/tvWrongPass"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/wrong_password"
+            android:textColor="#BD1206"
+            android:textSize="15sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/passCodeView"
+            app:layout_constraintStart_toStartOf="@id/passCodeView"
+            app:layout_constraintTop_toBottomOf="@id/passCodeView"
+            app:textColorDefault="false" />
+
+        <com.sutech.common.PassCodeView
+            android:id="@+id/passCodeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_password_des" />
+
+
+        <com.sutech.common.text.TextViewMedium
+            android:id="@+id/tvWrong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/passCodeView" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvWrongPass, passCodeView" />
+
+        <LinearLayout
+            android:id="@+id/ll_btn_input"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/barrier">
 
-            <com.sutech.common.text.TextViewRegular
-                android:id="@+id/tvPasscode"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="16dp"
-                android:text="@string/enter_pass_word"
+                android:layout_marginBottom="24dp">
+
+                <com.sutech.common.text.TextViewLight
+                    android:id="@+id/btn1"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:textColorDefault="false" />
+
+                <com.sutech.common.text.TextViewLight
+                    android:id="@+id/btn2"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginHorizontal="24dp"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:textColorDefault="false" />
+
+                <com.sutech.common.text.TextViewLight
+                    android:id="@+id/btn3"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:gravity="center"
+                    android:text="3"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:layout_constraintWidth_percent="0.17"
+                    app:textColorDefault="false" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
+
+                <com.sutech.common.text.TextViewLight
+                    android:id="@+id/btn4"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:gravity="center"
+                    android:text="4"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:textColorDefault="false" />
+
+                <com.sutech.common.text.TextViewLight
+                    android:id="@+id/btn5"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginHorizontal="24dp"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:gravity="center"
+                    android:text="5"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:textColorDefault="false" />
+
+                <com.sutech.common.text.TextViewLight
+                    android:id="@+id/btn6"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:gravity="center"
+                    android:text="6"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:textColorDefault="false" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
+
+                <com.sutech.common.text.TextViewLight
+                    android:id="@+id/btn7"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:gravity="center"
+                    android:text="7"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:textColorDefault="false" />
+
+                <com.sutech.common.text.TextViewLight
+                    android:id="@+id/btn8"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginHorizontal="24dp"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:gravity="center"
+                    android:text="8"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:textColorDefault="false" />
+
+                <com.sutech.common.text.TextViewLight
+                    android:id="@+id/btn9"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:gravity="center"
+                    android:text="9"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:textColorDefault="false" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/btnReset"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:scaleType="centerInside"
+                    android:text="0"
+                    app:srcCompat="@drawable/ic_reload" />
+
+                <com.sutech.common.text.TextViewLight
+                    android:id="@+id/btn0"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginHorizontal="24dp"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:textColorDefault="false" />
+
+
+                <ImageView
+                    android:id="@+id/btnDelete"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:scaleType="centerInside"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_delete_number_password" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_btn_input">
+
+            <com.sutech.common.text.TextViewRegular
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/forgot_password"
                 android:textColor="?attr/textColor"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                android:textSize="18sp" />
 
-            <com.sutech.common.text.TextViewRegular
-                android:id="@+id/tv_password_des"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Please enter your password"
-                android:textColor="#606F7F"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvPasscode" />
-
-            <com.sutech.common.text.TextViewMedium
-                android:id="@+id/tvWrongPass"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="@string/wrong_password"
-                android:textColor="#BD1206"
-                android:textSize="15sp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/passCodeView"
-                app:layout_constraintStart_toStartOf="@id/passCodeView"
-                app:layout_constraintTop_toBottomOf="@id/passCodeView"
-                app:textColorDefault="false" />
-
-            <com.sutech.common.PassCodeView
-                android:id="@+id/passCodeView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="23dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_password_des" />
-
-
-            <com.sutech.common.text.TextViewMedium
-                android:id="@+id/tvWrong"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:gravity="center"
-                android:textAllCaps="true"
-                android:textSize="16sp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/passCodeView" />
-
-            <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/barrier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:barrierDirection="bottom"
-                app:constraint_referenced_ids="tvWrongPass, passCodeView" />
-
-            <LinearLayout
-                android:id="@+id/ll_btn_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/barrier">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp">
-
-                    <com.sutech.common.text.TextViewLight
-                        android:id="@+id/btn1"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_btn_circle_white"
-                        android:gravity="center"
-                        android:text="1"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        app:textColorDefault="false" />
-
-                    <com.sutech.common.text.TextViewLight
-                        android:id="@+id/btn2"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginHorizontal="24dp"
-                        android:background="@drawable/bg_btn_circle_white"
-                        android:gravity="center"
-                        android:text="2"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        app:textColorDefault="false" />
-
-                    <com.sutech.common.text.TextViewLight
-                        android:id="@+id/btn3"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_btn_circle_white"
-                        android:gravity="center"
-                        android:text="3"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        app:layout_constraintWidth_percent="0.17"
-                        app:textColorDefault="false" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp">
-
-                    <com.sutech.common.text.TextViewLight
-                        android:id="@+id/btn4"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_btn_circle_white"
-                        android:gravity="center"
-                        android:text="4"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        app:textColorDefault="false" />
-
-                    <com.sutech.common.text.TextViewLight
-                        android:id="@+id/btn5"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginHorizontal="24dp"
-                        android:background="@drawable/bg_btn_circle_white"
-                        android:gravity="center"
-                        android:text="5"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        app:textColorDefault="false" />
-
-                    <com.sutech.common.text.TextViewLight
-                        android:id="@+id/btn6"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_btn_circle_white"
-                        android:gravity="center"
-                        android:text="6"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        app:textColorDefault="false" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp">
-
-                    <com.sutech.common.text.TextViewLight
-                        android:id="@+id/btn7"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_btn_circle_white"
-                        android:gravity="center"
-                        android:text="7"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        app:textColorDefault="false" />
-
-                    <com.sutech.common.text.TextViewLight
-                        android:id="@+id/btn8"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginHorizontal="24dp"
-                        android:background="@drawable/bg_btn_circle_white"
-                        android:gravity="center"
-                        android:text="8"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        app:textColorDefault="false" />
-
-                    <com.sutech.common.text.TextViewLight
-                        android:id="@+id/btn9"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_btn_circle_white"
-                        android:gravity="center"
-                        android:text="9"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        app:textColorDefault="false" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/btnReset"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_btn_circle_white"
-                        android:gravity="center"
-                        android:padding="12dp"
-                        android:scaleType="centerInside"
-                        android:text="0"
-                        app:srcCompat="@drawable/ic_reload" />
-
-                    <com.sutech.common.text.TextViewLight
-                        android:id="@+id/btn0"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginHorizontal="24dp"
-                        android:background="@drawable/bg_btn_circle_white"
-                        android:gravity="center"
-                        android:text="0"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        app:textColorDefault="false" />
-
-
-                    <ImageView
-                        android:id="@+id/btnDelete"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_btn_circle_white"
-                        android:gravity="center"
-                        android:padding="12dp"
-                        android:scaleType="centerInside"
-                        android:visibility="visible"
-                        app:srcCompat="@drawable/ic_delete_number_password" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_forgot_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_btn_input">
-
-                <com.sutech.common.text.TextViewRegular
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/forgot_password"
-                    android:textColor="?attr/textColor"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/tvCancel"
