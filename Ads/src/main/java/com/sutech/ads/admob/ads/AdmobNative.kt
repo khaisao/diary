@@ -91,7 +91,6 @@ class AdmobNative : AdmobAds() {
         adView.starRatingView = adView.findViewById(R.id.ad_stars)
         adView.storeView = adView.findViewById(R.id.ad_store)
         adView.advertiserView = adView.findViewById(R.id.ad_advertiser)
-        adView.adChoicesView = adView.findViewById(R.id.ad_choices_container)
 
         // The headline and media content are guaranteed to be in every UnifiedNativeAd.
         (adView.headlineView as TextView).text = nativeAd.headline
@@ -123,14 +122,7 @@ class AdmobNative : AdmobAds() {
                 adView.iconView!!.visibility = View.VISIBLE
             }
         }
-        if (adView.adChoicesView != null) {
-            if (nativeAd.adChoicesInfo == null) {
-                adView.adChoicesView!!.visibility = View.INVISIBLE
-            } else {
-                adView.adChoicesView!!.visibility = View.VISIBLE
-                (adView.priceView as TextView).text = nativeAd.price
-            }
-        }
+
         if (adView.advertiserView != null) {
             if (nativeAd.advertiser == null) {
                 adView.advertiserView!!.visibility = View.INVISIBLE
