@@ -18,6 +18,20 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_loading_ad"
+        app:layout_constraintEnd_toEndOf="@id/layoutAdsPassword"
+        app:layout_constraintStart_toStartOf="@id/layoutAdsPassword"
+        app:layout_constraintBottom_toBottomOf="@id/layoutAdsPassword"
+        app:layout_constraintTop_toTopOf="@id/layoutAdsPassword"
+        android:background="@color/white"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:text="Loading ad.."
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:id="@+id/cl_password"

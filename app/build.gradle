@@ -24,10 +24,14 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "ID_AD_INLINES_BANNER", "\"ca-app-pub-3940256099942544/6300978111\""
+
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "ID_AD_INLINES_BANNER", "\"ca-app-pub-2094788208346877/4369588529\""
+            signingConfig signingConfigs.debug
         }
     }
     buildFeatures {

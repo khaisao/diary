@@ -1,19 +1,18 @@
 package com.sutech.diary.view.password
 
-import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
-import android.util.TypedValue
 import android.view.Display
 import android.view.View
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.sutech.common.PassCodeView
 import com.sutech.diary.base.BaseFragment
@@ -24,6 +23,7 @@ import com.sutech.diary.util.Constant.TYPE_PASSWORD
 import com.sutech.diary.util.show
 import com.sutech.diary.view.password.SecurityQuesFrag.Companion.TYPE_INPUT_NEW_SECURITY
 import com.sutech.diary.view.password.SecurityQuesFrag.Companion.TYPE_INPUT_SECURITY_TO_CHANGE_PASSWORD
+import com.sutech.journal.diary.diarywriting.lockdiary.BuildConfig
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import com.test.dialognew.setPreventDoubleClick
 import kotlinx.android.synthetic.main.fragment_pass_word.btn0
@@ -44,6 +44,7 @@ import kotlinx.android.synthetic.main.fragment_pass_word.passCodeView
 import kotlinx.android.synthetic.main.fragment_pass_word.tvCancel
 import kotlinx.android.synthetic.main.fragment_pass_word.tvPasscode
 import kotlinx.android.synthetic.main.fragment_pass_word.tvWrongPass
+import kotlinx.android.synthetic.main.fragment_pass_word.tv_loading_ad
 
 
 class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
@@ -84,7 +85,6 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
             Glide.with(requireContext()).load(R.drawable.ic_back).into(tvCancel)
         } else {
             layoutAdsPassword.visibility = View.VISIBLE
-//            showAdsWithLayout("native_password", layoutAdsPassword)
             Glide.with(requireContext()).load(R.drawable.ic_cancel).into(tvCancel)
         }
         if (isTypePassword == 2) {
@@ -95,10 +95,19 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
         MobileAds.initialize(requireContext(),
             { })
         adView = AdView(requireContext())
-        adView!!.adUnitId = "ca-app-pub-3940256099942544/6300978111"
+        adView!!.adUnitId = BuildConfig.ID_AD_INLINES_BANNER
         layoutAdsPassword!!.addView(adView)
+        adView!!.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                tv_loading_ad.isVisible = false
+            }
+
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                tv_loading_ad.isVisible = false
+            }
+        }
         layoutAdsPassword.viewTreeObserver.addOnGlobalLayoutListener {
-            if(!isFirstTimeShowBanner){
+            if (!isFirstTimeShowBanner) {
                 val height = layoutAdsPassword.height
                 val adRequest: AdRequest = AdRequest.Builder().build()
                 val adSize: AdSize = getAdSize(height)
@@ -109,17 +118,17 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
         }
     }
 
-    private fun getAdSize(height:Int): AdSize {
-        // Step 2 - Determine the screen width (less decorations) to use for the ad width.
+    private fun getAdSize(height: Int): AdSize {
         val display: Display = requireActivity().windowManager.getDefaultDisplay()
         val outMetrics = DisplayMetrics()
         display.getMetrics(outMetrics)
         val widthPixels = outMetrics.widthPixels.toFloat()
         val density = outMetrics.density
         val adWidth = (widthPixels / density).toInt()
-        Log.d("asgagwawgawgwag", "getAdSize: $height")
-        return AdSize.getInlineAdaptiveBannerAdSize(adWidth, height)
+        val adHeight = (height / density).toInt()
+        return AdSize.getInlineAdaptiveBannerAdSize(adWidth, adHeight)
     }
+
     private fun getDataBundle() {
         val bundle = arguments
         if (bundle != null) {
