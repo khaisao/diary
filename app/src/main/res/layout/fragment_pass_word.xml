@@ -5,36 +5,36 @@
     android:layout_height="match_parent"
     android:background="?attr/backgroundImage">
 
+    <TextView
+        android:id="@+id/tv_loading_ad"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="Loading ad.."
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/layoutAdsPassword"
+        app:layout_constraintEnd_toEndOf="@id/layoutAdsPassword"
+        app:layout_constraintStart_toStartOf="@id/layoutAdsPassword"
+        app:layout_constraintTop_toTopOf="@id/layoutAdsPassword" />
+
     <LinearLayout
         android:id="@+id/layoutAdsPassword"
         android:layout_width="match_parent"
-        android:gravity="top"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/cl_password"
         android:layout_marginTop="16dp"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/tvCancel"
-        android:orientation="horizontal">
+        android:gravity="top"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/cl_password"
+        app:layout_constraintTop_toBottomOf="@id/tvCancel">
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_loading_ad"
-        app:layout_constraintEnd_toEndOf="@id/layoutAdsPassword"
-        app:layout_constraintStart_toStartOf="@id/layoutAdsPassword"
-        app:layout_constraintBottom_toBottomOf="@id/layoutAdsPassword"
-        app:layout_constraintTop_toTopOf="@id/layoutAdsPassword"
-        android:background="@color/white"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:text="Loading ad.."
-        android:layout_width="0dp"
-        android:layout_height="0dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
         android:id="@+id/cl_password"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="45dp"
         app:layout_constraintBottom_toBottomOf="parent">

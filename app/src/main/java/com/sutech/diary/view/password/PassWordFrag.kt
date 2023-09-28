@@ -1,5 +1,6 @@
 package com.sutech.diary.view.password
 
+import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.Display
@@ -17,6 +18,7 @@ import com.google.android.gms.ads.MobileAds
 import com.sutech.common.PassCodeView
 import com.sutech.diary.base.BaseFragment
 import com.sutech.diary.database.DataStore
+import com.sutech.diary.util.AppUtil
 import com.sutech.diary.util.Constant
 import com.sutech.diary.util.Constant.COME_FROM_SECURITY
 import com.sutech.diary.util.Constant.TYPE_PASSWORD
@@ -60,9 +62,10 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
      * $param 3: check splash
      */
     var isTypePassword = -1
-    var isFirstTimeShowBanner = false
+    private var needLoadAds = false
 
     private var adView: AdView? = null
+
 
     override fun initView() {
         getDataBundle()
@@ -91,29 +94,55 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
             layoutAdsPassword.isVisible = true
             ll_forgot_password.isVisible = true
         }
+        needLoadAds = isTypePassword == 2 || isTypePassword == 3
+        if (AppUtil.isIAP || !isNetworkConnected()) {
+            needLoadAds = false
+        }
+        layoutAdsPassword.isVisible = needLoadAds
         setClick()
         MobileAds.initialize(requireContext(),
             { })
-        adView = AdView(requireContext())
-        adView!!.adUnitId = BuildConfig.ID_AD_INLINES_BANNER
-        layoutAdsPassword!!.addView(adView)
-        adView!!.adListener = object : AdListener() {
+        layoutAdsPassword.post {
+            val adView = AdView(requireContext())
+            adView.adUnitId = BuildConfig.ID_AD_INLINES_BANNER
+            adView.setAdSize(
+                getAdSize(
+                    requireContext(),
+                    layoutAdsPassword.width,
+                    layoutAdsPassword.height
+                )
+            )
+            adView.loadState { isLoaded ->
+                if (isLoaded) {
+                    tv_loading_ad.isVisible = false
+                }
+            }
+            val adRequest = AdRequest.Builder().build()
+            layoutAdsPassword.removeAllViews()
+            layoutAdsPassword.addView(adView)
+            if (needLoadAds) {
+
+                adView.loadAd(adRequest)
+            }
+        }
+    }
+
+    private fun getAdSize(context: Context, width: Int, height: Int): AdSize {
+        val displayMetrics = context.resources.displayMetrics
+        val density: Float = displayMetrics.density
+        val adWidth: Int = (width / density).toInt()
+        val adHeight: Int = (height / density).toInt()
+        return AdSize.getInlineAdaptiveBannerAdSize(adWidth, adHeight)
+    }
+
+    private fun AdView.loadState(callback: ((Boolean) -> Unit)? = null) {
+        adListener = object : AdListener() {
             override fun onAdLoaded() {
-                tv_loading_ad.isVisible = false
+                callback?.invoke(true)
             }
 
             override fun onAdFailedToLoad(adError: LoadAdError) {
-                tv_loading_ad.isVisible = false
-            }
-        }
-        layoutAdsPassword.viewTreeObserver.addOnGlobalLayoutListener {
-            if (!isFirstTimeShowBanner) {
-                val height = layoutAdsPassword.height
-                val adRequest: AdRequest = AdRequest.Builder().build()
-                val adSize: AdSize = getAdSize(height)
-                adView!!.setAdSize(adSize)
-                adView!!.loadAd(adRequest)
-                isFirstTimeShowBanner = true
+                callback?.invoke(false)
             }
         }
     }
@@ -146,7 +175,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                 }
             }
         }
-        if(isTypePassword == 3){
+        if (isTypePassword == 3) {
             logEvent("UnlockPass_Show")
         }
     }
@@ -215,11 +244,13 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                 logEvent("ConfirmPassword_IconBack_Clicked")
             } else if (tvPasscode.text.toString() == getString(
                     R.string.confirm_new_password
-                )) {
+                )
+            ) {
                 logEvent("ConfirmNewScr_IconBack_Clicked")
-            } else if(tvPasscode.text.toString() == getString(
+            } else if (tvPasscode.text.toString() == getString(
                     R.string.enter_pass_word
-                )){
+                )
+            ) {
                 logEvent("UnlockPass_IconBack_Clicked")
             } else {
                 logEvent("SetpassScr_IconSkip_Clicked")
@@ -271,6 +302,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                             }
                         }
                     }
+
                     1 -> {
 //                        update
                         if (oldPassword.isEmpty()) {
@@ -301,6 +333,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                             }
                         }
                     }
+
                     2 -> {
 //                        check
                         if (DataStore.checkPassword(passCode)) {
@@ -312,6 +345,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
                         }
 
                     }
+
                     3 -> {
 //                        check splash
                         if (DataStore.checkPassword(passCode)) {
@@ -329,7 +363,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
         })
     }
 
-    private fun goToSecurityScreen(){
+    private fun goToSecurityScreen() {
         logEvent("UnlockPass_Forgotpassword")
         val ans = DataStore.getAns()
         val bundle = Bundle()
@@ -338,11 +372,11 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
         } else {
             bundle.putInt(Constant.TYPE_SECURITY, TYPE_INPUT_SECURITY_TO_CHANGE_PASSWORD)
         }
-        bundle.putBoolean(Constant.GO_TO_SECURITY_FROM_CHANGE_PASSWORD,true)
+        bundle.putBoolean(Constant.GO_TO_SECURITY_FROM_CHANGE_PASSWORD, true)
         gotoFrag(R.id.passWordFrag, R.id.action_passWordFrag_to_securityQuesFrag, bundle)
     }
 
-    private fun goToSecurityAndClearPasswordScreenInBackStack(){
+    private fun goToSecurityAndClearPasswordScreenInBackStack() {
         val ans = DataStore.getAns()
         val bundle = Bundle()
         if (ans.isNullOrBlank()) {
@@ -350,7 +384,7 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
         } else {
             bundle.putInt(Constant.TYPE_SECURITY, TYPE_INPUT_SECURITY_TO_CHANGE_PASSWORD)
         }
-        bundle.putBoolean(Constant.GO_TO_SECURITY_FROM_CHANGE_PASSWORD,true)
+        bundle.putBoolean(Constant.GO_TO_SECURITY_FROM_CHANGE_PASSWORD, true)
         gotoFrag(R.id.passWordFrag, R.id.action_passWordFrag_to_securityQuesFrag2, bundle)
     }
 

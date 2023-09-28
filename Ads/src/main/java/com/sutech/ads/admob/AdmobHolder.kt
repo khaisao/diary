@@ -147,7 +147,7 @@ class AdmobHolder {
 
     }
 
-    public fun preload(
+    fun preload(
         activity: Activity,
         adsChild: AdsChild,
         preloadCallback: PreloadCallback? = null

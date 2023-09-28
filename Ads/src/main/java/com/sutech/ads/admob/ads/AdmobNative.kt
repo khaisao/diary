@@ -91,6 +91,7 @@ class AdmobNative : AdmobAds() {
         adView.starRatingView = adView.findViewById(R.id.ad_stars)
         adView.storeView = adView.findViewById(R.id.ad_store)
         adView.advertiserView = adView.findViewById(R.id.ad_advertiser)
+        adView.adChoicesView = adView.findViewById(R.id.ad_choices_container)
 
         // The headline and media content are guaranteed to be in every UnifiedNativeAd.
         (adView.headlineView as TextView).text = nativeAd.headline

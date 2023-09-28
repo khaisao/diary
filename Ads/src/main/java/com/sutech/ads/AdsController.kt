@@ -159,7 +159,7 @@ class AdsController private constructor(
     }
 
 
-    public fun preload(spaceName: String, preloadCallback: PreloadCallback? = null) {
+    fun preload(spaceName: String, preloadCallback: PreloadCallback? = null) {
         if (isPremium) return
         val listItem = hashMapAds[spaceName.toLowerCase(Locale.getDefault())]
         if (listItem != null && listItem.size > 0) {
@@ -346,7 +346,7 @@ class AdsController private constructor(
             adCallback?.onAdFailToLoad("no data check spaceName or file json")
         } else {
             val adsChild = getChildPriority(listItem, -1)
-            Log.d(TAG, "loadAndShow: ${adsChild?.toString()}")
+            Log.d("sagagwawgwag", "loadAndShow: ${adsChild?.toString()}")
             if (adsChild != null) {
                 loadAdsPriority(
                     contextUse,
