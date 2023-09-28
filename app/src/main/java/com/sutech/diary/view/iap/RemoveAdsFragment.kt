@@ -2,8 +2,14 @@ package com.sutech.diary.view.iap
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.util.Log
 import android.widget.Toast
+import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.BillingClientStateListener
+import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.Purchase
+import com.android.billingclient.api.PurchasesUpdatedListener
+import com.android.billingclient.api.SkuDetailsParams
 import com.sutech.diary.base.BaseFragment
 import com.sutech.diary.billding.BillingError
 import com.sutech.diary.billding.BillingListener
@@ -24,6 +30,9 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
             )
         )
     }
+
+    private lateinit var billingClient: BillingClient
+
 
     override fun onDestroy() {
         sdkBilling.endConnection()
@@ -58,6 +67,49 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
             }
         }
         sdkBilling.startConnection()
+        billingClient = BillingClient.newBuilder(requireContext())
+            .enablePendingPurchases()
+            .setListener(purchaseUpdateListener)
+            .build()
+
+        billingClient.startConnection(object : BillingClientStateListener {
+            override fun onBillingSetupFinished(billingResult: BillingResult) {
+                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                    querySkuDetails()
+                }
+            }
+            override fun onBillingServiceDisconnected() {
+            }
+        })
+    }
+
+    private fun querySkuDetails() {
+        val skuList = listOf(AppUtil.SKU_FOREVER, AppUtil.SKU_FOREVER_FAKE)
+        val params = SkuDetailsParams.newBuilder()
+            .setSkusList(skuList)
+            .setType(BillingClient.SkuType.INAPP)
+            .build()
+
+        billingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
+            if (skuDetailsList != null) {
+                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList.isNotEmpty()) {
+                    val skuDetailsReal = skuDetailsList[0]
+                    val skuDetailsFake = skuDetailsList[1]
+                    val priceReal = skuDetailsReal?.price
+                    val priceFake = skuDetailsFake?.price
+
+                    // Đây là giá của sản phẩm
+                    // Bạn có thể hiển thị giá trong giao diện của bạn
+                }
+            }
+        }
+    }
+
+    private val purchaseUpdateListener = PurchasesUpdatedListener { billingResult, purchases ->
+        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
+            for (purchase in purchases) {
+            }
+        }
     }
 
     private fun haveNetworkConnection(ctx: Context): Boolean {
@@ -83,5 +135,10 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
             System.err.println(e.toString())
             false
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        billingClient.endConnection()
     }
 }

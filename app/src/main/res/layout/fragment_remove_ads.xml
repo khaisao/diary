@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:textColorDefault="false" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -50,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivBack" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
             android:adjustViewBounds="true"
             android:src="@drawable/banner2_iap"
             app:layout_constraintTop_toBottomOf="@id/ivImg" />
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <com.sutech.common.text.TextViewRegular
