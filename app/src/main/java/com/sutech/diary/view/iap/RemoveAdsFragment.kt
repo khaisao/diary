@@ -1,9 +1,10 @@
 package com.sutech.diary.view.iap
 
 import android.content.Context
+import android.graphics.Paint
 import android.net.ConnectivityManager
-import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingResult
@@ -20,6 +21,8 @@ import com.sutech.diary.util.AppUtil
 import com.sutech.diary.util.setPreventDoubleClickScaleView
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.fragment_remove_ads.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
 
@@ -50,6 +53,8 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
             val buyNow = sdkBilling.buyNow(requireActivity(), AppUtil.SKU_FOREVER)
         }
 
+        tv_fake_price.paintFlags = tv_fake_price.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+
         ivBack.setPreventDoubleClickScaleView {
             logEvent("IAPScr_ButtonX_Clicked")
             onBackPress(R.id.IAPFragment)
@@ -78,6 +83,7 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
                     querySkuDetails()
                 }
             }
+
             override fun onBillingServiceDisconnected() {
             }
         })
@@ -93,13 +99,29 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
         billingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
             if (skuDetailsList != null) {
                 if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList.isNotEmpty()) {
-                    val skuDetailsReal = skuDetailsList[0]
-                    val skuDetailsFake = skuDetailsList[1]
-                    val priceReal = skuDetailsReal?.price
-                    val priceFake = skuDetailsFake?.price
+                    try {
+                        val skuDetailsReal = skuDetailsList[0]
+                        val skuDetailsFake = skuDetailsList[1]
+                        val priceReal = skuDetailsReal?.price
+                        val priceFake = skuDetailsFake?.price
+                        lifecycleScope.launch(Dispatchers.Main) {
+                            tv_real_price.text = priceReal
+                            tv_fake_price.text = priceFake
+                        }
+                        val priceRealNumber =
+                            priceReal?.replace("[^\\d.]".toRegex(), "")?.replace(".", "")?.toInt()
+                        val priceFakeNumber =
+                            priceFake?.replace("[^\\d.]".toRegex(), "")?.replace(".", "")?.toInt()
 
-                    // Đây là giá của sản phẩm
-                    // Bạn có thể hiển thị giá trong giao diện của bạn
+                        if (priceRealNumber != null && priceFakeNumber != null) {
+                            lifecycleScope.launch(Dispatchers.Main) {
+                                val percent =
+                                    (priceRealNumber.toFloat() / priceFakeNumber.toFloat()) * 100
+                                tv_save_percent.text = "Save ${percent.toInt()}%"
+                            }
+                        }
+                    } catch (e: Exception) {
+                    }
                 }
             }
         }
@@ -120,14 +142,14 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
             val netInfo = cm.allNetworkInfo
             for (ni in netInfo) {
                 if (ni.typeName.equals(
-                            "WIFI",
-                            ignoreCase = true
-                        )
+                        "WIFI",
+                        ignoreCase = true
+                    )
                 ) if (ni.isConnected) haveConnectedWifi = true
                 if (ni.typeName.equals(
-                            "MOBILE",
-                            ignoreCase = true
-                        )
+                        "MOBILE",
+                        ignoreCase = true
+                    )
                 ) if (ni.isConnected) haveConnectedMobile = true
             }
             haveConnectedWifi || haveConnectedMobile
