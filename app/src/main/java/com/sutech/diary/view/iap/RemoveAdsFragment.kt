@@ -116,7 +116,7 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
                         if (priceRealNumber != null && priceFakeNumber != null) {
                             lifecycleScope.launch(Dispatchers.Main) {
                                 val percent =
-                                    (priceRealNumber.toFloat() / priceFakeNumber.toFloat()) * 100
+                                    ((priceFakeNumber.toFloat() - priceRealNumber.toFloat()) / priceFakeNumber.toFloat()) * 100
                                 tv_save_percent.text = "Save ${percent.toInt()}%"
                             }
                         }
