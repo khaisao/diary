@@ -9,6 +9,7 @@ import com.sutech.diary.adapter.decoration.DividerItemDecoration
 import com.sutech.diary.base.BaseFragment
 import com.sutech.diary.util.Constant
 import com.sutech.diary.util.HashtagUtil
+import com.sutech.diary.util.ImageUtil
 import com.sutech.diary.util.setOnClick
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.fragment_hashtags.btnBack
@@ -32,6 +33,7 @@ class HashtagsFrag : BaseFragment(R.layout.fragment_hashtags) {
     }
 
     private fun setupView() {
+        ImageUtil.setImage(empty_image, R.drawable.empty_box)
         lifecycleScope.launch {
             val htQuantity = HashtagUtil.getHashtagQuantities(requireContext()).also {
                 empty_image.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE

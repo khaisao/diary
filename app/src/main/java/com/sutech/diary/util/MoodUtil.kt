@@ -45,12 +45,16 @@ object MoodUtil {
             }.filter { moodObj -> moodObj.id == id }.also {
                 selectedMoodNumber = it.size
             }
-            val percent = selectedMoodNumber.toFloat() / allMoodsNumber * 100
-
-            if (selectedMoodNumber * 100 % allMoodsNumber * 100 == 0) {
-                return@withContext percent.toInt().toString()
+            if (allMoodsNumber == 0) {
+                return@withContext "0 %"
             } else {
-                return@withContext String.format("%.1f", percent)
+                val percent = selectedMoodNumber.toFloat() / allMoodsNumber * 100
+
+                if (selectedMoodNumber * 100 % allMoodsNumber * 100 == 0) {
+                    return@withContext percent.toInt().toString()
+                } else {
+                    return@withContext String.format("%.1f", percent)
+                }
             }
         }
     }

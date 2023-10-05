@@ -70,7 +70,11 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
     private fun onClickDeleteDiary() {
         context?.let { ctx ->
             DialogUtil.showDialogAlert(ctx, getString(R.string.confirm_delete_diary), {
-                diaryModel?.listContent?.removeAt(positionContent)
+                if (diaryModel != null && diaryModel!!.listContent != null && (diaryModel!!.listContent?.size
+                        ?: 0) > 0
+                ) {
+                    diaryModel?.listContent?.removeAt(positionContent)
+                }
                 CoroutineScope(Dispatchers.IO).launch {
                     if (diaryModel?.listContent?.size != 0) {
                         dirayDataBase.getDiaryDao().updateDiary(diaryModel!!).let {

@@ -336,7 +336,6 @@
                 android:layout_width="128dp"
                 android:layout_height="136dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/drawer_header"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ScrollView

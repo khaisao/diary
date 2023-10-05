@@ -279,8 +279,8 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         }
         btnHashtag?.setOnClickScaleView(500) {
             logEvent("WriteDiary_Iconhashtag_Clicked")
-            edtTitle.clearFocus()
-            edtContent.clearFocus()
+            edtTitle?.clearFocus()
+            edtContent?.clearFocus()
             val view = InputHashtagView(requireContext())
             view.setCustomViewListener(this)
             view.setRequestHashtagInput(true)
@@ -291,17 +291,17 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
         edtTitle?.setOnFocusChangeListener { view, isFocus ->
             if (isFocus) {
                 logEvent("WriteDiary_Title_Clicked")
-                edtTitle.isCursorVisible = true
-                edtContent.clearFocus()
-                edtContent.isCursorVisible = false
+                edtTitle?.isCursorVisible = true
+                edtContent?.clearFocus()
+                edtContent?.isCursorVisible = false
             }
         }
         edtContent?.setOnFocusChangeListener { view, isFocus ->
             if (isFocus) {
                 logEvent("WriteDiary_Write_Clicked")
-                edtContent.isCursorVisible = true
-                edtTitle.clearFocus()
-                edtTitle.isCursorVisible = false
+                edtContent?.isCursorVisible = true
+                edtTitle?.clearFocus()
+                edtTitle?.isCursorVisible = false
             }
         }
 
@@ -447,8 +447,14 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
             currentDate.set(Calendar.YEAR, year)
             currentDate.set(Calendar.MONTH, month)
             currentDate.set(Calendar.DAY_OF_MONTH, day)
-            tvDateTime.text =
-                SimpleDateFormat(Constant.FormatdayDDMMMMYY, Locale.US).format(currentDate.time)
+            try {
+                val textDateTime =
+                    SimpleDateFormat(Constant.FormatdayDDMMMMYY, Locale.US).format(currentDate.time)
+                tvDateTime.text = textDateTime
+
+            } catch (e: Exception) {
+
+            }
             customDialog.dismiss()
         }
         customDialog.show()
@@ -660,8 +666,8 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
     }
 
     private fun invalidateContent(): Boolean {
-        titleDiary = edtTitle.text.toString().trim()
-        contentDiary = edtContent.text.toString().trim()
+        titleDiary = edtTitle?.text.toString().trim()
+        contentDiary = edtContent?.text.toString().trim()
 
         if (titleDiary.isBlank()) {
             titleDiary = if (contentDiary.isNotEmpty() && contentDiary.length > 150) {

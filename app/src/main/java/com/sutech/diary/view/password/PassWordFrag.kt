@@ -102,29 +102,34 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
         setClick()
         MobileAds.initialize(requireContext(),
             { })
-        layoutAdsPassword.post {
-            val adView = AdView(requireContext())
-            adView.adUnitId = BuildConfig.ID_AD_INLINES_BANNER
-            adView.setAdSize(
-                getAdSize(
-                    requireContext(),
-                    layoutAdsPassword.width,
-                    layoutAdsPassword.height
+        try {
+            layoutAdsPassword.post {
+                val adView = AdView(requireContext())
+                adView.adUnitId = BuildConfig.ID_AD_INLINES_BANNER
+                adView.setAdSize(
+                    getAdSize(
+                        requireContext(),
+                        layoutAdsPassword.width,
+                        layoutAdsPassword.height
+                    )
                 )
-            )
-            adView.loadState { isLoaded ->
-                if (isLoaded) {
-                    tv_loading_ad.isVisible = false
+                adView.loadState { isLoaded ->
+                    if (isLoaded) {
+                        tv_loading_ad.isVisible = false
+                    }
+                }
+                val adRequest = AdRequest.Builder().build()
+                layoutAdsPassword.removeAllViews()
+                layoutAdsPassword.addView(adView)
+                if (needLoadAds) {
+
+                    adView.loadAd(adRequest)
                 }
             }
-            val adRequest = AdRequest.Builder().build()
-            layoutAdsPassword.removeAllViews()
-            layoutAdsPassword.addView(adView)
-            if (needLoadAds) {
+        } catch (e: Exception) {
 
-                adView.loadAd(adRequest)
-            }
         }
+
     }
 
     private fun getAdSize(context: Context, width: Int, height: Int): AdSize {

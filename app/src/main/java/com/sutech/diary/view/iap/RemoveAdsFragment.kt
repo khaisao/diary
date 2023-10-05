@@ -11,6 +11,7 @@ import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.SkuDetailsParams
+import com.bumptech.glide.Glide
 import com.sutech.diary.base.BaseFragment
 import com.sutech.diary.billding.BillingError
 import com.sutech.diary.billding.BillingListener
@@ -44,6 +45,7 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
 
     override fun initView() {
         logEvent("IAPScr_Show")
+        Glide.with(requireContext()).load(R.drawable.banner_iap).into(ivImg)
         tvBuyNow.setPreventDoubleClickScaleView(5000) {
             logEvent("IAPScr_BuyNow_Clicked")
             if (!context?.let { haveNetworkConnection(it) }!!) {
@@ -105,8 +107,12 @@ class RemoveAdsFragment : BaseFragment(R.layout.fragment_remove_ads) {
                         val priceReal = skuDetailsReal?.price
                         val priceFake = skuDetailsFake?.price
                         lifecycleScope.launch(Dispatchers.Main) {
-                            tv_real_price.text = priceReal
-                            tv_fake_price.text = priceFake
+                            if (priceReal != null) {
+                                tv_real_price.text = priceReal
+                            }
+                            if (priceFake != null) {
+                                tv_fake_price.text = priceFake
+                            }
                         }
                         val priceRealNumber =
                             priceReal?.replace("[^\\d.]".toRegex(), "")?.replace(".", "")?.toInt()

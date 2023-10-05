@@ -63,6 +63,7 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
     private var diaryDataBase: DiaryDatabase? = null
     override fun initView() {
         logEvent("MainScr_Show")
+        ImageUtil.setImage(iv_header, R.drawable.drawer_header)
         activity?.onBackPressedDispatcher?.addCallback(this, true) {
             if (rlSearch?.isShow() == true) {
                 rlSearch?.gone()

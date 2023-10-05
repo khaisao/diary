@@ -26,14 +26,16 @@ class CalendarViewHolder(itemView: View, private val onItemListener: OnDateItemL
     }
 
     override fun onClick(view: View) {
-        if (daysOfMonth[adapterPosition] != "") {
-            if (!fromAddnew) {
-                if (daysOfMonth[adapterPosition].toInt() <= currentDateStr && selectedDate <= LocalDate.now() || selectedDate<LocalDate.now()) {
-                    onItemListener.onDateItemClick(adapterPosition, dayOfMonth.text as String)
-                }
-            } else {
-                if (daysOfMonth[adapterPosition].toInt() <= currentDateStr && VietFrag.addNewsSlectedDate <= LocalDate.now() || VietFrag.addNewsSlectedDate < LocalDate.now()) {
-                    onItemListener.onDateItemClick(adapterPosition, dayOfMonth.text as String)
+        if(adapterPosition > -1){
+            if (daysOfMonth[adapterPosition] != "") {
+                if (!fromAddnew) {
+                    if (daysOfMonth[adapterPosition].toInt() <= currentDateStr && selectedDate <= LocalDate.now() || selectedDate<LocalDate.now()) {
+                        onItemListener.onDateItemClick(adapterPosition, dayOfMonth.text as String)
+                    }
+                } else {
+                    if (daysOfMonth[adapterPosition].toInt() <= currentDateStr && VietFrag.addNewsSlectedDate <= LocalDate.now() || VietFrag.addNewsSlectedDate < LocalDate.now()) {
+                        onItemListener.onDateItemClick(adapterPosition, dayOfMonth.text as String)
+                    }
                 }
             }
         }

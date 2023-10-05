@@ -40,7 +40,7 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                tv_wrong_security_ans.isVisible = false
+                tv_wrong_security_ans?.isVisible = false
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -110,7 +110,7 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
                     }
 
                 } else {
-                    tv_wrong_security_ans.isVisible = true
+                    tv_wrong_security_ans?.isVisible = true
                 }
             }
         }
