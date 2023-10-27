@@ -32,6 +32,7 @@ class DocDiaryFrag : BaseFragment(R.layout.fragment_doc_diary) {
         AppUtil.readiary++
 
         dirayDataBase = DiaryDatabase.getInstance(requireContext())
+        ImageUtil.setThemeForImageView(iv_theme, requireContext())
 
         activity?.onBackPressedDispatcher?.addCallback(this, true) {
             backReader()

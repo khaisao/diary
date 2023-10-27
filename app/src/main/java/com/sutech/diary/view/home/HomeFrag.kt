@@ -27,7 +27,6 @@ import com.sutech.diary.util.*
 import com.sutech.diary.util.Constant.EXTRA_DIARY
 import com.sutech.diary.util.Constant.EXTRA_POSITION_CONTENT
 import com.sutech.diary.util.Constant.FormatdayDDMMYY
-import com.sutech.diary.util.Constant.showRateToday
 import com.sutech.journal.diary.diarywriting.lockdiary.BuildConfig
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import com.test.dialognew.*
@@ -64,6 +63,8 @@ class HomeFrag : BaseFragment(R.layout.fragment_home) {
     override fun initView() {
         logEvent("MainScr_Show")
         ImageUtil.setImage(iv_header, R.drawable.drawer_header)
+        ImageUtil.setThemeForImageView(iv_theme_home, requireContext())
+
         activity?.onBackPressedDispatcher?.addCallback(this, true) {
             if (rlSearch?.isShow() == true) {
                 rlSearch?.gone()

@@ -22,6 +22,7 @@ import com.sutech.diary.util.AppUtil
 import com.sutech.diary.util.Constant
 import com.sutech.diary.util.Constant.COME_FROM_SECURITY
 import com.sutech.diary.util.Constant.TYPE_PASSWORD
+import com.sutech.diary.util.ImageUtil
 import com.sutech.diary.util.show
 import com.sutech.diary.view.password.SecurityQuesFrag.Companion.TYPE_INPUT_NEW_SECURITY
 import com.sutech.diary.view.password.SecurityQuesFrag.Companion.TYPE_INPUT_SECURITY_TO_CHANGE_PASSWORD
@@ -40,6 +41,7 @@ import kotlinx.android.synthetic.main.fragment_pass_word.btn8
 import kotlinx.android.synthetic.main.fragment_pass_word.btn9
 import kotlinx.android.synthetic.main.fragment_pass_word.btnDelete
 import kotlinx.android.synthetic.main.fragment_pass_word.btnReset
+import kotlinx.android.synthetic.main.fragment_pass_word.iv_theme
 import kotlinx.android.synthetic.main.fragment_pass_word.layoutAdsPassword
 import kotlinx.android.synthetic.main.fragment_pass_word.ll_forgot_password
 import kotlinx.android.synthetic.main.fragment_pass_word.passCodeView
@@ -69,6 +71,8 @@ class PassWordFrag : BaseFragment(R.layout.fragment_pass_word) {
 
     override fun initView() {
         getDataBundle()
+        ImageUtil.setThemeForImageView(iv_theme, requireContext())
+
         if (isTypePassword == -1) {
             if (DataStore.getPassword().isNullOrBlank()) {
                 gotoFrag(R.id.passWordFrag, R.id.action_passWordFrag_to_mainFrag)

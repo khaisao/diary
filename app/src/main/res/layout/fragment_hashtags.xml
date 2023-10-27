@@ -1,79 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/iv_theme"
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/backgroundImage"
-        android:paddingBottom="@dimen/margin_24">
+        android:layout_height="match_parent"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <ImageView
-            android:id="@+id/empty_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="30dp"
-            android:contentDescription="@null"
-            android:src="@drawable/empty_box"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/topAppBar"
-            app:tint="?attr/textColor" />
-
-        <TextView
-            android:id="@+id/empty_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="@string/there_are_no_hashtag_in_your_diary"
-            android:textColor="?attr/textColor"
-            android:textSize="@dimen/text_s_16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/empty_image" />
-
-        <RelativeLayout
-            android:id="@+id/topAppBar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/topAppBarColor"
-            android:paddingVertical="@dimen/margin_16"
-            android:paddingStart="@dimen/margin_16"
-            android:paddingEnd="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:paddingBottom="@dimen/margin_24">
 
             <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="@dimen/margin_32"
-                android:layout_height="@dimen/margin_32"
-                android:layout_marginEnd="@dimen/margin_24"
-                android:background="@drawable/bg_btn_circle_white"
-                android:contentDescription="@string/back_navigation"
-                android:gravity="center"
-                android:padding="4dp"
-                android:src="@drawable/ic_back" />
+                android:id="@+id/empty_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="30dp"
+                android:contentDescription="@null"
+                android:src="@drawable/empty_box"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/topAppBar"
+                app:tint="?attr/textColor" />
 
             <TextView
+                android:id="@+id/empty_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/btnBack"
-                android:text="@string/hashtags"
+                android:layout_marginTop="25dp"
+                android:text="@string/there_are_no_hashtag_in_your_diary"
                 android:textColor="?attr/textColor"
-                android:textSize="@dimen/text_s_20" />
-        </RelativeLayout>
+                android:textSize="@dimen/text_s_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/empty_image" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/hashtagsRV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/topAppBar" />
+            <RelativeLayout
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/topAppBarColor"
+                android:paddingVertical="@dimen/margin_16"
+                android:paddingStart="@dimen/margin_16"
+                android:paddingEnd="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="@dimen/margin_32"
+                    android:layout_height="@dimen/margin_32"
+                    android:layout_marginEnd="@dimen/margin_24"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:contentDescription="@string/back_navigation"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/btnBack"
+                    android:text="@string/hashtags"
+                    android:textColor="?attr/textColor"
+                    android:textSize="@dimen/text_s_20" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hashtagsRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/topAppBar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,8 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/backgroundImage">
-
+    >
+    <ImageView
+        android:id="@+id/iv_theme"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <ImageView
         android:id="@+id/tvCancel"
         android:layout_width="@dimen/margin_32"

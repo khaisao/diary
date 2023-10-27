@@ -20,6 +20,7 @@ import com.sutech.diary.adapter.AdapterTrend
 import com.sutech.diary.adapter.decoration.GridSpacingItemDecoration
 import com.sutech.diary.base.BaseFragment
 import com.sutech.diary.util.BarChartCustomRenderer
+import com.sutech.diary.util.ImageUtil
 import com.sutech.diary.util.MoodFilter
 import com.sutech.diary.util.MoodUtil
 import com.sutech.diary.util.setOnClick
@@ -27,6 +28,7 @@ import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.fragment_statistics.btnBack
 import kotlinx.android.synthetic.main.fragment_statistics.btnFilter
 import kotlinx.android.synthetic.main.fragment_statistics.chart
+import kotlinx.android.synthetic.main.fragment_statistics.iv_theme
 import kotlinx.android.synthetic.main.fragment_statistics.layoutAdsStatics
 import kotlinx.android.synthetic.main.fragment_statistics.statistic_filter_text
 import kotlinx.android.synthetic.main.fragment_statistics.trendRV
@@ -44,6 +46,8 @@ class StatisticsFrag : BaseFragment(R.layout.fragment_statistics) {
         logEvent("StatisticsDiary_Show")
         setupView()
         handleEvent()
+        ImageUtil.setThemeForImageView(iv_theme, requireContext())
+
     }
 
     private fun handleEvent() {

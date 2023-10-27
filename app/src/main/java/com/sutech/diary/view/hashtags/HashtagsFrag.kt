@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_hashtags.btnBack
 import kotlinx.android.synthetic.main.fragment_hashtags.empty_image
 import kotlinx.android.synthetic.main.fragment_hashtags.empty_title
 import kotlinx.android.synthetic.main.fragment_hashtags.hashtagsRV
+import kotlinx.android.synthetic.main.fragment_hashtags.iv_theme
 import kotlinx.coroutines.launch
 
 class HashtagsFrag : BaseFragment(R.layout.fragment_hashtags) {
@@ -34,6 +35,8 @@ class HashtagsFrag : BaseFragment(R.layout.fragment_hashtags) {
 
     private fun setupView() {
         ImageUtil.setImage(empty_image, R.drawable.empty_box)
+        ImageUtil.setThemeForImageView(iv_theme, requireContext())
+
         lifecycleScope.launch {
             val htQuantity = HashtagUtil.getHashtagQuantities(requireContext()).also {
                 empty_image.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE

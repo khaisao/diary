@@ -9,8 +9,10 @@ import com.bumptech.glide.Glide
 import com.sutech.diary.base.BaseFragment
 import com.sutech.diary.database.DataStore
 import com.sutech.diary.util.Constant
+import com.sutech.diary.util.ImageUtil
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.fragment_security_ques.edt_ans
+import kotlinx.android.synthetic.main.fragment_security_ques.iv_theme
 import kotlinx.android.synthetic.main.fragment_security_ques.tvCancel
 import kotlinx.android.synthetic.main.fragment_security_ques.tv_confirm_security
 import kotlinx.android.synthetic.main.fragment_security_ques.tv_ques
@@ -28,6 +30,7 @@ class SecurityQuesFrag : BaseFragment(R.layout.fragment_security_ques) {
     private var isComeFromChangePassword = false
 
     override fun initView() {
+        ImageUtil.setThemeForImageView(iv_theme, requireContext())
         logEvent("SecurityQuestion_Show")
         getDataBundle()
         setUpUi()

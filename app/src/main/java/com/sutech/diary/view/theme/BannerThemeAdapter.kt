@@ -5,9 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sutech.diary.model.ThemeObj
+import com.sutech.diary.util.ImageUtil
 import com.sutech.diary.util.setPreventDoubleClickItem
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import com.youth.banner.adapter.BannerAdapter
+import kotlinx.android.synthetic.main.item_theme.view.iv_theme
 import kotlinx.android.synthetic.main.item_theme.view.tvContentTheme
 import kotlinx.android.synthetic.main.item_theme.view.tvContentTheme2
 import kotlinx.android.synthetic.main.item_theme.view.tvDay
@@ -38,7 +40,9 @@ class BannerThemeAdapter(
 
 
         fun binData(data: ThemeObj, position: Int) {
-            itemView.setBackgroundResource(data.imageResource)
+//            itemView.setBackgroundResource(data.imageResource)
+            ImageUtil.setImage(itemView.iv_theme, data.imageResource)
+
             itemView.tvDay.setTextColor(data.textColor)
             itemView.tvTitleTheme.setTextColor(data.textColor)
             itemView.tvContentTheme.setTextColor(data.textColor)

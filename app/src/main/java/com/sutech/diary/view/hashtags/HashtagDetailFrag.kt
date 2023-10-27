@@ -12,9 +12,11 @@ import com.sutech.diary.model.DiaryModel
 import com.sutech.diary.util.Constant
 import com.sutech.diary.util.Constant.EXTRA_DIARY
 import com.sutech.diary.util.Constant.EXTRA_POSITION_CONTENT
+import com.sutech.diary.util.ImageUtil
 import com.sutech.diary.util.setOnClick
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.fragment_hashtag_detail.btnBack
+import kotlinx.android.synthetic.main.fragment_hashtag_detail.iv_theme
 import kotlinx.android.synthetic.main.fragment_hashtag_detail.rcvData
 import kotlinx.android.synthetic.main.fragment_hashtag_detail.top_app_bar_title
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +28,8 @@ class HashtagDetailFrag : BaseFragment(R.layout.fragment_hashtag_detail) {
     private var adapterDiary: AdapterDiaryItem? = null
     private var title: String? = null
     override fun initView() {
+        ImageUtil.setThemeForImageView(iv_theme, requireContext())
+
         getDataDiary()
         setupUi()
         handleEvent()

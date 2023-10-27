@@ -18,6 +18,7 @@ import com.sutech.diary.model.DiaryModel
 import com.sutech.diary.util.Common
 import com.sutech.diary.util.Constant
 import com.sutech.diary.util.DialogUtil
+import com.sutech.diary.util.ImageUtil
 import com.sutech.diary.util.gone
 import com.sutech.diary.util.setOnClick
 import com.sutech.diary.util.show
@@ -25,6 +26,7 @@ import com.sutech.journal.diary.diarywriting.lockdiary.R
 import kotlinx.android.synthetic.main.fragment_calendar.btn_back
 import kotlinx.android.synthetic.main.fragment_calendar.btn_backMonth
 import kotlinx.android.synthetic.main.fragment_calendar.btn_nextMonth
+import kotlinx.android.synthetic.main.fragment_calendar.iv_theme
 import kotlinx.android.synthetic.main.fragment_calendar.layoutAdsCalendar
 import kotlinx.android.synthetic.main.fragment_calendar.rcv_calendar
 import kotlinx.android.synthetic.main.fragment_calendar.rcv_diary
@@ -161,6 +163,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar),
     override fun initView() {
         logEvent("CalendarScr_Show")
         showAdsWithLayout("banner_calendar", layoutAdsCalendar)
+        ImageUtil.setThemeForImageView(iv_theme, requireContext())
 
         if (mcontext != null) {
             diaryDataBase = DiaryDatabase.getInstance(mcontext!!)

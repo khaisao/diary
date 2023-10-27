@@ -1,58 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/iv_theme"
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/backgroundImage"
-        android:paddingBottom="@dimen/margin_24">
+        android:layout_height="match_parent"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <RelativeLayout
-            android:id="@+id/topAppBar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/topAppBarColor"
-            android:paddingVertical="@dimen/margin_16"
-            android:paddingStart="@dimen/margin_16"
-            android:paddingEnd="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:paddingBottom="@dimen/margin_24">
 
-            <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="@dimen/margin_32"
-                android:layout_height="@dimen/margin_32"
-                android:layout_marginEnd="@dimen/margin_24"
-                android:background="@drawable/bg_btn_circle_white"
-                android:contentDescription="@string/back_navigation"
-                android:gravity="center"
-                android:padding="4dp"
-                android:src="@drawable/ic_back" />
-
-            <TextView
-                android:id="@+id/top_app_bar_title"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/btnBack"
-                android:textColor="?attr/textColor"
-                android:textSize="@dimen/text_s_20" />
-        </RelativeLayout>
+                android:background="?attr/topAppBarColor"
+                android:paddingVertical="@dimen/margin_16"
+                android:paddingStart="@dimen/margin_16"
+                android:paddingEnd="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcvData"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_screen_normal"
-            android:clipToPadding="false"
-            android:nestedScrollingEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/topAppBar" />
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="@dimen/margin_32"
+                    android:layout_height="@dimen/margin_32"
+                    android:layout_marginEnd="@dimen/margin_24"
+                    android:background="@drawable/bg_btn_circle_white"
+                    android:contentDescription="@string/back_navigation"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_back" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+                <TextView
+                    android:id="@+id/top_app_bar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/btnBack"
+                    android:textColor="?attr/textColor"
+                    android:textSize="@dimen/text_s_20" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_screen_normal"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/topAppBar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

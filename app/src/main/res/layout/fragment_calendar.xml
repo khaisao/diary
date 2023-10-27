@@ -3,9 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/backgroundImage"
     android:backgroundTint="@null"
     tools:context="com.sutech.diary.view.calendar.CalendarFragment">
+
+    <ImageView
+        android:id="@+id/iv_theme"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <LinearLayout
         android:id="@+id/ln_toolbar"

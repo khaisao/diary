@@ -51,6 +51,7 @@ import kotlinx.android.synthetic.main.fragment_viet_diary.btnWriteBack
 import kotlinx.android.synthetic.main.fragment_viet_diary.btn_selectDate
 import kotlinx.android.synthetic.main.fragment_viet_diary.edtContent
 import kotlinx.android.synthetic.main.fragment_viet_diary.edtTitle
+import kotlinx.android.synthetic.main.fragment_viet_diary.iv_theme
 import kotlinx.android.synthetic.main.fragment_viet_diary.layoutAdsViet
 import kotlinx.android.synthetic.main.fragment_viet_diary.rcvImageDiary
 import kotlinx.android.synthetic.main.fragment_viet_diary.tvDateTime
@@ -129,6 +130,8 @@ class VietFrag : BaseFragment(R.layout.fragment_viet_diary), CalendarAdapter.OnD
     }
 
     override fun initView() {
+        ImageUtil.setThemeForImageView(iv_theme, requireContext())
+
         currentDate = Calendar.getInstance()
         context?.let { ctx ->
             dirayDataBase = DiaryDatabase.getInstance(ctx)

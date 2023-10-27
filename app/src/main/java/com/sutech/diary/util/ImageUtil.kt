@@ -11,6 +11,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.sutech.diary.database.DataStore
 import com.sutech.diary.model.ImageObj
 import com.sutech.journal.diary.diarywriting.lockdiary.R
 import java.io.ByteArrayOutputStream
@@ -24,6 +25,57 @@ object ImageUtil {
 
     fun setImage(image: ImageView, drawable_image: Int) {
         Glide.with(image.context).load(drawable_image).into(image)
+    }
+
+    fun setThemeForImageView(image: ImageView, context: Context) {
+        DataStore.init(context)
+        when (DataStore.getTheme()) {
+            -1 -> {
+                Glide.with(context).load(R.drawable.default_background).into(image)
+            }
+
+            0 -> {
+                Glide.with(context).load(R.drawable.default_background).into(image)
+            }
+
+            1 -> {
+                Glide.with(context).load(R.drawable.theme_1_background).into(image)
+
+            }
+
+            2 -> {
+                Glide.with(context).load(R.drawable.theme_2_background).into(image)
+
+            }
+
+            3 -> {
+                Glide.with(context).load(R.drawable.theme_3_background).into(image)
+
+            }
+
+            4 -> {
+                Glide.with(context).load(R.drawable.theme_4_background).into(image)
+
+            }
+
+            5 -> {
+                Glide.with(context).load(R.drawable.theme_5_background).into(image)
+
+            }
+
+            6 -> {
+                Glide.with(context).load(R.drawable.theme_6_background).into(image)
+
+            }
+
+            7 -> {
+                Glide.with(context).load(R.drawable.theme_7_background).into(image)
+
+            }
+            else -> {
+                Glide.with(context).load(R.drawable.default_background).into(image)
+            }
+        }
     }
 
     fun setImage(image: ImageView, drawable_image: Uri) {
